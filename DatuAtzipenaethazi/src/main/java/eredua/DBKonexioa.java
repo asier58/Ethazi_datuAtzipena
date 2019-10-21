@@ -1,103 +1,51 @@
 package eredua;
 
+import java.sql.Connection;
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import org.apache.log4j.Logger;
+
 public class DBKonexioa {
-	/*
-	 * @author grupo4
-	 * Datu basearekin konexioa egiten du
-	 */
-	 private String  maquina;
-	    private String  usuario;
-	    private String  clave;
-	    private int puerto;
-	    private String  servidor;
-	    private static Connection conexion  = null;
-	 
-	    
-	    //CONSTRUCTOR
-	    //Recibe el nombre de la base de datos
-	    public DBKonexioa(String baseDatos){
-	    	
+	public static Logger logger = Logger.getLogger(DBKonexioa.class);
+	 // Librería de MySQL
+    public String driver = "com.mysql.jdbc.Driver";
 
-	    	String fichero = "../Ethazi4_APP/src/DB/Fitxero";
-	    	
-	    	
- 		int kont =0;
- 		String server="jdbc:mysql://";
-	        
-	        //LEER FICHERO LINEA A LINEA
-	        try {
-		      FileReader fr = new FileReader(fichero);
-		      BufferedReader br = new BufferedReader(fr);
-		 
-		      String linea;
-		      while((linea = br.readLine()) != null) {
-		    	  System.out.println(linea);
-		    	  
-	  		        if(kont==0) {
-	  		        	this.maquina=linea;
-	  		        	}
-	  		      	if (kont==1) {
-	  		      		this.usuario=linea;
-	  		      		}
-	  		      	if (kont==2) {
-	  		      		this.clave=linea;
-	  		      		}
-		      	
-		      	kont++;
-		      	linea="";
-		      	
-		      	}
-		      
-		      if (kont==3) {
-		    	  this.servidor=linea;
-		    	  
-		      }
+    // Nombre de la base de datos
+    public String database = "mydb";
+    // Host
+    public String hostname = "localhost";
 
-		      fr.close();
-		    }
-		    catch(Exception e) {
-		      System.out.println("Fitxeroa irakurri "+ fichero + ": " + e);
-		    }
-	
-	        // FINAL DE LEER FICHERO LINEA A LINEA
-	        
-	        
-	        
-	        
-	this.servidor="jdbc:mysql://"+this.maquina+":"+ this.puerto+"/"+baseDatos;
-	        
-	        
-	        
-	        //Registrar el driver
-	        try {
-	            Class.forName("com.mysql.jdbc.Driver");
-	        } catch (ClassNotFoundException e) {
-	            System.err.println("ERROR AL REGISTRAR EL DRIVER");
-	            System.exit(0); //parar la ejecución
-	        }
-	 
-	        //Establecer la conexión con el servidor
-	        try {
-	            conexion = DriverManager.getConnection("jdbc:mysql://" + this.maquina, this.usuario, this.clave);
-	        } catch (SQLException e) {
-	            System.err.println("ERROR AL CONECTAR CON EL SERVIDOR");
-	            System.exit(0); //parar la ejecución
-	        }
-	        System.out.println("Conectado a "+baseDatos);
-	    }
-	 
-	    //Devuelve el objeto Connection que se usará en la clase Controller
+    // Puerto
+    public String port = "3306";
 
-	  
-	    public  Connection getConexion() {
-	        return conexion;
-	    }
+    // Ruta de nuestra base de datos (desactivamos el uso de SSL con "?useSSL=false")
+//    public String url = "jdbc:mysql://" + hostname + ":" + port + "/" + database + "?useSSL=false";
+    public String url = "org.mariadb.jdbc";
+
+    // Nombre de usuario
+    public String username = "root";
+
+    // Clave de usuario
+    public String password = "";
+
+    public Connection conectarMySQL() {
+        Connection conn = null;
+
+        try {
+            Class.forName(driver);
+            conn = DriverManager.getConnection(url, username, password);
+            System.out.println(" Conectado a la Base de datos  ");
+            logger.info("enchufa");
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+            logger.info("no enchufa");
+        }
+
+        return conn;
+    }
 
 
 }
