@@ -3,6 +3,7 @@ package kontroladorea;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 
+import eredua.DBKonexioa;
 import lehioa.Departamentua;
 import lehioa.Menua;
 
@@ -11,6 +12,13 @@ public class Nagusia {
 	public static Logger logger = Logger.getLogger(Nagusia.class);
 	public static void main(String[] args) {
 	
+		/**
+		 * Datu baserako konexioa
+		 */
+		String basedatos = "mydb";
+		DBKonexioa con1 = new DBKonexioa();
+		con1.conectarMySQL();
+		
 	Menukontroladorea menukontroladorea =  new Menukontroladorea();
 	Departamentua departamentua =  new Departamentua();
 		//Lehioak
