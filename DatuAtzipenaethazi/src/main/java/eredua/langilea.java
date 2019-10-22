@@ -10,7 +10,7 @@ public class langilea {
 	private int nagusia;
 	private String ardura;
 	private String dataOrdua;
-	
+
 	public langilea(int langile_kod, String izena, String abizena, String dept_no, double soldata, int nagusia,
 			String ardura, String dataOrdua) {
 		super();
@@ -87,5 +87,5 @@ public class langilea {
 	public void setDataOrdua(String dataOrdua) {
 		this.dataOrdua = dataOrdua;
 	}
-	
+
 }
