@@ -26,7 +26,6 @@ public class Menua extends JFrame {
 	 * Launch the application.
 	 */
 
-
 	/**
 	 * Create the frame.
 	 */
@@ -37,7 +36,7 @@ public class Menua extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JButton departamentua = new JButton("Departamentua");
 		departamentua.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -46,18 +45,17 @@ public class Menua extends JFrame {
 		});
 		departamentua.setBounds(117, 53, 381, 47);
 		contentPane.add(departamentua);
-		
+
 		JButton enplegatua = new JButton("Enplegatua");
 		enplegatua.setBounds(117, 159, 381, 47);
 		contentPane.add(enplegatua);
-		
+
 		JButton txostena = new JButton("Txostena");
 		txostena.setBounds(117, 267, 381, 47);
 		contentPane.add(txostena);
 		logger.info("Menu Pantailan sartu da");
 	}
-	
-	
+
 	public void nireMenukontroladorea(Menukontroladorea menukontroladorea) {
 		this.menukontroladorea = menukontroladorea;
 	}

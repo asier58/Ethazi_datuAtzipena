@@ -14,6 +14,7 @@ public class Menukontroladorea {
 	public static Logger logger = Logger.getLogger(Menukontroladorea.class);
 	private Menua menua;
 	private Departamentua departamentua;
+<<<<<<< Upstream, based on branch 'master' of https://github.com/asier58/Ethazi_datuAtzipena.git
 	
 
 	
@@ -72,23 +73,29 @@ public class Menukontroladorea {
 	
 	//Lehioak
 	//Hasierako Pantaila
+=======
+
+	// Lehioak
+	// Hasierako Pantaila
+>>>>>>> ac2480d Datu baserako konexioa FINAL
 	public void nireMenua(Menua menua) {
-		this.menua=menua;
-		
+		this.menua = menua;
+
 	}
-	
+
 	public void nireDepartamentua(Departamentua departamentua) {
-		this.departamentua=departamentua;
-		
+		this.departamentua = departamentua;
+
 	}
-	
-	//*************************
-	//Departamentua Pantaila
+
+	// *************************
+	// Departamentua Pantaila
 	public void departamentuaPantailara() {
 		menua.setVisible(false);
 		departamentua.setVisible(true);
 	}
 
+<<<<<<< Upstream, based on branch 'master' of https://github.com/asier58/Ethazi_datuAtzipena.git
 	public void parametroakHartu(String fitxategi, String formatua) {
 		File fitx = new File(fitxategi+formatua);
 		if (!fitx.exists()) {
@@ -187,3 +194,6 @@ public class Menukontroladorea {
 	
 	
 
+=======
+}
+>>>>>>> ac2480d Datu baserako konexioa FINAL

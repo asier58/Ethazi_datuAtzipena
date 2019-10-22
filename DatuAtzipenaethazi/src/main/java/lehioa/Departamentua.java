@@ -35,7 +35,11 @@ public class Departamentua extends JFrame {
 	private String formatua;
 	private JComboBox comboBox;
 	public static Logger logger = Logger.getLogger(Departamentua.class);
+<<<<<<< Upstream, based on branch 'master' of https://github.com/asier58/Ethazi_datuAtzipena.git
 	private JLabel lblNewLabel;
+=======
+
+>>>>>>> ac2480d Datu baserako konexioa FINAL
 	/**
 	 * Launch the application.
 	 */
@@ -62,7 +66,7 @@ public class Departamentua extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JButton departamentuberri = new JButton("Departamentua sartu");
 		departamentuberri.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -71,11 +75,11 @@ public class Departamentua extends JFrame {
 		});
 		departamentuberri.setBounds(117, 53, 381, 47);
 		contentPane.add(departamentuberri);
-		
+
 		JButton departamentuaikusi = new JButton("Departamentua ikusi");
 		departamentuaikusi.setBounds(117, 159, 381, 47);
 		contentPane.add(departamentuaikusi);
-		
+
 		JButton fitxategiaKargatu = new JButton("Fitxategia Kargatu");
 		fitxategiaKargatu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -88,19 +92,25 @@ public class Departamentua extends JFrame {
 		});
 		fitxategiaKargatu.setBounds(410, 265, 151, 47);
 		contentPane.add(fitxategiaKargatu);
-		
+
 		textField = new JTextField();
 		textField.setBounds(164, 278, 86, 20);
 		contentPane.add(textField);
 		textField.setColumns(10);
+<<<<<<< Upstream, based on branch 'master' of https://github.com/asier58/Ethazi_datuAtzipena.git
 		
 		 comboBox = new JComboBox();
+=======
+
+		JComboBox comboBox = new JComboBox();
+>>>>>>> ac2480d Datu baserako konexioa FINAL
 		comboBox.setBounds(289, 278, 86, 20);
 		contentPane.add(comboBox);
-		
+
 		JLabel lblFitxategiarenIzena = new JLabel("Fitxategiaren Izena:");
 		lblFitxategiarenIzena.setBounds(40, 281, 114, 14);
 		contentPane.add(lblFitxategiarenIzena);
+<<<<<<< Upstream, based on branch 'master' of https://github.com/asier58/Ethazi_datuAtzipena.git
 		
 		lblNewLabel = new JLabel("Fitxategia ez da existitzen");
 		lblNewLabel.setBounds(65, 333, 308, 14);
@@ -108,12 +118,15 @@ public class Departamentua extends JFrame {
 		lblNewLabel.setVisible(false);
 		
 		ArrayList<String> fitxategiMota = new  ArrayList();
+=======
+		ArrayList<String> fitxategiMota = new ArrayList();
+>>>>>>> ac2480d Datu baserako konexioa FINAL
 		fitxategiMota.add(".Csv");
 		fitxategiMota.add(".Xml");
 		fitxategiMota.add(".Txt");
-		int cont =0;
-		for( int i=0;i<fitxategiMota.size();i++) {
-			if(cont==0) {
+		int cont = 0;
+		for (int i = 0; i < fitxategiMota.size(); i++) {
+			if (cont == 0) {
 				comboBox.addItem("");
 				cont++;
 			}
@@ -122,8 +135,7 @@ public class Departamentua extends JFrame {
 		}
 		logger.info("Departamentu Pantailan sartu da");
 	}
-	
-	
+
 	public void nireMenukontroladorea(Menukontroladorea menukontroladorea) {
 		this.menukontroladorea = menukontroladorea;
 	}
