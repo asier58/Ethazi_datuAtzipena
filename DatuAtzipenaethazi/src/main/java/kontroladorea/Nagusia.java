@@ -18,6 +18,7 @@ public class Nagusia {
 		DBKonexioa con1 = new DBKonexioa();
 		con1.conectarDB();
 		
+		eredua.Kontsultak.datuakSartu();
 		eredua.Kontsultak.datuakBerritu();
 
 		Menukontroladorea menukontroladorea = new Menukontroladorea();
