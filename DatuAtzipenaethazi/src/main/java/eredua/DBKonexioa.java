@@ -15,10 +15,12 @@ public class DBKonexioa {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection conn = null;
-			conn = DriverManager.getConnection("jdbc:mysql://localhost/test", "root", "");
-			System.out.print("Database is connected !");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost/mydb", "root", "");
+			System.out.print("Database is connected!\n");
 			conn.close();
-		} catch (Exception e) {
+		} catch (ClassNotFoundException e) {
+			System.out.print("Do not connect to DB - Error:" + e);
+		} catch (SQLException e) {
 			System.out.print("Do not connect to DB - Error:" + e);
 		}
 	}
