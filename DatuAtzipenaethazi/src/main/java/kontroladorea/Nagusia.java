@@ -31,6 +31,8 @@ public class Nagusia {
 		departamentua.nireMenukontroladorea(menukontroladorea);
 
 		ON(menua);
+		
+		eredua.Kontsultak.datuakSartu();
 
 	}
 
