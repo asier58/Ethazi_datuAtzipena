@@ -17,6 +17,8 @@ public class Nagusia {
 		String basedatos = "mydb";
 		DBKonexioa con1 = new DBKonexioa();
 		con1.conectarDB();
+		
+		eredua.Kontsultak.datuakBerritu();
 
 		Menukontroladorea menukontroladorea = new Menukontroladorea();
 		Departamentua departamentua = new Departamentua();
@@ -32,7 +34,7 @@ public class Nagusia {
 
 		ON(menua);
 		
-		eredua.Kontsultak.datuakSartu();
+		
 
 	}
 
