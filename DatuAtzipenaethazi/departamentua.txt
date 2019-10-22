@@ -1,0 +1,34 @@
+dept_no:1
+izena:Elektrizitatea eta Elektronika
+eraikina:2
+zentroa:Elorrieta
+******************
+dept_no:2
+izena:Eraikuntza eta Obra Zibila
+eraikina:4
+zentroa:Elorrieta
+******************
+dept_no:3
+izena:Ostalaritza eta Turismoa
+eraikina:1
+zentroa:Errekamari
+******************
+dept_no:4
+izena:Kimika
+eraikina:3
+zentroa:Elorrieta
+******************
+dept_no:5
+izena:Hizkuntzak
+eraikina:6
+zentroa:Errekamari
+******************
+dept_no:6
+izena:Merkataritza eta marketina
+eraikina:5
+zentroa:Errekamari
+******************
+dept_no:7
+izena:Administrazioa eta Kudeaketa
+eraikina:7
+zentroa:Errekamari
