@@ -159,7 +159,7 @@ public class departamentua {
 	         }
 	      }
 
-		txertatuDepartamentua(zerrenda);
+		Kontsultak.datuakSartu1(zerrenda);
 	}
 	private static String ateraDatua(String linea) {
 		String hitza = "";

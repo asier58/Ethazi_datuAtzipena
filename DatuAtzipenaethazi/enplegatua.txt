@@ -1,8 +1,8 @@
-kodea:1
-departamentua:Elektrizitatea eta Elektronika
+kodea:10
+dept_no:1
 soldata:2.000
 izena:Aitor
 abizena:Etxebarria
-nagusia:Bai
+nagusia:1
 Ardura:Buruzagia
 ******************
