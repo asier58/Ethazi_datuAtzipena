@@ -34,18 +34,8 @@ public class Departamentua extends JFrame {
 	private String fitxategi;
 	private String formatua;
 	private JComboBox comboBox;
-<<<<<<< Upstream, based on branch 'master' of https://github.com/asier58/Ethazi_datuAtzipena.git
-	public static Logger logger = Logger.getLogger(Departamentua.class);
-<<<<<<< Upstream, based on branch 'master' of https://github.com/asier58/Ethazi_datuAtzipena.git
-	private JLabel lblNewLabel;
-=======
-
->>>>>>> ac2480d Datu baserako konexioa FINAL
-=======
 	public static Logger logger = Logger.getLogger(Departamentua.class);
 	private JLabel lblNewLabel;
-
->>>>>>> 22d88e3 Departamentua txt y csv
 	/**
 	 * Launch the application.
 	 */
@@ -103,42 +93,27 @@ public class Departamentua extends JFrame {
 		textField.setBounds(164, 278, 86, 20);
 		contentPane.add(textField);
 		textField.setColumns(10);
-<<<<<<< Upstream, based on branch 'master' of https://github.com/asier58/Ethazi_datuAtzipena.git
-<<<<<<< Upstream, based on branch 'master' of https://github.com/asier58/Ethazi_datuAtzipena.git
+
 		
-		 comboBox = new JComboBox();
-=======
-=======
+		
 
->>>>>>> 22d88e3 Departamentua txt y csv
-
-		JComboBox comboBox = new JComboBox();
-<<<<<<< Upstream, based on branch 'master' of https://github.com/asier58/Ethazi_datuAtzipena.git
->>>>>>> ac2480d Datu baserako konexioa FINAL
-=======
 
 		
 		 comboBox = new JComboBox();
->>>>>>> 22d88e3 Departamentua txt y csv
+
 		comboBox.setBounds(289, 278, 86, 20);
 		contentPane.add(comboBox);
 
 		JLabel lblFitxategiarenIzena = new JLabel("Fitxategiaren Izena:");
 		lblFitxategiarenIzena.setBounds(40, 281, 114, 14);
 		contentPane.add(lblFitxategiarenIzena);
-<<<<<<< Upstream, based on branch 'master' of https://github.com/asier58/Ethazi_datuAtzipena.git
-<<<<<<< Upstream, based on branch 'master' of https://github.com/asier58/Ethazi_datuAtzipena.git
 		
 		lblNewLabel = new JLabel("Fitxategia ez da existitzen");
 		lblNewLabel.setBounds(65, 333, 308, 14);
 		contentPane.add(lblNewLabel);
 		lblNewLabel.setVisible(false);
 		
-		ArrayList<String> fitxategiMota = new  ArrayList();
-=======
-		ArrayList<String> fitxategiMota = new ArrayList();
->>>>>>> ac2480d Datu baserako konexioa FINAL
-=======
+
 		lblNewLabel = new JLabel("Fitxategia ez da existitzen");
 		lblNewLabel.setBounds(65, 333, 308, 14);
 		contentPane.add(lblNewLabel);
@@ -146,7 +121,7 @@ public class Departamentua extends JFrame {
 		
 		ArrayList<String> fitxategiMota = new  ArrayList();
 
->>>>>>> 22d88e3 Departamentua txt y csv
+
 		fitxategiMota.add(".Csv");
 		fitxategiMota.add(".Xml");
 		fitxategiMota.add(".Txt");

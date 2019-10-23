@@ -14,6 +14,7 @@ public class Nagusia {
 		/**
 		 * Datu baserako konexioa
 		 */
+		//ugadooooooooooooooooooooooooo
 		String basedatos = "mydb";
 		DBKonexioa con1 = new DBKonexioa();
 		con1.conectarDB();
