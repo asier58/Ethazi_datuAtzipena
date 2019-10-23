@@ -87,5 +87,10 @@ public class langilea {
 	public void setDataOrdua(String dataOrdua) {
 		this.dataOrdua = dataOrdua;
 	}
+	
+	public static void txtKudeatu2(String fitxategi, String formatua) {
+		
+		
+	}
 
 }
