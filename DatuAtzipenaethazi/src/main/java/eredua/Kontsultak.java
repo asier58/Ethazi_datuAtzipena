@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class Kontsultak {
 
-	public static void datuakSartu() {
+	public static void datuakSartu1(ArrayList<departamentua> zerrenda) {
 		Connection conexion = null;
 		Statement s = null;
 
