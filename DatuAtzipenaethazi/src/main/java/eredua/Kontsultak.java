@@ -66,4 +66,18 @@ public class Kontsultak {
 			System.out.println("jajanotira");
 		} 
 	}
+	
+	public static void datuakEskatu() {
+		Connection conexion = null;
+		Statement s = null;
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conexion = DriverManager.getConnection("jdbc:mysql://localhost/mydb", "root", "");
+			
+			
+		}catch(Exception e) {
+			
+		}
+	}
 }
