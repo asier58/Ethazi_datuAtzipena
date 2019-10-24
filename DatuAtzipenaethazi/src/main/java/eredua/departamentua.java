@@ -111,7 +111,7 @@ public class departamentua {
 	        	   case 5:
 	        		   departamentua dep = new departamentua(zentro_deptno,zentro_izena,zentro_eraikina,zentro);
 	        		   zerrenda.add(dep);
-	        		   idatxi(dep);
+	        		   //idatxi(dep);
 	        	     break;
 	        	  
 	        	   
@@ -184,12 +184,8 @@ public class departamentua {
 	    } catch (IOException e) {
 	    e.printStackTrace();
 	    }
-	    
-	   
-	    	
-	    	
-	    	
-}
+	}
+	  
 
 	public static void csvkudeatu(String fitxategi, String formatua) {
 		ArrayList<departamentua> zerrenda = new ArrayList<departamentua>();

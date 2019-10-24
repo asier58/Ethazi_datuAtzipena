@@ -1,14 +1,23 @@
 package eredua;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Reader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
 
 public class langilea {
 
@@ -163,6 +172,7 @@ public class langilea {
 	        		    ordua = hourFormat.format(date).toString();
 	        		    langilea dep = new langilea(kodea,departamentua,soldata,izena,abizena,nagusia,Ardura,ordua+","+data);
 		        		zerrenda.add(dep);
+		        		//idatxi2(dep);
 	        		   break;
 	        	  
 	        	 }	
@@ -227,5 +237,70 @@ public class langilea {
 	public void setDept_nozenbakia(int dept_nozenbakia) {
 		this.dept_nozenbakia = dept_nozenbakia;
 	}
+	
+	  public static void idatxi2(langilea Langilea) throws IOException {
+		    int idatzita =0;
+		    File d = new File("enplegatua.csv");
+		    FileWriter fw;
+		    BufferedWriter bw;
+		    try {
+		    fw = new FileWriter(d, true);
+		    bw = new BufferedWriter(fw);
+		   
+		    bw.newLine();
+		    bw.write(Langilea.langile_kod + "," + Langilea.dept_nozenbakia + "," + Langilea.soldata + "," + Langilea.izena+ "," + Langilea.abizena+ "," + Langilea.nagusia+ "," + Langilea.ardura+ "," + Langilea.dataOrdua);
+		    bw.flush(); // txt-an idatzitakoa gortzeko
+		    idatzita = 1;
+		    } catch (IOException e) {
+		    e.printStackTrace();
+		    }
+	    
+	   }
+	  public static void csvkudeatu2(String fitxategi, String formatua) {
+			ArrayList<langilea> zerrenda = new ArrayList<langilea>();
+			int kodea=0;
+			int departamentua=0;
+			Double soldata=0.0;
+			String izena="";
+			String abizena="";
+			int nagusia=0;
+			String Ardura="";
+			Date date = new Date();
+			String data ="";
+			String ordua="";
+			String SAMPLE_CSV_FILE_PATH = fitxategi+formatua;
+			int contador =0;
+			
+		   
+		     
+		     try (
+		             Reader reader = Files.newBufferedReader(Paths.get(SAMPLE_CSV_FILE_PATH));
+		             CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT);
+		         ) {
+		             for (CSVRecord csvRecord : csvParser) {
+		                 // Accessing Values by Column Index
+		            	 if(contador!=0) {
+		            		 kodea = Integer.parseInt(csvRecord.get(0));
+		            		 departamentua = Integer.parseInt(csvRecord.get(1));
+		            		 soldata = Double.parseDouble(csvRecord.get(2));
+		            		 izena = csvRecord.get(3);
+		            		 abizena = csvRecord.get(4);
+		            		 nagusia = Integer.parseInt(csvRecord.get(5));
+		            		 Ardura = csvRecord.get(6);
+		            		 data = csvRecord.get(7);
+		                  langilea dep = new langilea(kodea,departamentua,soldata,izena,abizena,nagusia,Ardura,data);
+		        		  zerrenda.add(dep);
+		        	     }
+		            	 
+		                contador ++;
+		             }
+		             reader.close();
+		             csvParser.close();
+		         }catch(Exception e) {
+		        	 zerrenda = null;
+		         }
+		     Kontsultak.datuakSartu2(zerrenda);
+			
+		}
 
 }
