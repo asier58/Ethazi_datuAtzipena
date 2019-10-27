@@ -47,6 +47,11 @@ public class Menua extends JFrame {
 		contentPane.add(departamentua);
 
 		JButton enplegatua = new JButton("Enplegatua");
+		enplegatua.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				menukontroladorea.langilePantailara();
+			}
+		});
 		enplegatua.setBounds(117, 159, 381, 47);
 		contentPane.add(enplegatua);
 
