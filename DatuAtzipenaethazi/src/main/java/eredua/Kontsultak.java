@@ -35,9 +35,9 @@ public class Kontsultak {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			System.out.println("jajanotira");
-		} 
+		}
 	}
-	
+
 	public static void datuakBerritu() {
 		Connection conexion = null;
 		Statement s = null;
@@ -64,25 +64,24 @@ public class Kontsultak {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			System.out.println("jajanotira");
-		} 
+		}
 	}
-	
+
 	public static void datuakEskatu(ArrayList<langilea> zerrenda) {
 		Connection conexion = null;
 		Statement s = null;
-		
+
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			conexion = DriverManager.getConnection("jdbc:mysql://localhost/mydb", "root", "");
 			s = (Statement) conexion.createStatement();
-			
+
 			String sql = "SELECT * FROM enplegatua WHERE izena = Ramon";
-			
-			
+
 			PreparedStatement preparedStatement = conexion.prepareStatement(sql);
-			
+
 			ResultSet resultSet = preparedStatement.executeQuery();
-			
+
 			int id = resultSet.getInt("Kodea");
 			String izena = resultSet.getString("Izena");
 			int departamentua_dept_no = resultSet.getInt("Departamentua_dept_no");
@@ -90,9 +89,9 @@ public class Kontsultak {
 			String abizena = resultSet.getString("Abizena");
 			String ardura = resultSet.getString("Ardura");
 			int nagusia = resultSet.getInt("Nagusia");
-						
-		}catch(Exception e) {
-			
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
 		}
 	}
 
@@ -122,9 +121,9 @@ public class Kontsultak {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			System.out.println("jajanotira");
-		} 
+		}
 	}
-	
+
 	public static void datuakSartu2(ArrayList<langilea> zerrenda) {
 		Connection conexion = null;
 		Statement s = null;
@@ -142,7 +141,7 @@ public class Kontsultak {
 
 			PreparedStatement preparedStatement = conexion.prepareStatement(sql);
 
-			preparedStatement.setInt(1,  zerrenda.get(0).getLangile_kod());
+			preparedStatement.setInt(1, zerrenda.get(0).getLangile_kod());
 			preparedStatement.setInt(2, zerrenda.get(0).getDept_nozenbakia());
 			preparedStatement.setDouble(3, zerrenda.get(0).getSoldata());
 			preparedStatement.setString(4, zerrenda.get(0).getIzena());
@@ -154,16 +153,35 @@ public class Kontsultak {
 			int sartuTaulara = preparedStatement.executeUpdate();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			System.out.println("jajanotira");
-		} 
+		}
 	}
-	
-//	public static void datuakEzabatu() {
-//		Connection conexion = null;
-//		Statement s = null;
-//		
-//		try {
-//			
-//		}
-//	}
+
+	public static void datuakEzabatu() {
+		Connection conexion = null;
+		Statement s = null;
+
+		try {
+
+			// Cargar el driver
+			Class.forName("com.mysql.jdbc.Driver");
+			conexion = DriverManager.getConnection("jdbc:mysql://localhost/mydb", "root", "");
+			s = (Statement) conexion.createStatement();
+
+			// Se realiza la consulta
+
+			String sql = "UPDATE `departamentua` set dept_no=?, izena=?, eraikina=?, zentroa=?";
+
+			PreparedStatement preparedStatement = conexion.prepareStatement(sql);
+
+			preparedStatement.setInt(1, 00);
+			preparedStatement.setString(2, "");
+			preparedStatement.setInt(3, 00);
+			preparedStatement.setString(4, "");
+
+			int sartuTaulara = preparedStatement.executeUpdate();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			System.out.println("jajanotira");
+		}
+	}
 }
