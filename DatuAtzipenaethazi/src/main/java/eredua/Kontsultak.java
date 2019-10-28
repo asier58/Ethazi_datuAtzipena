@@ -158,7 +158,12 @@ public class Kontsultak {
 		} 
 	}
 	
-	public static void datuakEzabatu() {
-		
-	}
+//	public static void datuakEzabatu() {
+//		Connection conexion = null;
+//		Statement s = null;
+//		
+//		try {
+//			
+//		}
+//	}
 }
