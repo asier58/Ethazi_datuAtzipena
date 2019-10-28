@@ -116,6 +116,18 @@ public class Formularioa extends JFrame {
 		textField_dataOrdua.setColumns(10);
 		
 		btnGorde = new JButton("GORDE");
+		btnGorde.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String langKod = textField_langKod.getText();
+				String izena = textField_izena.getText();
+				String abizena = textField_abizena.getText();
+				String deptKod = textField_deptKod.getText();
+				String soldata = textField_soldata.getText();
+				String nagusia = textField_nagusia.getText();
+				String ardura = textField_ardura.getText();
+				String dataOrdua = textField_dataOrdua.getText();
+			}
+		});
 		btnGorde.setBounds(335, 303, 89, 23);
 		contentPane.add(btnGorde);
 		
