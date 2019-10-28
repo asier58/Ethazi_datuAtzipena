@@ -12,9 +12,20 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
+import org.w3c.dom.Attr;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 
 
@@ -112,6 +123,7 @@ public class departamentua {
 	        		   departamentua dep = new departamentua(zentro_deptno,zentro_izena,zentro_eraikina,zentro);
 	        		   zerrenda.add(dep);
 	        		   //idatxi(dep);
+//	        		   idatxiXML(dep);
 	        	     break;
 	        	  
 	        	   
@@ -160,6 +172,8 @@ public class departamentua {
 	      }
 
 		Kontsultak.datuakSartu1(zerrenda);
+		Converter con =  new Converter();
+	    con.convertToXML("enplegatua.csv", "enplegatua.xml");
 	}
 	private static String ateraDatua(String linea) {
 		String hitza = "";
@@ -224,12 +238,62 @@ public class departamentua {
 	         }catch(Exception e) {
 	        	 zerrenda = null;
 	         }
-	     txertatuDepartamentua(zerrenda);
+	     //txertatuDepartamentua(zerrenda);
 		
 	}
-	//Aitor basatirrrrrr
-	public static void txertatuDepartamentua(ArrayList<departamentua> arr) {
+	public static void idatxiXML(departamentua Departamentua) throws IOException {
+		int lastnode =1;
+		try {
+			  DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+			  DocumentBuilder db = dbf.newDocumentBuilder();
+			  Document doc = db.parse(new File ("departamentua.xml"));
+			  doc.getDocumentElement().normalize();
+			  Node nodoraiz = doc.getDocumentElement();
+
+			  // definimos el nodo que contendrá los elementos
+			  Element rec = doc.createElement("record");
+			  Attr attr = doc.createAttribute("id");
+			  attr.setValue(String.valueOf(lastnode++));
+			  rec.setAttributeNode(attr);
+
+			  // atributo para el nodo coche
+			  Element deptno = doc.createElement("dept_no");
+			  deptno.appendChild(doc.createTextNode(Integer.toString(Departamentua.getDept_no())));
+			  rec.appendChild(deptno);
+			  
+			  Element izena = doc.createElement("izena");
+			  izena.appendChild(doc.createTextNode(Departamentua.getIzena()));
+			  rec.appendChild(izena);
+			  
+			  Element eraikin = doc.createElement("eraikina");
+			  eraikin.appendChild(doc.createTextNode(Departamentua.getEraikina()));
+			  rec.appendChild(eraikin);
+			  
+			  Element zentr = doc.createElement("zentroa");
+			  zentr.appendChild(doc.createTextNode(Departamentua.getZentroa()));
+			  rec.appendChild(zentr);
+			  
+			  
+			  
+			  
+			  nodoraiz.appendChild(rec);
+			  TransformerFactory fábricaTransformador = TransformerFactory.newInstance();
+			  Transformer transformador = fábricaTransformador.newTransformer();
+			  DOMSource dom = new DOMSource(doc);
+			  StreamResult result = new StreamResult(new File("oharrak.xml"));
+
+			} catch(Exception e) {
+			  e.printStackTrace();
+			}
+
+
 		
-	}
+		
+
+	   
+	    	
+	    	
+	    	
+}
 
 }
