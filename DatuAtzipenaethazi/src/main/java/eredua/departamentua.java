@@ -26,6 +26,7 @@ import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 
 
@@ -238,7 +239,81 @@ public class departamentua {
 	         }catch(Exception e) {
 	        	 zerrenda = null;
 	         }
-	     //txertatuDepartamentua(zerrenda);
+	     Kontsultak.datuakSartu1(zerrenda);
+		
+	}
+	
+	
+	public static void xmlKudeatu(String fitxategi, String formatua) {
+		ArrayList<departamentua> zerrenda = new ArrayList<departamentua>();
+
+		try {
+			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            DocumentBuilder documentBuilder = dbf.newDocumentBuilder();
+            Document document = documentBuilder.parse(fitxategi+formatua);
+            document.getDocumentElement().normalize();
+            System.out.println("Elemento raiz:" + document.getDocumentElement().getNodeName());
+            NodeList mezua = document.getElementsByTagName("record");
+            String linea ="";
+            int kontagailua =0;
+            int zentro_deptno=0;
+    		String zentro_izena="";
+    		String zentro="";
+    		String zentro_eraikina="";
+            for (int temp = 0; temp < mezua.getLength(); temp++) {
+                Node nodo = mezua.item(temp);
+                System.out.println("Elemento:" + nodo.getNodeName());
+                if (nodo.getNodeType() == Node.ELEMENT_NODE) {
+                    Element element = (Element) nodo;
+                   
+       	        	 kontagailua+=1;
+       	        	 switch (kontagailua) {
+       	        	   case 1:
+       	        		zentro_deptno = Integer.parseInt(element.getElementsByTagName("dept_no").item(0).getTextContent());
+       	        		    
+       	        		   System.out.println(zentro_deptno);
+       	        		   kontagailua+=1;
+       	        		 
+       	        	   case 2:
+       	        		zentro_izena = element.getElementsByTagName("izena").item(0).getTextContent();
+       	        		  
+       	        	     System.out.println(zentro_izena);
+       	        	  kontagailua+=1;
+       	        	     
+       	        	   case 3:
+       	        		zentro_eraikina = element.getElementsByTagName("eraikina").item(0).getTextContent();
+  
+       	        		  
+       	        	     System.out.println(zentro_eraikina);
+       	        	  kontagailua+=1;
+       	        	     
+       	        	   case 4:
+       	        		zentro = element.getElementsByTagName("zentroa").item(0).getTextContent();
+
+       	        		    
+       	        	     System.out.println(zentro);
+       	        	  kontagailua+=1;
+       	        	     
+       	        	   case 5:
+       	        		 departamentua dep = new departamentua(zentro_deptno,zentro_izena,zentro_eraikina,zentro);
+       	        		 zerrenda.add(dep);
+      	        	     break;
+       	        	    
+       	        	   
+       	        	     
+       	        	 }	
+       	        	 
+       	        	 
+       	        	 
+       	        	 if(kontagailua ==5) {
+       	        		 kontagailua=0;
+       	        	 }
+                
+                }}}
+       	        	 catch (Exception e) {
+       	        		 e.printStackTrace();
+       	        	 }
+		Kontsultak.datuakSartu1(zerrenda);
 		
 	}
 	public static void idatxiXML(departamentua Departamentua) throws IOException {
