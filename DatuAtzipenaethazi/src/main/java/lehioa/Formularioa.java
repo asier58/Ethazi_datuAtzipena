@@ -2,6 +2,7 @@ package lehioa;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -10,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import eredua.langilea;
 import kontroladorea.Menukontroladorea;
 
 public class Formularioa extends JFrame {
@@ -34,6 +36,8 @@ public class Formularioa extends JFrame {
 	private JButton btnGorde;
 	private JButton btnEzabatu;
 	private JButton btnAtzera;
+	ArrayList<langilea> langileArr;
+	langilea l1;
 
 	private Menukontroladorea menukontroladorea;
 
@@ -120,14 +124,24 @@ public class Formularioa extends JFrame {
 		btnGorde = new JButton("GORDE");
 		btnGorde.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String langKod = textField_langKod.getText();
-				String izena = textField_izena.getText();
-				String abizena = textField_abizena.getText();
-				String deptKod = textField_deptKod.getText();
-				String soldata = textField_soldata.getText();
-				String nagusia = textField_nagusia.getText();
-				String ardura = textField_ardura.getText();
-				String dataOrdua = textField_dataOrdua.getText();
+				
+				int langKod = Integer.parseInt(textField_langKod.getText());
+				int soldata = Integer.parseInt(textField_soldata.getText());
+				
+				l1.setIzena(textField_izena.getText());
+				l1.setAbizena(textField_abizena.getText());
+				l1.setLangile_kod(langKod);
+				l1.setSoldata(soldata);
+				
+				langileArr.add(l1);
+				
+				
+				textField_deptKod.getText();
+				
+				textField_nagusia.getText();
+				textField_ardura.getText();
+				textField_dataOrdua.getText();
+				
 			}
 		});
 		btnGorde.setBounds(335, 303, 89, 23);
@@ -144,6 +158,7 @@ public class Formularioa extends JFrame {
 				textField_nagusia.setText(null);
 				textField_ardura.setText(null);
 				textField_dataOrdua.setText(null);
+				
 			}
 		});
 		btnEzabatu.setBounds(236, 303, 89, 23);
