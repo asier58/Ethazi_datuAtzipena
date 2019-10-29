@@ -63,7 +63,7 @@ public class Menukontroladorea {
 			}
 			
 			if(formatua.equalsIgnoreCase(".xml")) {
-				
+				eredua.departamentua.xmlKudeatu(fitxategi,formatua);
 			}
 			
 			if(formatua.equalsIgnoreCase(".csv")) {
@@ -90,7 +90,7 @@ public class Menukontroladorea {
 			}
 			
 			if(formatua.equalsIgnoreCase(".csv")) {
-				eredua.departamentua.csvkudeatu(fitxategi,formatua);
+				eredua.langilea.csvkudeatu2(fitxategi,formatua);
 			}}
 		
 	}
