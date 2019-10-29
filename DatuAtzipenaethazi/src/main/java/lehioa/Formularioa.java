@@ -6,6 +6,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import kontroladorea.Menukontroladorea;
+
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JButton;
@@ -34,6 +37,7 @@ public class Formularioa extends JFrame {
 	private JButton btnGorde;
 	private JButton btnEzabatu;
 	private JButton btnAtzera;
+	private Menukontroladorea menukontroladorea;
 
 	public Formularioa() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -150,5 +154,8 @@ public class Formularioa extends JFrame {
 		btnAtzera = new JButton("ATZERA");
 		btnAtzera.setBounds(137, 303, 89, 23);
 		contentPane.add(btnAtzera);
+	}
+	public void nireMenukontroladorea(Menukontroladorea menukontroladorea) {
+		this.menukontroladorea = menukontroladorea;
 	}
 }

@@ -12,6 +12,7 @@ import org.apache.log4j.Logger;
 
 import lehioa.Departamentua;
 import lehioa.Enplegatua;
+import lehioa.Formularioa;
 import lehioa.Menua;
 
 public class Menukontroladorea {
@@ -19,7 +20,7 @@ public class Menukontroladorea {
 	private Menua menua;
 	private Departamentua departamentua;
 	private Enplegatua enplegatua;
-
+	private Formularioa formularioa;
 
 	public void nireMenua(Menua menua) {
 		this.menua = menua;
@@ -35,6 +36,10 @@ public class Menukontroladorea {
 		this.enplegatua = enplegatua;
 
 	}
+	public void nireFormularioa(Formularioa formularioa) {
+		this.formularioa = formularioa;
+
+	}
 
 
 	// *************************
@@ -47,7 +52,10 @@ public class Menukontroladorea {
 		menua.setVisible(false);
 		enplegatua.setVisible(true);
 	}
-
+	public void formularioPantailara() {
+		enplegatua.setVisible(false);
+		formularioa.setVisible(true);
+	}
 
 	public void parametroakHartu(String fitxategi, String formatua) {
 		File fitx = new File(fitxategi+formatua);
