@@ -9,10 +9,10 @@ import java.util.ArrayList;
 
 public class Kontsultak {
 
-	public static void datuakSartu() {
+	public static void datuakSartu(ArrayList<departamentua> zerrenda) {
 		Connection conexion = null;
 		Statement s = null;
-
+		for(departamentua k : zerrenda) {
 		try {
 
 			// Cargar el driver
@@ -26,16 +26,25 @@ public class Kontsultak {
 
 			PreparedStatement preparedStatement = conexion.prepareStatement(sql);
 
+
 			preparedStatement.setInt(1, 01);
 			preparedStatement.setString(2, "Informatika");
 			preparedStatement.setInt(3, 02);
 			preparedStatement.setString(4, "Elorrieta");
+			preparedStatement.setInt(1, k.getDept_no());
+			preparedStatement.setString(2, k.getIzena());
+			preparedStatement.setString(3, k.getEraikina());
+			preparedStatement.setString(4, k.getZentroa());
+
 
 			int sartuTaulara = preparedStatement.executeUpdate();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			System.out.println("jajanotira");
+
 		}
+
+		} 
 	}
 
 	public static void datuakBerritu() {
@@ -98,7 +107,7 @@ public class Kontsultak {
 	public static void datuakSartu1(ArrayList<departamentua> zerrenda) {
 		Connection conexion = null;
 		Statement s = null;
-
+		for(departamentua k : zerrenda){
 		try {
 
 			// Cargar el driver
@@ -121,7 +130,7 @@ public class Kontsultak {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			System.out.println("jajanotira");
-		}
+		}}
 	}
 
 	public static void datuakSartu2(ArrayList<langilea> zerrenda) {
