@@ -11,6 +11,8 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import kontroladorea.Menukontroladorea;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class Formularioa extends JFrame {
 
@@ -152,10 +154,14 @@ public class Formularioa extends JFrame {
 		btnAtzera = new JButton("ATZERA");
 		btnAtzera.setBounds(137, 303, 89, 23);
 		contentPane.add(btnAtzera);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"INSERT", "UPDATE", "DELETE"}));
+		comboBox.setBounds(300, 12, 124, 18);
+		contentPane.add(comboBox);
 	}
 
 	public void nireMenukontroladorea(Menukontroladorea menukontroladorea) {
 		this.menukontroladorea = menukontroladorea;
 	}
-
 }
