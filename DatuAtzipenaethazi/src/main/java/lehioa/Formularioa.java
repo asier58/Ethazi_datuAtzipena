@@ -51,6 +51,7 @@ public class Formularioa extends JFrame {
 	private JButton btnGorde;
 	private JButton btnEzabatu;
 	private JButton btnAtzera;
+	private JComboBox comboBox;
 	ArrayList<langilea> langileArr;
 	langilea l1;
 
@@ -135,11 +136,22 @@ public class Formularioa extends JFrame {
 		textField_dataOrdua.setBounds(83, 254, 206, 17);
 		contentPane.add(textField_dataOrdua);
 		textField_dataOrdua.setColumns(10);
+		
+		comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] { "INSERT", "UPDATE", "DELETE" }));
+		comboBox.setBounds(300, 12, 124, 18);
+		contentPane.add(comboBox);
 
 		btnGorde = new JButton("GORDE");
 		btnGorde.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
+				if (comboBox.getSelectedItem().equals("UPDATE")) {
+					textField_langKod.setEditable(false);
+				}else if (comboBox.getSelectedItem().equals("DELETE")) {
+					
+				}
+				
 				int langKod = Integer.parseInt(textField_langKod.getText());
 				int soldata = Integer.parseInt(textField_soldata.getText());
 				int dept_noZenbkia = Integer.parseInt(textField_deptKod.getText());
@@ -155,6 +167,8 @@ public class Formularioa extends JFrame {
 				l1.setDataOrdua(textField_dataOrdua.getText());
 
 				langileArr.add(l1);
+				
+				menukontroladorea.getData(langileArr);
 			}
 		});
 		btnGorde.setBounds(335, 303, 89, 23);
@@ -181,10 +195,6 @@ public class Formularioa extends JFrame {
 		btnAtzera.setBounds(137, 303, 89, 23);
 		contentPane.add(btnAtzera);
 
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] { "INSERT", "UPDATE", "DELETE" }));
-		comboBox.setBounds(300, 12, 124, 18);
-		contentPane.add(comboBox);
 	}
 
 	public void nireMenukontroladorea(Menukontroladorea menukontroladorea) {
