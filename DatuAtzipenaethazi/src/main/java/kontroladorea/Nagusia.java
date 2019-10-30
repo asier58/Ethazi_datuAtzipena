@@ -3,6 +3,7 @@ package kontroladorea;
 import org.apache.log4j.Logger;
 import lehioa.Departamentua;
 import lehioa.Enplegatua;
+import lehioa.Formularioa;
 import lehioa.Menua;
 import eredua.DBKonexioa;
 
@@ -21,6 +22,8 @@ public class Nagusia {
 		con1.conectarDB();
 		
 		eredua.Kontsultak.datuakSartu1(null);
+
+//		eredua.Kontsultak.datuakSartu();
 		eredua.Kontsultak.datuakBerritu();
 
 
@@ -31,6 +34,7 @@ public class Nagusia {
 		Menukontroladorea menukontroladorea = new Menukontroladorea();
 		Departamentua departamentua = new Departamentua();
 		Enplegatua enplegatua =  new Enplegatua();
+		Formularioa formularioa = new Formularioa();
 
 		// Lehioak
 		Menua menua = new Menua();
@@ -45,6 +49,9 @@ public class Nagusia {
 		//***********
 		menukontroladorea.nireDepartamentua(enplegatua);
 		enplegatua.nireMenukontroladorea(menukontroladorea);
+		//********
+		menukontroladorea.nireFormularioa(formularioa);
+		formularioa.nireMenukontroladorea(menukontroladorea);
 		
 		ON(menua);
 		

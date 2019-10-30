@@ -50,7 +50,7 @@ public class Enplegatua extends JFrame {
 		JButton departamentuberri = new JButton("Enplegatua sartu");
 		departamentuberri.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				menukontroladorea.departamentuaPantailara();
+				menukontroladorea.formularioPantailara();
 			}
 		});
 		departamentuberri.setBounds(117, 53, 381, 47);
