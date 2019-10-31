@@ -93,7 +93,7 @@ public class Menukontroladorea {
 			}
 			
 			if(formatua.equalsIgnoreCase(".xml")) {
-				
+				eredua.langilea.xmlKudeatu2(fitxategi,formatua);
 				
 			}
 			

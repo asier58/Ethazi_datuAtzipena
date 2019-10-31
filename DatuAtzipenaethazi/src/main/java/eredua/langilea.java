@@ -15,9 +15,16 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 public class langilea {
 
@@ -144,6 +151,7 @@ public class langilea {
 	        	   case 3:
 	        		   soldata = Double.parseDouble(ateraDatua(linea));
 	        		   System.out.println(soldata);
+	        		   soldata = soldata*1000;
 	        	     break;
 	        	   case 4:
 	        		   izena = ateraDatua(linea);
@@ -288,6 +296,7 @@ public class langilea {
 		            		 nagusia = Integer.parseInt(csvRecord.get(5));
 		            		 Ardura = csvRecord.get(6);
 		            		 data = csvRecord.get(7);
+		            		 soldata = soldata*1000;
 		                  langilea dep = new langilea(kodea,departamentua,soldata,izena,abizena,nagusia,Ardura,data);
 		        		  zerrenda.add(dep);
 		        	     }
@@ -302,6 +311,109 @@ public class langilea {
 		     Kontsultak.datuakSartu2(zerrenda);
 			
 		}
+
+	public static void xmlKudeatu2(String fitxategi, String formatua) {
+		ArrayList<langilea> zerrenda = new ArrayList<langilea>();
+		int kodea=0;
+		int departamentua=0;
+		Double soldata=0.0;
+		String izena="";
+		String abizena="";
+		int nagusia=0;
+		String Ardura="";
+		Date date = new Date();
+		String data ="";
+		String ordua="";
+
+		try {
+			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            DocumentBuilder documentBuilder = dbf.newDocumentBuilder();
+            Document document = documentBuilder.parse(fitxategi+formatua);
+            document.getDocumentElement().normalize();
+            System.out.println("Elemento raiz:" + document.getDocumentElement().getNodeName());
+            NodeList mezua = document.getElementsByTagName("record");
+            String linea ="";
+            int kontagailua =0;
+           
+            for (int temp = 0; temp < mezua.getLength(); temp++) {
+                Node nodo = mezua.item(temp);
+                System.out.println("Elemento:" + nodo.getNodeName());
+                if (nodo.getNodeType() == Node.ELEMENT_NODE) {
+                    Element element = (Element) nodo;
+                   
+       	        	 kontagailua+=1;
+       	        	 switch (kontagailua) {
+       	        	   case 1:
+       	        		kodea = Integer.parseInt(element.getElementsByTagName("kodea").item(0).getTextContent());
+       	        		    
+       	        		   System.out.println(kodea);
+       	        		   kontagailua+=1;
+       	        		 
+       	        	   case 2:
+       	        		departamentua = Integer.parseInt(element.getElementsByTagName("dept_no").item(0).getTextContent());
+       	        		  
+       	        	     System.out.println(departamentua);
+       	        	  kontagailua+=1;
+       	        	     
+       	        	   case 3:
+       	        		soldata = Double.parseDouble(element.getElementsByTagName("soldata").item(0).getTextContent());
+       	        		soldata = soldata*1000;
+       	        		  
+       	        	     System.out.println(soldata);
+       	        	  kontagailua+=1;
+       	        	     
+       	        	   case 4:
+       	        		izena = element.getElementsByTagName("izena").item(0).getTextContent();
+
+       	        		    
+       	        	     System.out.println(izena);
+       	        	  kontagailua+=1;
+       	        	     
+       	        	   case 5:
+       	        		abizena = element.getElementsByTagName("abizena").item(0).getTextContent();
+
+   	        		    
+      	        	     System.out.println(abizena);
+      	        	  kontagailua+=1;
+       	        		
+       	        	   case 6:
+       	        		nagusia = Integer.parseInt(element.getElementsByTagName("nagusia").item(0).getTextContent());
+   	        		    
+    	        		   System.out.println(nagusia);
+    	        		   kontagailua+=1;
+       	        		   
+       	        	   case 7:
+       	        		Ardura = element.getElementsByTagName("Ardura").item(0).getTextContent();
+   	        		    
+ 	        		   System.out.println(Ardura);
+ 	        		  
+       	        	   case 8:
+       	        		DateFormat hourFormat = new SimpleDateFormat("HH:mm");
+       	        		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+ 	        		    data =dateFormat.format(date).toString();
+ 	        		    ordua = hourFormat.format(date).toString();
+       	        		langilea dep = new langilea(kodea,departamentua,soldata,izena,abizena,nagusia,Ardura,data+ordua);
+       	        		zerrenda.add(dep);
+      	        	    break;
+       	        		   
+       	        	   
+       	        	     
+       	        	 }	
+       	        	 
+       	        	 
+       	        	 
+       	        	 if(kontagailua ==8) {
+       	        		 kontagailua=0;
+       	        	 }
+                
+                }}}
+       	        	 catch (Exception e) {
+       	        		 e.printStackTrace();
+       	        	 }
+		Kontsultak.datuakSartu2(zerrenda);
+		
+		
+	}
 
 }
 

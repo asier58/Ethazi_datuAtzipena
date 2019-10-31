@@ -93,8 +93,7 @@ public class departamentua {
         BufferedReader br = new BufferedReader(fr);
 		ArrayList<departamentua> zerrenda = new ArrayList<departamentua>();
 		try {
-	         // Apertura del fichero y creacion de BufferedReader para poder
-	         // hacer una lectura comoda (disponer del metodo readLine()).
+	       
 			int zentro_deptno=0;
 			String zentro_izena="";
 			String zentro="";
