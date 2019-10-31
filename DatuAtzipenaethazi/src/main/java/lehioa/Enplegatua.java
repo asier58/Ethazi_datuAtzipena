@@ -2,7 +2,6 @@ package lehioa;
 
 import java.awt.BorderLayout;
 
-
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -36,21 +35,6 @@ public class Enplegatua extends JFrame {
 	private JComboBox comboBox;
 	public static Logger logger = Logger.getLogger(Enplegatua.class);
 	private JLabel lblNewLabel;
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Enplegatua frame = new Enplegatua();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
@@ -80,10 +64,10 @@ public class Enplegatua extends JFrame {
 		fitxategiaKargatu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				lblNewLabel.setVisible(false);
-				formatua=(String)comboBox.getSelectedItem();
-				fitxategi =textField.getText();
-				logger.info("Parametruak hartu dira: "+fitxategi+" "+formatua);
-				menukontroladorea.parametroakHartu2(fitxategi,formatua);
+				formatua = (String) comboBox.getSelectedItem();
+				fitxategi = textField.getText();
+				logger.info("Parametruak hartu dira: " + fitxategi + " " + formatua);
+				menukontroladorea.parametroakHartu2(fitxategi, formatua);
 			}
 		});
 		fitxategiaKargatu.setBounds(410, 265, 151, 47);
@@ -94,12 +78,7 @@ public class Enplegatua extends JFrame {
 		contentPane.add(textField);
 		textField.setColumns(10);
 
-		
-		
-
-
-		
-		 comboBox = new JComboBox();
+		comboBox = new JComboBox();
 
 		comboBox.setBounds(289, 278, 86, 20);
 		contentPane.add(comboBox);
@@ -107,20 +86,18 @@ public class Enplegatua extends JFrame {
 		JLabel lblFitxategiarenIzena = new JLabel("Fitxategiaren Izena:");
 		lblFitxategiarenIzena.setBounds(40, 281, 114, 14);
 		contentPane.add(lblFitxategiarenIzena);
-		
-		lblNewLabel = new JLabel("Fitxategia ez da existitzen");
-		lblNewLabel.setBounds(65, 333, 308, 14);
-		contentPane.add(lblNewLabel);
-		lblNewLabel.setVisible(false);
-		
 
 		lblNewLabel = new JLabel("Fitxategia ez da existitzen");
 		lblNewLabel.setBounds(65, 333, 308, 14);
 		contentPane.add(lblNewLabel);
 		lblNewLabel.setVisible(false);
-		
-		ArrayList<String> fitxategiMota = new  ArrayList();
 
+		lblNewLabel = new JLabel("Fitxategia ez da existitzen");
+		lblNewLabel.setBounds(65, 333, 308, 14);
+		contentPane.add(lblNewLabel);
+		lblNewLabel.setVisible(false);
+
+		ArrayList<String> fitxategiMota = new ArrayList();
 
 		fitxategiMota.add(".Csv");
 		fitxategiMota.add(".Xml");
@@ -143,8 +120,7 @@ public class Enplegatua extends JFrame {
 
 	public void erroreaAtera() {
 		lblNewLabel.setVisible(true);
-		
-	}
 
+	}
 
 }
