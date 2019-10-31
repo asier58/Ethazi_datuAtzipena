@@ -132,7 +132,7 @@ public class langilea {
 			String data = "";
 			String ordua = "";
 
-<<<<<<< HEAD
+
 	         // Lectura del fichero
 	         String linea;
 	         int kontagailua = 0;
@@ -160,34 +160,6 @@ public class langilea {
 	        		   abizena = ateraDatua(linea);
 		        	     System.out.println(abizena);
 		        	     break;
-=======
-			// Lectura del fichero
-			String linea;
-			int kontagailua = 0;
-			while ((linea = br.readLine()) != null) {
-				kontagailua += 1;
-				switch (kontagailua) {
-				case 1:
-					kodea = Integer.parseInt(ateraDatua(linea));
-					System.out.println(kodea);
-					break;
-				case 2:
-					departamentua = Integer.parseInt(ateraDatua(linea));
-					System.out.println(departamentua);
-					break;
-				case 3:
-					soldata = Double.parseDouble(ateraDatua(linea));
-					System.out.println(soldata);
-					break;
-				case 4:
-					izena = ateraDatua(linea);
-					System.out.println(izena);
-					break;
-				case 5:
-					abizena = ateraDatua(linea);
-					System.out.println(abizena);
-					break;
->>>>>>> branch 'master' of https://github.com/asier58/Ethazi_datuAtzipena.git
 //	        		   departamentua dep = new departamentua(zentro_deptno,zentro_izena,zentro_eraikina,zentro);
 //	        		   zerrenda.add(dep);
 //	        		   idatxi(dep);
@@ -253,7 +225,7 @@ public class langilea {
 	public void setDept_nozenbakia(int dept_nozenbakia) {
 		this.dept_nozenbakia = dept_nozenbakia;
 	}
-<<<<<<< HEAD
+
 	
 	  public static void idatxi2(langilea Langilea) throws IOException {
 		    int idatzita =0;
@@ -317,31 +289,10 @@ public class langilea {
 		         }catch(Exception e) {
 		        	 zerrenda = null;
 		         }
-		     Kontsultak.datuakSartu2(zerrenda);
+		     Kontsultak.datuakSartu2(zerrenda);}
 			
-=======
 
-	public static void idatxi2(langilea Langilea) throws IOException {
-		int idatzita = 0;
-		File d = new File("enplegatua.csv");
-		FileWriter fw;
-		BufferedWriter bw;
-		try {
-			fw = new FileWriter(d, true);
-			bw = new BufferedWriter(fw);
 
-			bw.newLine();
-			bw.write(Langilea.langile_kod + "," + Langilea.dept_nozenbakia + "," + Langilea.soldata + ","
-					+ Langilea.izena + "," + Langilea.abizena + "," + Langilea.nagusia + "," + Langilea.ardura + ","
-					+ Langilea.dataOrdua);
-			bw.flush(); // txt-an idatzitakoa gortzeko
-			idatzita = 1;
-		} catch (IOException e) {
-			e.printStackTrace();
->>>>>>> branch 'master' of https://github.com/asier58/Ethazi_datuAtzipena.git
-		}
-
-<<<<<<< HEAD
 	public static void xmlKudeatu2(String fitxategi, String formatua) {
 		ArrayList<langilea> zerrenda = new ArrayList<langilea>();
 		int kodea=0;
@@ -445,52 +396,9 @@ public class langilea {
 		
 	}
 
-}
-=======
-	}
->>>>>>> branch 'master' of https://github.com/asier58/Ethazi_datuAtzipena.git
 
-	public static void csvkudeatu2(String fitxategi, String formatua) {
-		ArrayList<langilea> zerrenda = new ArrayList<langilea>();
-		int kodea = 0;
-		int departamentua = 0;
-		Double soldata = 0.0;
-		String izena = "";
-		String abizena = "";
-		int nagusia = 0;
-		String Ardura = "";
-		Date date = new Date();
-		String data = "";
-		String ordua = "";
-		String SAMPLE_CSV_FILE_PATH = fitxategi + formatua;
-		int contador = 0;
 
-		try (Reader reader = Files.newBufferedReader(Paths.get(SAMPLE_CSV_FILE_PATH));
-				CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT);) {
-			for (CSVRecord csvRecord : csvParser) {
-				// Accessing Values by Column Index
-				if (contador != 0) {
-					kodea = Integer.parseInt(csvRecord.get(0));
-					departamentua = Integer.parseInt(csvRecord.get(1));
-					soldata = Double.parseDouble(csvRecord.get(2));
-					izena = csvRecord.get(3);
-					abizena = csvRecord.get(4);
-					nagusia = Integer.parseInt(csvRecord.get(5));
-					Ardura = csvRecord.get(6);
-					data = csvRecord.get(7);
-					langilea dep = new langilea(kodea, departamentua, soldata, izena, abizena, nagusia, Ardura, data);
-					zerrenda.add(dep);
-				}
+	
 
-				contador++;
-			}
-			reader.close();
-			csvParser.close();
-		} catch (Exception e) {
-			zerrenda = null;
-		}
-		Kontsultak.datuakSartu2(zerrenda);
-
-	}
 
 }
