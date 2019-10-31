@@ -21,10 +21,10 @@ public class Nagusia {
 		DBKonexioa con1 = new DBKonexioa();
 		con1.conectarDB();
 		
-		eredua.Kontsultak.datuakSartu1(null);
-
-//		eredua.Kontsultak.datuakSartu();
-		eredua.Kontsultak.datuakBerritu();
+//		eredua.Kontsultak.datuakSartu1(null);
+//
+////		eredua.Kontsultak.datuakSartu();
+//		eredua.Kontsultak.datuakBerritu();
 
 
 		//ugadooooooooooooooooooooooooo

@@ -108,4 +108,15 @@ public class Menukontroladorea {
 		Kontsultak.datuakSartu2(arrayList);
 	}
 
+	public void departamentutikMenura() {
+		departamentua.setVisible(false);
+		menua.setVisible(true);
+		
+	}
+	public void langiletikMenura() {
+		enplegatua.setVisible(false);
+		menua.setVisible(true);
+		
+	}
+
 }
