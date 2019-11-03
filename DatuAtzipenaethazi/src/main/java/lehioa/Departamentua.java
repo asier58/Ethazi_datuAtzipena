@@ -67,7 +67,7 @@ public class Departamentua extends JFrame {
 		JButton departamentuberri = new JButton("Departamentua sartu");
 		departamentuberri.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				menukontroladorea.departamentuaPantailara();
+				menukontroladorea.formulario2Pantailara();
 			}
 		});
 		departamentuberri.setBounds(117, 53, 381, 47);

@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import lehioa.Departamentua;
 import lehioa.Enplegatua;
 import lehioa.Formularioa;
+import lehioa.Formularioa2;
 import lehioa.Menua;
 import eredua.DBKonexioa;
 
@@ -35,6 +36,7 @@ public class Nagusia {
 		Departamentua departamentua = new Departamentua();
 		Enplegatua enplegatua =  new Enplegatua();
 		Formularioa formularioa = new Formularioa();
+		Formularioa2 formularioa2 = new Formularioa2();
 
 		// Lehioak
 		Menua menua = new Menua();
@@ -52,6 +54,9 @@ public class Nagusia {
 		//********
 		menukontroladorea.nireFormularioa(formularioa);
 		formularioa.nireMenukontroladorea(menukontroladorea);
+		//******
+		menukontroladorea.nireFormularioa2(formularioa2);
+		formularioa2.nireMenukontroladorea(menukontroladorea);
 		
 		ON(menua);
 		

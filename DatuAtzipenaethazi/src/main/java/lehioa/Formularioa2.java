@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import eredua.departamentua;
 import kontroladorea.Menukontroladorea;
 
 import javax.swing.JTextField;
@@ -23,15 +24,16 @@ public class Formularioa2 extends JFrame {
 	private JLabel lblIzena;
 	private JLabel lblAbizena;
 	private JLabel lblDeptKod;
-	private JTextField textField_langKod;
+	private JTextField textField_depKod;
 	private JTextField textField_izena;
-	private JTextField textField_abizena;
-	private JTextField textField_deptKod;
+	private JTextField textField_eraikina;
+	private JTextField textField_zentroa;
 	private JButton btnGorde;
 	private JButton btnEzabatu;
 	private JButton btnAtzera;
 	private Menukontroladorea menukontroladorea;
 	private JComboBox comboBox = new JComboBox();
+	private JLabel lblNewLabel;
 
 	public Formularioa2() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -41,10 +43,10 @@ public class Formularioa2 extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		textField_langKod = new JTextField();
-		textField_langKod.setBounds(144, 11, 181, 20);
-		contentPane.add(textField_langKod);
-		textField_langKod.setColumns(10);
+		textField_depKod = new JTextField();
+		textField_depKod.setBounds(144, 11, 181, 20);
+		contentPane.add(textField_depKod);
+		textField_depKod.setColumns(10);
 		
 		lblLangKod = new JLabel("Departamentu Zenbakia:");
 		lblLangKod.setBounds(10, 11, 124, 20);
@@ -63,27 +65,59 @@ public class Formularioa2 extends JFrame {
 		lblAbizena.setBounds(10, 84, 50, 14);
 		contentPane.add(lblAbizena);
 		
-		textField_abizena = new JTextField();
-		textField_abizena.setBounds(144, 81, 181, 20);
-		contentPane.add(textField_abizena);
-		textField_abizena.setColumns(10);
+		textField_eraikina = new JTextField();
+		textField_eraikina.setBounds(144, 81, 181, 20);
+		contentPane.add(textField_eraikina);
+		textField_eraikina.setColumns(10);
 		
 		lblDeptKod = new JLabel("Zentroa:");
 		lblDeptKod.setBounds(10, 122, 102, 14);
 		contentPane.add(lblDeptKod);
 		
-		textField_deptKod = new JTextField();
-		textField_deptKod.setBounds(144, 119, 181, 20);
-		contentPane.add(textField_deptKod);
-		textField_deptKod.setColumns(10);
+		textField_zentroa = new JTextField();
+		textField_zentroa.setBounds(144, 119, 181, 20);
+		contentPane.add(textField_zentroa);
+		textField_zentroa.setColumns(10);
 		
 		btnGorde = new JButton("GORDE");
 		btnGorde.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String langKod = textField_langKod.getText();
-				String izena = textField_izena.getText();
-				String abizena = textField_abizena.getText();
-				String deptKod = textField_deptKod.getText();
+				lblNewLabel.setVisible(false);
+				String operazioa = (String) comboBox.getSelectedItem();
+				if(operazioa.equalsIgnoreCase("txertatu")) {
+					if(!textField_izena.getText().equalsIgnoreCase("") && !textField_eraikina.getText().equalsIgnoreCase("") && !textField_zentroa.getText().equalsIgnoreCase("")) {
+						departamentua Departamentua = new departamentua(0,textField_izena.getText(),textField_eraikina.getText(),textField_zentroa.getText());
+						menukontroladorea.txertatuDepatamentua(Departamentua);
+					}
+					else {
+						lblNewLabel.setVisible(true);
+						lblNewLabel.setText("Parametroak falta dira");
+					}
+					
+				}
+				if(operazioa.equalsIgnoreCase("ezabatu")) {
+					if(!textField_depKod.getText().equalsIgnoreCase("")) {
+						departamentua Departamentua = new departamentua(Integer.parseInt(textField_depKod.getText()),null,null,null);
+						menukontroladorea.ezabatuDepatamentua(Departamentua);
+					}
+					else {
+						lblNewLabel.setVisible(true);
+						lblNewLabel.setText("Parametroak falta dira");
+					}
+					
+				}
+				if(operazioa.equalsIgnoreCase("aldatu")) {
+					if(!textField_depKod.getText().equalsIgnoreCase("") && !textField_izena.getText().equalsIgnoreCase("") && !textField_eraikina.getText().equalsIgnoreCase("") && !textField_zentroa.getText().equalsIgnoreCase("")) {
+						departamentua Departamentua = new departamentua(Integer.parseInt(textField_depKod.getText()),textField_izena.getText(),textField_eraikina.getText(),textField_zentroa.getText());
+						menukontroladorea.aldatuDepartamentu(Departamentua);
+					}
+					else {
+						lblNewLabel.setVisible(true);
+						lblNewLabel.setText("Parametroak falta dira");
+					}
+					
+				}
+				
 				
 			}
 		});
@@ -93,10 +127,10 @@ public class Formularioa2 extends JFrame {
 		btnEzabatu = new JButton("EZABATU");
 		btnEzabatu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				textField_langKod.setText(null);
+				textField_depKod.setText(null);
 				textField_izena.setText(null);
-				textField_abizena.setText(null);
-				textField_deptKod.setText(null);
+				textField_eraikina.setText(null);
+				textField_zentroa.setText(null);
 				
 			}
 		});
@@ -109,8 +143,22 @@ public class Formularioa2 extends JFrame {
 		comboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String operazioa = (String) comboBox.getSelectedItem();
-				if(operazioa.equalsIgnoreCase("Txertatu")) {
+				if(operazioa.equalsIgnoreCase("txertatu")) {
+					textField_depKod.setEnabled(false);
 					
+				}
+				if(operazioa.equalsIgnoreCase("ezabatu")) {
+					textField_depKod.setEnabled(true);
+					textField_eraikina.setEditable(false);
+					textField_izena.setEditable(false);
+					textField_zentroa.setEditable(false);
+					
+				}
+				if(operazioa.equalsIgnoreCase("aldatu")) {
+					textField_depKod.setEnabled(true);
+					textField_eraikina.setEditable(true);
+					textField_izena.setEditable(true);
+					textField_zentroa.setEditable(true);
 					
 				}
 			}
@@ -123,8 +171,21 @@ public class Formularioa2 extends JFrame {
 		comboBox.addItem("Ezabatu");
 		comboBox.addItem("Aldatu");
 		
+		lblNewLabel = new JLabel("Departamentua ez da existitzen");
+		lblNewLabel.setBounds(139, 235, 256, 14);
+		contentPane.add(lblNewLabel);
+		lblNewLabel.setVisible(false);
+		
 	}
 	public void nireMenukontroladorea(Menukontroladorea menukontroladorea) {
 		this.menukontroladorea = menukontroladorea;
+	}
+	public void errorea() {
+		lblNewLabel.setVisible(true);
+	}
+	public void ezdago() {
+		lblNewLabel.setVisible(true);
+		lblNewLabel.setText("Departamentua ez da existitzen");
+		
 	}
 }

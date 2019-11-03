@@ -4,11 +4,16 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class Kontsultak {
+import org.apache.log4j.Logger;
 
+import kontroladorea.Menukontroladorea;
+
+public class Kontsultak {
+	public static Logger logger = Logger.getLogger(Kontsultak.class);
 	/**
 	 * INSERT
 	 */
@@ -297,4 +302,226 @@ public class Kontsultak {
 			System.out.println(e.getMessage());
 		}
 	}
+	
+	
+	//****Departamentu kudeaketa
+	//***Departamentua
+	public static int ateraZenbakiamaximoa() {
+		int zenbakia =0;
+		
+		Connection conexion = null;
+		Statement s = null;
+
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conexion = DriverManager.getConnection("jdbc:mysql://localhost/mydb", "root", "");
+			s = (Statement) conexion.createStatement();
+
+			String sql = "SELECT MAX(dept_no) FROM departamentua";
+
+			PreparedStatement preparedStatement = conexion.prepareStatement(sql);
+
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				zenbakia = resultSet.getInt(1);
+				
+			}
+
+			
+			
+			
+
+		} 
+		
+		catch(SQLException I) {
+			logger.error(I.getMessage());
+		}
+		catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		
+		
+		
+		
+		return zenbakia;
+		
+	}
+	public static boolean depart_state(departamentua Dept) {
+		boolean existitu = false;
+		
+		Connection conexion = null;
+		Statement s = null;
+
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conexion = DriverManager.getConnection("jdbc:mysql://localhost/mydb", "root", "");
+			s = (Statement) conexion.createStatement();
+
+			String sql = ("SELECT * FROM departamentua WHERE dept_no ="+Dept.getDept_no());
+
+			PreparedStatement preparedStatement = conexion.prepareStatement(sql);
+
+			ResultSet resultSet = preparedStatement.executeQuery();
+			if(resultSet.getRow()!=-1) {
+				existitu=true;
+			}
+
+			
+			
+			
+
+		} catch(SQLException I) {
+			logger.error(I.getMessage());
+		}
+		catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		
+		
+		
+		return existitu;
+	}
+	public static int departamentuaEzabatuta(departamentua dept) {
+		int zenbakia =58;
+		Connection conexion = null;
+		Statement s = null;
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conexion = DriverManager.getConnection("jdbc:mysql://localhost/mydb", "root", "");
+			s = (Statement) conexion.createStatement();
+			
+			String sql = "DELETE FROM departamentua WHERE dept_no = ?";
+			
+			PreparedStatement preparedStatement = conexion.prepareStatement(sql);
+			preparedStatement.setInt(1, dept.getDept_no());
+			//ResultSet resultSet = preparedStatement.executeQuery();
+			zenbakia = preparedStatement.executeUpdate();
+			
+			
+		}catch(SQLException I) {
+			logger.error(I.getMessage());
+		}
+		catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		
+		
+		
+		return zenbakia;
+	}
+	public static int departamentuaAldatu(departamentua dept) {
+		int zenbakia =58;
+		Connection conexion = null;
+		Statement s = null;
+
+		try {
+
+			
+			Class.forName("com.mysql.jdbc.Driver");
+			conexion = DriverManager.getConnection("jdbc:mysql://localhost/mydb", "root", "");
+			s = (Statement) conexion.createStatement();
+			String sql = "UPDATE departamentua SET Izena=?, eraikina=?, zentroa=? WHERE dept_no=?";
+
+			PreparedStatement preparedStatement = conexion.prepareStatement(sql);
+			
+			preparedStatement.setString(1, dept.getIzena());
+			preparedStatement.setString(2, dept.getEraikina());
+			preparedStatement.setString(3, dept.getZentroa());
+			preparedStatement.setInt(4, dept.getDept_no());
+
+			 zenbakia = preparedStatement.executeUpdate();
+		}
+			
+			
+		catch(SQLException I) {
+			logger.error(I.getMessage());
+		}
+		catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		
+		
+		
+		return zenbakia;
+	}
+	//Departamentu Amaiera
+	
+	//***Enplegatua
+	//Insert baino lehen kodea ateratzen dugu enplegatuari kode egokiena emateko
+	public static int ateraEnplegatumaximoa() {
+		int zenbakia =0;
+		
+		Connection conexion = null;
+		Statement s = null;
+
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conexion = DriverManager.getConnection("jdbc:mysql://localhost/mydb", "root", "");
+			s = (Statement) conexion.createStatement();
+
+			String sql = "SELECT MAX(Kodea) FROM enplegatua";
+
+			PreparedStatement preparedStatement = conexion.prepareStatement(sql);
+
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				zenbakia = resultSet.getInt(1);
+				
+			}
+
+			} 
+		
+		catch(SQLException I) {
+			logger.error(I.getMessage());
+		}
+		catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		
+		
+		
+		
+		return zenbakia;
+		
+	}
+	//Enplegatua existitzen badu ikusten duen metodoa
+	public static boolean enplegatu_state(langilea lang) {
+		boolean existitu = false;
+		
+		Connection conexion = null;
+		Statement s = null;
+
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conexion = DriverManager.getConnection("jdbc:mysql://localhost/mydb", "root", "");
+			s = (Statement) conexion.createStatement();
+
+			String sql = ("SELECT * FROM enplegatua WHERE Kodea ="+lang.getLangile_kod());
+
+			PreparedStatement preparedStatement = conexion.prepareStatement(sql);
+
+			ResultSet resultSet = preparedStatement.executeQuery();
+			if(resultSet.getRow()!=-1) {
+				existitu=true;
+			}
+
+			
+			
+			
+
+		} catch(SQLException I) {
+			logger.error(I.getMessage());
+		}
+		catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		
+		
+		
+		return existitu;
+	}
+	
+	//**Enplegatu Amaiera
+	//****
 }

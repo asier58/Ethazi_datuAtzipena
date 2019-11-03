@@ -1,15 +1,18 @@
 package kontroladorea;
 
 import java.io.File;
+
 import java.util.ArrayList;
 
 import org.apache.log4j.Logger;
 
 import eredua.Kontsultak;
 import eredua.langilea;
+import eredua.departamentua;
 import lehioa.Departamentua;
 import lehioa.Enplegatua;
 import lehioa.Formularioa;
+import lehioa.Formularioa2;
 import lehioa.Menua;
 
 public class Menukontroladorea {
@@ -19,6 +22,7 @@ public class Menukontroladorea {
 	private Enplegatua enplegatua;
 
 	private Formularioa formularioa;
+	private Formularioa2 formularioa2;
 
 	public void nireMenua(Menua menua) {
 		this.menua = menua;
@@ -38,6 +42,10 @@ public class Menukontroladorea {
 		this.formularioa = formularioa;
 
 	}
+	public void nireFormularioa2(Formularioa2 formularioa2) {
+		this.formularioa2 = formularioa2;
+
+	}
 
 
 	// *************************
@@ -45,6 +53,11 @@ public class Menukontroladorea {
 	public void departamentuaPantailara() {
 		menua.setVisible(false);
 		departamentua.setVisible(true);
+	}
+	//Formulario departamentua pantailara
+	public void formulario2Pantailara() {
+		departamentua.setVisible(false);
+		formularioa2.setVisible(true);
 	}
 
 	public void langilePantailara() {
@@ -118,5 +131,48 @@ public class Menukontroladorea {
 		menua.setVisible(true);
 		
 	}
+	
+	
+	
+	//***Formularioen kudeaketa
+	//***Departamentua
+	
+	public void txertatuDepatamentua(departamentua dept) {
+		int dept_zenbakia = Kontsultak.ateraZenbakiamaximoa();
+		dept_zenbakia = dept_zenbakia+1;
+		dept.setDept_no(dept_zenbakia);
+		ArrayList<departamentua> zerrenda =  new ArrayList<departamentua>();
+		zerrenda.add(dept);
+		Kontsultak.datuakSartu1(zerrenda);
+	}
+	public void ezabatuDepatamentua(departamentua dept) {
+		boolean existitzen = Kontsultak.depart_state(dept);
+		if (existitzen) {
+			int ezabatuta = Kontsultak.departamentuaEzabatuta(dept);
+			if(ezabatuta == 1) {
+				logger.info("Elementu bat ezabatu egin da: "+dept.getDept_no());
+			}
+			
+		}
+		
+		else {
+			formularioa2.ezdago();		}
+	}
+	public void aldatuDepartamentu(departamentua dept) {
+		boolean existitzen = Kontsultak.depart_state(dept);
+		if (existitzen) {
+			int ezabatuta = Kontsultak.departamentuaAldatu(dept);
+			if(ezabatuta == 1) {
+				logger.info("Elementu bat Aldatu egin da: id "+dept.getDept_no());
+			}
+			
+		}
+		
+		else {
+			formularioa2.ezdago();		}
+		
+	}
+	
+	//Amaiera departamentua
 
 }
