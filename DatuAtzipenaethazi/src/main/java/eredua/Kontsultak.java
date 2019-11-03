@@ -1,12 +1,16 @@
 package eredua;
 
 import java.sql.Connection;
+
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.apache.log4j.Logger;
 
@@ -346,6 +350,38 @@ public class Kontsultak {
 		return zenbakia;
 		
 	}
+	public static int sartuDepartamentua(departamentua Dept) {
+		int zenbakia =0;
+		Connection conexion = null;
+		Statement s = null;
+		try {
+
+			// Cargar el driver
+			Class.forName("com.mysql.jdbc.Driver");
+			conexion = DriverManager.getConnection("jdbc:mysql://localhost/mydb", "root", "");
+			s = (Statement) conexion.createStatement();
+
+			// Se realiza la consulta
+
+			String sql = "INSERT INTO `departamentua` (dept_no, izena, eraikina, zentroa) VALUES (?, ?, ?, ?)";
+
+			PreparedStatement preparedStatement = conexion.prepareStatement(sql);
+			preparedStatement.setInt(1, Dept.getDept_no());
+			preparedStatement.setString(2, Dept.getIzena());
+			preparedStatement.setString(3, Dept.getEraikina());
+			preparedStatement.setString(4, Dept.getZentroa());
+			zenbakia = preparedStatement.executeUpdate();
+			
+		} catch(SQLException I) {
+			logger.error(I.getMessage());
+		}
+		catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		
+		return zenbakia	;
+		
+	}
 	public static boolean depart_state(departamentua Dept) {
 		boolean existitu = false;
 		
@@ -362,8 +398,9 @@ public class Kontsultak {
 			PreparedStatement preparedStatement = conexion.prepareStatement(sql);
 
 			ResultSet resultSet = preparedStatement.executeQuery();
-			if(resultSet.getRow()!=-1) {
+			if(resultSet.getRow()>0) {
 				existitu=true;
+				
 			}
 
 			
@@ -520,6 +557,78 @@ public class Kontsultak {
 		
 		
 		return existitu;
+	}
+	//Enplegatua ezabatzeko metodoa
+	public static int enplegatuEzabatuta(langilea lang) {
+		int zenbakia =58;
+		Connection conexion = null;
+		Statement s = null;
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conexion = DriverManager.getConnection("jdbc:mysql://localhost/mydb", "root", "");
+			s = (Statement) conexion.createStatement();
+			
+			String sql = "DELETE FROM enplegatua WHERE Kodea = ?";
+			
+			PreparedStatement preparedStatement = conexion.prepareStatement(sql);
+			preparedStatement.setInt(1, lang.getLangile_kod());
+			//ResultSet resultSet = preparedStatement.executeQuery();
+			zenbakia = preparedStatement.executeUpdate();
+			
+			
+		}catch(SQLException I) {
+			logger.error(I.getMessage());
+		}
+		catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		
+		
+		
+		return zenbakia;
+	}
+	public static int enplegatuaAldatu(langilea lang) {
+		int zenbakia =58;
+		Connection conexion = null;
+		Statement s = null;
+		Date date = new Date();
+		DateFormat hourFormat = new SimpleDateFormat("HH:mm");
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		String data = dateFormat.format(date).toString();
+		String ordua = hourFormat.format(date).toString();
+		try {
+
+			
+			Class.forName("com.mysql.jdbc.Driver");
+			conexion = DriverManager.getConnection("jdbc:mysql://localhost/mydb", "root", "");
+			s = (Statement) conexion.createStatement();
+			String sql = "UPDATE enplegatua SET Departamentua_dept_no=?, Soldata=?, Izena=?, Abizena=?, Nagusia=?, Ardura=?, DataOrdua=? WHERE Kodea=?";
+
+			PreparedStatement preparedStatement = conexion.prepareStatement(sql);
+			
+			preparedStatement.setInt(1, lang.getDept_nozenbakia());
+			preparedStatement.setDouble(2, lang.getSoldata());
+			preparedStatement.setString(3, lang.getIzena());
+			preparedStatement.setString(4, lang.getAbizena());
+			preparedStatement.setInt(5, lang.getNagusia());
+			preparedStatement.setString(6, lang.getArdura());
+			preparedStatement.setString(7,data+","+ordua );
+			preparedStatement.setInt(8,lang.getLangile_kod() );
+			zenbakia = preparedStatement.executeUpdate();
+		}
+			
+			
+		catch(SQLException I) {
+			logger.error(I.getMessage());
+		}
+		catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		
+		
+		
+		return zenbakia;
 	}
 	
 	//**Enplegatu Amaiera

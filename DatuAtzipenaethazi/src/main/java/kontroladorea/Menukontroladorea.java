@@ -14,6 +14,7 @@ import lehioa.Enplegatua;
 import lehioa.Formularioa;
 import lehioa.Formularioa2;
 import lehioa.Menua;
+import lehioa.deptTxostena;
 
 public class Menukontroladorea {
 	public static Logger logger = Logger.getLogger(Menukontroladorea.class);
@@ -23,6 +24,7 @@ public class Menukontroladorea {
 
 	private Formularioa formularioa;
 	private Formularioa2 formularioa2;
+	private deptTxostena depttxostena;
 
 	public void nireMenua(Menua menua) {
 		this.menua = menua;
@@ -46,19 +48,42 @@ public class Menukontroladorea {
 		this.formularioa2 = formularioa2;
 
 	}
+	public void nireTxostena1(deptTxostena depttxostena) {
+		this.depttxostena=depttxostena;
+	}
 
 
 	// *************************
-	// Departamentua Pantaila
+	// DEPARTAMENTUA
 	public void departamentuaPantailara() {
 		menua.setVisible(false);
 		departamentua.setVisible(true);
 	}
-	//Formulario departamentua pantailara
+	
+	
+	
+	//Formulario2
 	public void formulario2Pantailara() {
 		departamentua.setVisible(false);
 		formularioa2.setVisible(true);
 	}
+	public void formulario2tikDepartamentura() {
+		formularioa2.setVisible(false);
+		departamentua.setVisible(true);
+	}
+	//**
+	
+	
+	//Txostena DEPERTAMENTUA
+	public void departamentutikTxostenara() {
+		
+		departamentua.setVisible(false);
+		depttxostena.setVisible(true);
+	}
+	
+	//***
+	
+	
 
 	public void langilePantailara() {
 		menua.setVisible(false);
@@ -129,21 +154,25 @@ public class Menukontroladorea {
 	public void langiletikMenura() {
 		enplegatua.setVisible(false);
 		menua.setVisible(true);
-		
 	}
+	
 	
 	
 	
 	//***Formularioen kudeaketa
 	//***Departamentua
-	
 	public void txertatuDepatamentua(departamentua dept) {
 		int dept_zenbakia = Kontsultak.ateraZenbakiamaximoa();
 		dept_zenbakia = dept_zenbakia+1;
 		dept.setDept_no(dept_zenbakia);
-		ArrayList<departamentua> zerrenda =  new ArrayList<departamentua>();
-		zerrenda.add(dept);
-		Kontsultak.datuakSartu1(zerrenda);
+		int zenbakia = Kontsultak.sartuDepartamentua(dept);
+		if(zenbakia>0) {
+			logger.info("Elementu bat sartu egin da: "+dept.getDept_no());
+			formularioa2.operazioa();
+		}
+		else {
+			formularioa2.txertatuErrorea();
+		}
 	}
 	public void ezabatuDepatamentua(departamentua dept) {
 		boolean existitzen = Kontsultak.depart_state(dept);
@@ -151,12 +180,14 @@ public class Menukontroladorea {
 			int ezabatuta = Kontsultak.departamentuaEzabatuta(dept);
 			if(ezabatuta == 1) {
 				logger.info("Elementu bat ezabatu egin da: "+dept.getDept_no());
+				formularioa2.operazioa();
 			}
 			
 		}
 		
 		else {
-			formularioa2.ezdago();		}
+			formularioa2.ezdago();		
+			}
 	}
 	public void aldatuDepartamentu(departamentua dept) {
 		boolean existitzen = Kontsultak.depart_state(dept);
@@ -164,6 +195,7 @@ public class Menukontroladorea {
 			int ezabatuta = Kontsultak.departamentuaAldatu(dept);
 			if(ezabatuta == 1) {
 				logger.info("Elementu bat Aldatu egin da: id "+dept.getDept_no());
+				formularioa2.operazioa();
 			}
 			
 		}
@@ -172,7 +204,6 @@ public class Menukontroladorea {
 			formularioa2.ezdago();		}
 		
 	}
-	
 	//Amaiera departamentua
 
 }

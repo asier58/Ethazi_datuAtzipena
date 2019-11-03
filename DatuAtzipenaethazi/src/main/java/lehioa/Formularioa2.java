@@ -27,13 +27,14 @@ public class Formularioa2 extends JFrame {
 	private JTextField textField_depKod;
 	private JTextField textField_izena;
 	private JTextField textField_eraikina;
-	private JTextField textField_zentroa;
 	private JButton btnGorde;
 	private JButton btnEzabatu;
 	private JButton btnAtzera;
 	private Menukontroladorea menukontroladorea;
 	private JComboBox comboBox = new JComboBox();
 	private JLabel lblNewLabel;
+	private JComboBox comboBox_1 =new JComboBox();;
+	private String zentroa="";
 
 	public Formularioa2() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -74,19 +75,14 @@ public class Formularioa2 extends JFrame {
 		lblDeptKod.setBounds(10, 122, 102, 14);
 		contentPane.add(lblDeptKod);
 		
-		textField_zentroa = new JTextField();
-		textField_zentroa.setBounds(144, 119, 181, 20);
-		contentPane.add(textField_zentroa);
-		textField_zentroa.setColumns(10);
-		
 		btnGorde = new JButton("GORDE");
 		btnGorde.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				lblNewLabel.setVisible(false);
 				String operazioa = (String) comboBox.getSelectedItem();
 				if(operazioa.equalsIgnoreCase("txertatu")) {
-					if(!textField_izena.getText().equalsIgnoreCase("") && !textField_eraikina.getText().equalsIgnoreCase("") && !textField_zentroa.getText().equalsIgnoreCase("")) {
-						departamentua Departamentua = new departamentua(0,textField_izena.getText(),textField_eraikina.getText(),textField_zentroa.getText());
+					if(!textField_izena.getText().equalsIgnoreCase("") && !textField_eraikina.getText().equalsIgnoreCase("") && !zentroa.equalsIgnoreCase("")) {
+						departamentua Departamentua = new departamentua(0,textField_izena.getText(),textField_eraikina.getText(),zentroa);
 						menukontroladorea.txertatuDepatamentua(Departamentua);
 					}
 					else {
@@ -107,8 +103,8 @@ public class Formularioa2 extends JFrame {
 					
 				}
 				if(operazioa.equalsIgnoreCase("aldatu")) {
-					if(!textField_depKod.getText().equalsIgnoreCase("") && !textField_izena.getText().equalsIgnoreCase("") && !textField_eraikina.getText().equalsIgnoreCase("") && !textField_zentroa.getText().equalsIgnoreCase("")) {
-						departamentua Departamentua = new departamentua(Integer.parseInt(textField_depKod.getText()),textField_izena.getText(),textField_eraikina.getText(),textField_zentroa.getText());
+					if(!textField_depKod.getText().equalsIgnoreCase("") && !textField_izena.getText().equalsIgnoreCase("") && !textField_eraikina.getText().equalsIgnoreCase("") && !zentroa.equalsIgnoreCase("")) {
+						departamentua Departamentua = new departamentua(Integer.parseInt(textField_depKod.getText()),textField_izena.getText(),textField_eraikina.getText(),zentroa);
 						menukontroladorea.aldatuDepartamentu(Departamentua);
 					}
 					else {
@@ -130,7 +126,8 @@ public class Formularioa2 extends JFrame {
 				textField_depKod.setText(null);
 				textField_izena.setText(null);
 				textField_eraikina.setText(null);
-				textField_zentroa.setText(null);
+				comboBox_1.setSelectedIndex(0);
+				
 				
 			}
 		});
@@ -138,6 +135,11 @@ public class Formularioa2 extends JFrame {
 		contentPane.add(btnEzabatu);
 		
 		btnAtzera = new JButton("ATZERA");
+		btnAtzera.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				menukontroladorea.formulario2tikDepartamentura();
+			}
+		});
 		btnAtzera.setBounds(137, 303, 89, 23);
 		contentPane.add(btnAtzera);
 		comboBox.addActionListener(new ActionListener() {
@@ -145,20 +147,25 @@ public class Formularioa2 extends JFrame {
 				String operazioa = (String) comboBox.getSelectedItem();
 				if(operazioa.equalsIgnoreCase("txertatu")) {
 					textField_depKod.setEnabled(false);
+					comboBox_1.setEnabled(true);
+					textField_eraikina.setEditable(true);
+					textField_izena.setEditable(true);
+					
 					
 				}
 				if(operazioa.equalsIgnoreCase("ezabatu")) {
 					textField_depKod.setEnabled(true);
 					textField_eraikina.setEditable(false);
 					textField_izena.setEditable(false);
-					textField_zentroa.setEditable(false);
+					comboBox_1.setEnabled(false);
+					
 					
 				}
 				if(operazioa.equalsIgnoreCase("aldatu")) {
 					textField_depKod.setEnabled(true);
 					textField_eraikina.setEditable(true);
 					textField_izena.setEditable(true);
-					textField_zentroa.setEditable(true);
+					comboBox_1.setEnabled(true);
 					
 				}
 			}
@@ -176,6 +183,19 @@ public class Formularioa2 extends JFrame {
 		contentPane.add(lblNewLabel);
 		lblNewLabel.setVisible(false);
 		
+		
+		comboBox_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				zentroa = (String) comboBox_1.getSelectedItem();
+			}
+		});
+		comboBox_1.setBounds(144, 119, 124, 20);
+		contentPane.add(comboBox_1);
+		comboBox_1.addItem("");
+		comboBox_1.addItem("Elorrieta");
+		comboBox_1.addItem("Errekamari");
+		
+		
 	}
 	public void nireMenukontroladorea(Menukontroladorea menukontroladorea) {
 		this.menukontroladorea = menukontroladorea;
@@ -186,6 +206,16 @@ public class Formularioa2 extends JFrame {
 	public void ezdago() {
 		lblNewLabel.setVisible(true);
 		lblNewLabel.setText("Departamentua ez da existitzen");
+		
+	}
+	public void operazioa() {
+		lblNewLabel.setVisible(true);
+		lblNewLabel.setText("Departamentua operazioa ondo atera da.");
+		
+	}
+	public void txertatuErrorea() {
+		lblNewLabel.setVisible(true);
+		lblNewLabel.setText("Departamentua ezin izan da txertatu, kontsultatu log.");
 		
 	}
 }

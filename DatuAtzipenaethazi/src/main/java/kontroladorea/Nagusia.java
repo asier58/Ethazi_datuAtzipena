@@ -6,6 +6,7 @@ import lehioa.Enplegatua;
 import lehioa.Formularioa;
 import lehioa.Formularioa2;
 import lehioa.Menua;
+import lehioa.deptTxostena;
 import eredua.DBKonexioa;
 
 public class Nagusia {
@@ -37,6 +38,7 @@ public class Nagusia {
 		Enplegatua enplegatua =  new Enplegatua();
 		Formularioa formularioa = new Formularioa();
 		Formularioa2 formularioa2 = new Formularioa2();
+		deptTxostena depttxostena = new deptTxostena();
 
 		// Lehioak
 		Menua menua = new Menua();
@@ -57,6 +59,9 @@ public class Nagusia {
 		//******
 		menukontroladorea.nireFormularioa2(formularioa2);
 		formularioa2.nireMenukontroladorea(menukontroladorea);
+		//****
+		menukontroladorea.nireTxostena1(depttxostena);
+		depttxostena.nireMenukontroladorea(menukontroladorea);
 		
 		ON(menua);
 		
