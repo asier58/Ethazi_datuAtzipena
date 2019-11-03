@@ -74,6 +74,11 @@ public class Departamentua extends JFrame {
 		contentPane.add(departamentuberri);
 
 		JButton departamentuaikusi = new JButton("Departamentua ikusi");
+		departamentuaikusi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				menukontroladorea.departamentutikTxostenara();
+			}
+		});
 		departamentuaikusi.setBounds(117, 159, 381, 47);
 		contentPane.add(departamentuaikusi);
 

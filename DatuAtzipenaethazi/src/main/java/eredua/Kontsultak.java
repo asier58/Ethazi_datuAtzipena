@@ -310,6 +310,48 @@ public class Kontsultak {
 	
 	//****Departamentu kudeaketa
 	//***Departamentua
+	public static ArrayList<departamentua> ateraDepartamentuak(){
+		ArrayList<departamentua> zerrenda =  new ArrayList<departamentua> ();
+		Connection conexion = null;
+		Statement s = null;
+
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conexion = DriverManager.getConnection("jdbc:mysql://localhost/mydb", "root", "");
+			s = (Statement) conexion.createStatement();
+
+			String sql = "SELECT * FROM departamentua";
+
+			PreparedStatement preparedStatement = conexion.prepareStatement(sql);
+
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				int dept_no =resultSet.getInt(1);
+				String izena = resultSet.getString(2);
+				String eraikina = resultSet.getString(3);
+				String zentroa = resultSet.getString(4);
+				
+				departamentua Departamentua =  new departamentua(dept_no, izena, eraikina, zentroa);
+				zerrenda.add(Departamentua);
+				
+			}
+
+			
+			
+			
+
+		} 
+		
+		catch(SQLException I) {
+			logger.error(I.getMessage());
+		}
+		catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		
+		
+		return zerrenda;
+	}
 	public static int ateraZenbakiamaximoa() {
 		int zenbakia =0;
 		
@@ -629,6 +671,64 @@ public class Kontsultak {
 		
 		
 		return zenbakia;
+	}
+
+	public static ArrayList<langilea> ateraLangileak() {
+		ArrayList<langilea> zerrenda =  new ArrayList<langilea> ();
+		Connection conexion = null;
+		Statement s = null;
+		int kodea=0;
+		int departamentua=0;
+		Double soldata=0.0;
+		String izena="";
+		String abizena="";
+		int nagusia=0;
+		String Ardura="";
+		String dataOrdua ="";
+		
+
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conexion = DriverManager.getConnection("jdbc:mysql://localhost/mydb", "root", "");
+			s = (Statement) conexion.createStatement();
+
+			String sql = "SELECT * FROM enplegatua";
+
+			PreparedStatement preparedStatement = conexion.prepareStatement(sql);
+
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				
+				
+				kodea = resultSet.getInt(1);
+				departamentua = resultSet.getInt(2);
+				soldata = resultSet.getDouble(3);
+				izena =resultSet.getString(4);
+				abizena = resultSet.getString(5);
+				nagusia = resultSet.getInt(6);
+				Ardura =  resultSet.getString(7);
+				dataOrdua = resultSet.getString(8);
+				
+				langilea lang = new langilea(kodea,departamentua,soldata,izena,abizena,nagusia,Ardura,dataOrdua);
+				zerrenda.add(lang);
+				
+			}
+
+			
+			
+			
+
+		} 
+		
+		catch(SQLException I) {
+			logger.error(I.getMessage());
+		}
+		catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		
+		
+		return zerrenda;
 	}
 	
 	//**Enplegatu Amaiera

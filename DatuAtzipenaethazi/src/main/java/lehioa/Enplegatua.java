@@ -57,6 +57,11 @@ public class Enplegatua extends JFrame {
 		contentPane.add(departamentuberri);
 
 		JButton departamentuaikusi = new JButton("Enplegatuak ikusi");
+		departamentuaikusi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				menukontroladorea.langiletikTxostenara();
+			}
+		});
 		departamentuaikusi.setBounds(117, 159, 381, 47);
 		contentPane.add(departamentuaikusi);
 

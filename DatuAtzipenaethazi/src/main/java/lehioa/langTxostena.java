@@ -20,12 +20,12 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class deptTxostena extends JFrame {
+public class langTxostena extends JFrame {
 	
 	private JPanel contentPane;
 	private Menukontroladorea menukontroladorea;
 	private JScrollPane scrollPane;
-	private ArrayList<eredua.departamentua> zerrenda =  new ArrayList<eredua.departamentua>();
+	private ArrayList<eredua.langilea> zerrenda =  new ArrayList<eredua.langilea>();
 	private JTable table;
 
 	/**
@@ -35,7 +35,7 @@ public class deptTxostena extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					deptTxostena frame = new deptTxostena();
+					langTxostena frame = new langTxostena();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -47,7 +47,7 @@ public class deptTxostena extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public deptTxostena() {
+	public langTxostena() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 998, 588);
 		contentPane = new JPanel();
@@ -72,7 +72,7 @@ public class deptTxostena extends JFrame {
 		JButton btnAtzera = new JButton("Atzera");
 		btnAtzera.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				menukontroladorea.txostenatikDepartamentura();
+				menukontroladorea.langiletikDepartamentura();
 			}
 		});
 		btnAtzera.setBounds(103, 500, 89, 23);
@@ -95,24 +95,32 @@ public void filtroapart() {
 		table.setModel(t1);
 
 
-		t1.addColumn("dept_no");
-		t1.addColumn("izena");
-		t1.addColumn("eraikina");
-		t1.addColumn("zentroa");
+		t1.addColumn("Kodea");
+		t1.addColumn("Dept_no");
+		t1.addColumn("Soldata");
+		t1.addColumn("Izena");
+		t1.addColumn("Abizena");
+		t1.addColumn("Nagusia");
+		t1.addColumn("Ardura");
+		t1.addColumn("Data eta Ordua");
 		
 
 
-		for (eredua.departamentua e:zerrenda) {
-					columnas[0]=Integer.toString(e.getDept_no());
-					columnas[1]=e.getIzena();
-					columnas[2]=e.getEraikina();
-					columnas[3]=e.getZentroa();
+		for (eredua.langilea e:zerrenda) {
+					columnas[0]=Integer.toString(e.getLangile_kod());
+					columnas[1]=Integer.toString(e.getDept_nozenbakia());
+					columnas[2]=Double.toString(e.getSoldata());
+					columnas[3]=e.getIzena();
+					columnas[4]=e.getAbizena();
+					columnas[5]=Integer.toString(e.getNagusia());
+					columnas[6]=e.getArdura();
+					columnas[7]=e.getDataOrdua();
 					
 					t1.addRow(columnas);	
 			}	
 
 	}
-public void gordeTxostena(ArrayList<eredua.departamentua> arr) {
+public void gordeTxostena(ArrayList<eredua.langilea> arr) {
 	zerrenda=arr;
 }
 }

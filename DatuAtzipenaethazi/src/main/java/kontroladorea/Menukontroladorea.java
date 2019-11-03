@@ -15,6 +15,7 @@ import lehioa.Formularioa;
 import lehioa.Formularioa2;
 import lehioa.Menua;
 import lehioa.deptTxostena;
+import lehioa.langTxostena;
 
 public class Menukontroladorea {
 	public static Logger logger = Logger.getLogger(Menukontroladorea.class);
@@ -25,6 +26,7 @@ public class Menukontroladorea {
 	private Formularioa formularioa;
 	private Formularioa2 formularioa2;
 	private deptTxostena depttxostena;
+	private langTxostena langtxostena;
 
 	public void nireMenua(Menua menua) {
 		this.menua = menua;
@@ -51,7 +53,9 @@ public class Menukontroladorea {
 	public void nireTxostena1(deptTxostena depttxostena) {
 		this.depttxostena=depttxostena;
 	}
-
+	public void nireTxostena(langTxostena langtxostena) {
+		this.langtxostena=langtxostena;
+	}
 
 	// *************************
 	// DEPARTAMENTUA
@@ -76,12 +80,33 @@ public class Menukontroladorea {
 	
 	//Txostena DEPERTAMENTUA
 	public void departamentutikTxostenara() {
-		
+		ArrayList<departamentua> zerrenda =Kontsultak.ateraDepartamentuak();
+		depttxostena.gordeTxostena(zerrenda);
+		depttxostena.filtroapart();
 		departamentua.setVisible(false);
 		depttxostena.setVisible(true);
 	}
+	public void txostenatikDepartamentura() {
+		depttxostena.setVisible(false);
+		departamentua.setVisible(true);
+	}
 	
 	//***
+	
+	//Txostena LANGILEA
+		public void langiletikTxostenara() {
+			ArrayList<langilea> zerrenda =Kontsultak.ateraLangileak();
+			langtxostena.gordeTxostena(zerrenda);
+			langtxostena.filtroapart();
+			enplegatua.setVisible(false);
+			langtxostena.setVisible(true);
+		}
+		public void langiletikDepartamentura() {
+			langtxostena.setVisible(false);
+			departamentua.setVisible(true);
+		}
+		
+		//***
 	
 	
 
