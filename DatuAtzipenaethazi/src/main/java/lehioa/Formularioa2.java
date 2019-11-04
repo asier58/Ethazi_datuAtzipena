@@ -16,6 +16,10 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.InputMethodListener;
+import java.awt.event.InputMethodEvent;
 
 public class Formularioa2 extends JFrame {
 
@@ -45,6 +49,15 @@ public class Formularioa2 extends JFrame {
 		contentPane.setLayout(null);
 		
 		textField_depKod = new JTextField();
+		textField_depKod.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char a =e.getKeyChar();
+				if (!Character.isDigit(a)){
+				e.consume();
+				}
+			}
+		});
 		textField_depKod.setBounds(144, 11, 181, 20);
 		contentPane.add(textField_depKod);
 		textField_depKod.setColumns(10);
@@ -58,6 +71,15 @@ public class Formularioa2 extends JFrame {
 		contentPane.add(lblIzena);
 		
 		textField_izena = new JTextField();
+		textField_izena.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+			char a =e.getKeyChar();
+			if (( ((int)a>=33 && (int)a<=64))||((int)a>=91 && (int)a<=96)|| ((int)a>=123 && (int)a<=223)){
+				e.consume();}
+				
+			}
+		});
 		textField_izena.setBounds(144, 42, 181, 20);
 		contentPane.add(textField_izena);
 		textField_izena.setColumns(10);
@@ -67,6 +89,15 @@ public class Formularioa2 extends JFrame {
 		contentPane.add(lblAbizena);
 		
 		textField_eraikina = new JTextField();
+		textField_eraikina.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char a =e.getKeyChar();
+				if (!Character.isDigit(a)){
+				e.consume();
+				}
+			}
+		});
 		textField_eraikina.setBounds(144, 81, 181, 20);
 		contentPane.add(textField_eraikina);
 		textField_eraikina.setColumns(10);
