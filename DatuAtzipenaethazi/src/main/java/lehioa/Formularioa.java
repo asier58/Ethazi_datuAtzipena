@@ -141,7 +141,7 @@ public class Formularioa extends JFrame {
 		textField_dataOrdua.setColumns(10);
 		
 		comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] { "INSERT", "UPDATE", "DELETE" }));
+		comboBox.setModel(new DefaultComboBoxModel(new String[] { "Txertatu", "Ezabatu", "Aldatu" }));
 		comboBox.setBounds(300, 12, 124, 18);
 		contentPane.add(comboBox);
 

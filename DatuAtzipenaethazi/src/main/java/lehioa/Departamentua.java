@@ -67,13 +67,18 @@ public class Departamentua extends JFrame {
 		JButton departamentuberri = new JButton("Departamentua sartu");
 		departamentuberri.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				menukontroladorea.departamentuaPantailara();
+				menukontroladorea.formulario2Pantailara();
 			}
 		});
 		departamentuberri.setBounds(117, 53, 381, 47);
 		contentPane.add(departamentuberri);
 
 		JButton departamentuaikusi = new JButton("Departamentua ikusi");
+		departamentuaikusi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				menukontroladorea.departamentutikTxostenara();
+			}
+		});
 		departamentuaikusi.setBounds(117, 159, 381, 47);
 		contentPane.add(departamentuaikusi);
 
@@ -110,6 +115,15 @@ public class Departamentua extends JFrame {
 		lblNewLabel = new JLabel("Fitxategia ez da existitzen");
 		lblNewLabel.setBounds(65, 333, 308, 14);
 		contentPane.add(lblNewLabel);
+		
+		JButton btnAtzera = new JButton("Atzera");
+		btnAtzera.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				menukontroladorea.departamentutikMenura();
+			}
+		});
+		btnAtzera.setBounds(472, 337, 89, 23);
+		contentPane.add(btnAtzera);
 		lblNewLabel.setVisible(false);
 
 		fitxategiMota.add(".Csv");
@@ -135,5 +149,4 @@ public class Departamentua extends JFrame {
 		lblNewLabel.setVisible(true);
 
 	}
-
 }

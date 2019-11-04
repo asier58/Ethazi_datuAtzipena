@@ -4,7 +4,10 @@ import org.apache.log4j.Logger;
 import lehioa.Departamentua;
 import lehioa.Enplegatua;
 import lehioa.Formularioa;
+import lehioa.Formularioa2;
 import lehioa.Menua;
+import lehioa.deptTxostena;
+import lehioa.langTxostena;
 import eredua.DBKonexioa;
 
 public class Nagusia {
@@ -21,10 +24,10 @@ public class Nagusia {
 		DBKonexioa con1 = new DBKonexioa();
 		con1.conectarDB();
 		
-		eredua.Kontsultak.datuakSartu1(null);
-
-//		eredua.Kontsultak.datuakSartu();
-		eredua.Kontsultak.datuakBerritu();
+//		eredua.Kontsultak.datuakSartu1(null);
+//
+////		eredua.Kontsultak.datuakSartu();
+//		eredua.Kontsultak.datuakBerritu();
 
 
 		//ugadooooooooooooooooooooooooo
@@ -35,6 +38,9 @@ public class Nagusia {
 		Departamentua departamentua = new Departamentua();
 		Enplegatua enplegatua =  new Enplegatua();
 		Formularioa formularioa = new Formularioa();
+		Formularioa2 formularioa2 = new Formularioa2();
+		deptTxostena depttxostena = new deptTxostena();
+		langTxostena langtxostena = new langTxostena();
 
 		// Lehioak
 		Menua menua = new Menua();
@@ -52,6 +58,15 @@ public class Nagusia {
 		//********
 		menukontroladorea.nireFormularioa(formularioa);
 		formularioa.nireMenukontroladorea(menukontroladorea);
+		//******
+		menukontroladorea.nireFormularioa2(formularioa2);
+		formularioa2.nireMenukontroladorea(menukontroladorea);
+		//****
+		menukontroladorea.nireTxostena1(depttxostena);
+		depttxostena.nireMenukontroladorea(menukontroladorea);
+		//***
+		menukontroladorea.nireTxostena(langtxostena);
+		langtxostena.nireMenukontroladorea(menukontroladorea);
 		
 		ON(menua);
 		

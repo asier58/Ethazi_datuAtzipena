@@ -57,6 +57,11 @@ public class Enplegatua extends JFrame {
 		contentPane.add(departamentuberri);
 
 		JButton departamentuaikusi = new JButton("Enplegatuak ikusi");
+		departamentuaikusi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				menukontroladorea.langiletikTxostenara();
+			}
+		});
 		departamentuaikusi.setBounds(117, 159, 381, 47);
 		contentPane.add(departamentuaikusi);
 
@@ -95,6 +100,15 @@ public class Enplegatua extends JFrame {
 		lblNewLabel = new JLabel("Fitxategia ez da existitzen");
 		lblNewLabel.setBounds(65, 333, 308, 14);
 		contentPane.add(lblNewLabel);
+		
+		JButton btnAtzera = new JButton("Atzera");
+		btnAtzera.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				menukontroladorea.langiletikMenura();
+			}
+		});
+		btnAtzera.setBounds(472, 337, 89, 23);
+		contentPane.add(btnAtzera);
 		lblNewLabel.setVisible(false);
 
 		ArrayList<String> fitxategiMota = new ArrayList();
