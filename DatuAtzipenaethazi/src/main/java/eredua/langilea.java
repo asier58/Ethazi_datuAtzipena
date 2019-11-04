@@ -106,6 +106,13 @@ public class langilea {
 		this.dataOrdua = dataOrdua;
 	}
 
+	@Override
+	public String toString() {
+		return "langilea [langile_kod=" + langile_kod + ", dept_nozenbakia=" + dept_nozenbakia + ", soldata=" + soldata
+				+ ", izena=" + izena + ", abizena=" + abizena + ", nagusia=" + nagusia + ", ardura=" + ardura
+				+ ", dataOrdua=" + dataOrdua + "]";
+	}
+
 	public static void txtKudeatu2(String fitxategi, String formatua) {
 		String kk = System.getProperty("line.separator");
 		File archivo = new File(fitxategi + formatua);
@@ -207,7 +214,7 @@ public class langilea {
 		}
 
 //		txertatuDepartamentua(zerrenda);
-		Kontsultak.datuakSartu2(zerrenda);
+		Kontsultak.datuakSartu2(zerrenda.get(0));
 
 	}
 
@@ -289,7 +296,7 @@ public class langilea {
 		         }catch(Exception e) {
 		        	 zerrenda = null;
 		         }
-		     Kontsultak.datuakSartu2(zerrenda);}
+		     Kontsultak.datuakSartu2(zerrenda.get(0));}
 			
 
 
@@ -391,7 +398,7 @@ public class langilea {
        	        	 catch (Exception e) {
        	        		 e.printStackTrace();
        	        	 }
-		Kontsultak.datuakSartu2(zerrenda);
+		Kontsultak.datuakSartu2(zerrenda.get(0));
 		
 		
 	}

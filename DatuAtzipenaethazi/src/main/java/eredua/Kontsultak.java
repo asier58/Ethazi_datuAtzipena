@@ -89,7 +89,7 @@ public class Kontsultak {
 	}
 
 	// Enplegatuen datu berriak sarzeko.
-	public static void datuakSartu2(ArrayList<langilea> zerrenda) {
+	public static void datuakSartu2(langilea l1) {
 		Connection conexion = null;
 		Statement s = null;
 
@@ -102,22 +102,28 @@ public class Kontsultak {
 
 			// Se realiza la consulta
 
-			String sql = "INSERT INTO `enplegatua` (Kodea, Departamentua_dept_no, Soldata, Izena, Abizena,Nagusia,Ardura,DataOrdua) VALUES (?, ?, ?, ?,?, ?, ?, ?)";
+			String sql = "INSERT INTO `enplegatua` (Kodea,Departamentua_dept_no,Soldata,Izena,Abizena,Nagusia,Ardura,DataOrdua) VALUES (?,?,?,?,?,?,?,?)";
 
 			PreparedStatement preparedStatement = conexion.prepareStatement(sql);
 
-			preparedStatement.setInt(1, zerrenda.get(0).getLangile_kod());
-			preparedStatement.setInt(2, zerrenda.get(0).getDept_nozenbakia());
-			preparedStatement.setDouble(3, zerrenda.get(0).getSoldata());
-			preparedStatement.setString(4, zerrenda.get(0).getIzena());
-			preparedStatement.setString(5, zerrenda.get(0).getAbizena());
-			preparedStatement.setInt(6, zerrenda.get(0).getNagusia());
-			preparedStatement.setString(7, zerrenda.get(0).getArdura());
-			preparedStatement.setString(8, zerrenda.get(0).getDataOrdua());
+			preparedStatement.setInt(1, l1.getLangile_kod());
+			preparedStatement.setInt(2, l1.getDept_nozenbakia());
+			preparedStatement.setDouble(3, l1.getSoldata());
+			preparedStatement.setString(4, l1.getIzena());
+			preparedStatement.setString(5, l1.getAbizena());
+			preparedStatement.setInt(6, l1.getNagusia());
+			preparedStatement.setString(7, l1.getArdura());
+			preparedStatement.setString(8, l1.getDataOrdua());
 
 			int sartuTaulara = preparedStatement.executeUpdate();
+			
+			
+		}catch (SQLException n) {
+			System.out.println(n.getMessage());
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
+			System.out.println(e.getCause());
+		
 		}
 	}
 

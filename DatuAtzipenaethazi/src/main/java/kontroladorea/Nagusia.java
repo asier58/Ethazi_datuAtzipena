@@ -29,11 +29,6 @@ public class Nagusia {
 ////		eredua.Kontsultak.datuakSartu();
 //		eredua.Kontsultak.datuakBerritu();
 
-
-		//ugadooooooooooooooooooooooooo
-//		String basedatos = "mydb";
-//		DBKonexioa con1 = new DBKonexioa();
-//		con1.conectarDB();
 		Menukontroladorea menukontroladorea = new Menukontroladorea();
 		Departamentua departamentua = new Departamentua();
 		Enplegatua enplegatua =  new Enplegatua();

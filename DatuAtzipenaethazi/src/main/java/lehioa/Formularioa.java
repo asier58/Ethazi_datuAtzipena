@@ -54,7 +54,7 @@ public class Formularioa extends JFrame {
 	private JButton btnEzabatu;
 	private JButton btnAtzera;
 	private JComboBox comboBox;
-	ArrayList<langilea> langileArr;
+	ArrayList<langilea> langileArr = new ArrayList<langilea>();;
 	langilea l1;
 	public static Logger logger = Logger.getLogger(Menua.class);
 
@@ -149,29 +149,27 @@ public class Formularioa extends JFrame {
 		btnGorde.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				if (comboBox.getSelectedItem().equals("UPDATE")) {
-					textField_langKod.setEditable(false);
-				}else if (comboBox.getSelectedItem().equals("DELETE")) {
-					
-				}
+//				if (comboBox.getSelectedItem().equals("Aldatu")) {
+//					textField_langKod.setEditable(false);
+//				}else if (comboBox.getSelectedItem().equals("Ezabatu")) {
+//					
+//					
+//				}
 				
 				int langKod = Integer.parseInt(textField_langKod.getText());
 				int soldata = Integer.parseInt(textField_soldata.getText());
 				int dept_noZenbkia = Integer.parseInt(textField_deptKod.getText());
 				int nagusia = Integer.parseInt(textField_nagusia.getText());
 
-				l1.setIzena(textField_izena.getText());
-				l1.setAbizena(textField_abizena.getText());
-				l1.setLangile_kod(langKod);
-				l1.setSoldata(soldata);
-				l1.setArdura(textField_ardura.getText());
-				l1.setDept_nozenbakia(dept_noZenbkia);
-				l1.setNagusia(nagusia);
-				l1.setDataOrdua(textField_dataOrdua.getText());
-
-				langileArr.add(l1);
 				
-				menukontroladorea.getData(langileArr);
+				
+				l1 = new langilea(langKod, dept_noZenbkia, soldata, textField_izena.getText(),
+						textField_abizena.getText(), nagusia, textField_ardura.getText(), textField_dataOrdua.getText());
+
+				System.out.println(l1);
+//				langileArr.add(l1);
+				
+				menukontroladorea.getData(l1);
 			}
 		});
 		btnGorde.setBounds(335, 303, 89, 23);
@@ -198,7 +196,7 @@ public class Formularioa extends JFrame {
 		btnAtzera.setBounds(137, 303, 89, 23);
 		contentPane.add(btnAtzera);
 		
-		logger.notifyAll();
+		
 	}
 
 	public void nireMenukontroladorea(Menukontroladorea menukontroladorea) {

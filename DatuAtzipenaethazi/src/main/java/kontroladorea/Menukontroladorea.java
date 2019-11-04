@@ -167,8 +167,8 @@ public class Menukontroladorea {
 
 	}
 	
-	public void getData(ArrayList<langilea> arrayList) {
-		Kontsultak.datuakSartu2(arrayList);
+	public void getData(langilea l1) {
+		Kontsultak.datuakSartu2(l1);
 	}
 
 	public void departamentutikMenura() {
