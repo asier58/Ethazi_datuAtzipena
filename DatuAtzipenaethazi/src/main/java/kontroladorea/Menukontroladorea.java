@@ -192,7 +192,7 @@ public class Menukontroladorea {
 		dept.setDept_no(dept_zenbakia);
 		int zenbakia = Kontsultak.sartuDepartamentua(dept);
 		if(zenbakia>0) {
-			logger.info("Elementu bat sartu egin da: "+dept.getDept_no());
+			logger.info("Elementu bat sartu egin da: "+dept.getDept_no()+" "+dept.getIzena()+" "+dept.getEraikina()+" "+dept.getZentroa());
 			formularioa2.operazioa();
 		}
 		else {
@@ -204,7 +204,7 @@ public class Menukontroladorea {
 		if (existitzen) {
 			int ezabatuta = Kontsultak.departamentuaEzabatuta(dept);
 			if(ezabatuta == 1) {
-				logger.info("Elementu bat ezabatu egin da: "+dept.getDept_no());
+				logger.info("Elementu bat ezabatu egin da: "+dept.getDept_no()+" "+dept.getIzena()+" "+dept.getEraikina()+" "+dept.getZentroa());
 				formularioa2.operazioa();
 			}
 			
@@ -219,7 +219,7 @@ public class Menukontroladorea {
 		if (existitzen) {
 			int ezabatuta = Kontsultak.departamentuaAldatu(dept);
 			if(ezabatuta == 1) {
-				logger.info("Elementu bat Aldatu egin da: id "+dept.getDept_no());
+				logger.info("Elementu bat aldatu egin da: "+dept.getDept_no()+" "+dept.getIzena()+" "+dept.getEraikina()+" "+dept.getZentroa());
 				formularioa2.operazioa();
 			}
 			
