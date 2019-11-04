@@ -7,6 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import org.apache.log4j.Logger;
+
 import kontroladorea.Menukontroladorea;
 
 import javax.swing.JTextField;
@@ -54,6 +56,7 @@ public class Formularioa extends JFrame {
 	private JComboBox comboBox;
 	ArrayList<langilea> langileArr;
 	langilea l1;
+	public static Logger logger = Logger.getLogger(Menua.class);
 
 	private Menukontroladorea menukontroladorea;
 
@@ -194,7 +197,8 @@ public class Formularioa extends JFrame {
 		btnAtzera = new JButton("ATZERA");
 		btnAtzera.setBounds(137, 303, 89, 23);
 		contentPane.add(btnAtzera);
-
+		
+		logger.notifyAll();
 	}
 
 	public void nireMenukontroladorea(Menukontroladorea menukontroladorea) {
