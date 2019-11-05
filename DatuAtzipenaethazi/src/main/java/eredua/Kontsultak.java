@@ -89,7 +89,7 @@ public class Kontsultak {
 	}
 
 	// Enplegatuen datu berriak sarzeko.
-	public static int datuakSartu2(langilea l1) { //la usa aitor
+	public static void datuakSartu2(langilea l1) { //la usa aitor
 		//departamentu zenbakia datu basean ez bada existitzen ez INSERT-a egingo!!!
 		Connection conexion = null;
 		Statement s = null;
@@ -126,10 +126,10 @@ public class Kontsultak {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			System.out.println(e.getCause());
-		
+			logger.error(e.getMessage());
 		}
 		
-		return sartuTaulara;
+		
 	}
 
 	/**
@@ -194,7 +194,7 @@ public class Kontsultak {
 			int sartuTaulara = preparedStatement.executeUpdate();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			System.out.println("jajanotira");
+			logger.error(e.getMessage());
 		}
 	}
 
@@ -229,7 +229,7 @@ public class Kontsultak {
 		}
 	}
 
-	public static void datuakHustu1() {
+	public static void datuakEguneratuBD(langilea l1) {
 		Connection conexion = null;
 		Statement s = null;
 
@@ -242,23 +242,22 @@ public class Kontsultak {
 
 			// Se realiza la consulta
 
-			String sql = "UPDATE `enplegatua` set kodea = ?, izena = ?, abizena = ?, soldata = ?, departamentua_dept_no = ?, ardura = ?, nagusia = ?, DataOrdua = ?";
+			String sql = "UPDATE `enplegatua` set izena = ?, abizena = ?, soldata = ?, departamentua_dept_no = ?, ardura = ?, nagusia = ?, DataOrdua = ?";
 
 			PreparedStatement preparedStatement = conexion.prepareStatement(sql);
 
-			preparedStatement.setInt(1, 00);
-			preparedStatement.setString(2, "");
-			preparedStatement.setString(3, "");
-			preparedStatement.setInt(4, 00);
-			preparedStatement.setInt(5, 00);
-			preparedStatement.setString(6, "");
-			preparedStatement.setString(7, "");
-			preparedStatement.setString(8, "");
+			preparedStatement.setString(2, l1.getIzena());
+			preparedStatement.setString(3, l1.getAbizena());
+			preparedStatement.setInt(4, l1.getSoldata());
+			preparedStatement.setInt(5, l1.getDept_nozenbakia());
+			preparedStatement.setString(6, l1.getArdura());
+			preparedStatement.setInt(7, l1.getNagusia());
+			preparedStatement.setString(8, l1.getDataOrdua());
 
 			int sartuTaulara = preparedStatement.executeUpdate();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			System.out.println("jajanotira");
+			logger.error(e.getMessage());
 		}
 	}
 
@@ -266,7 +265,7 @@ public class Kontsultak {
 	 * SELECT
 	 */
 
-	public static void datuakEskatu(ArrayList<langilea> zerrenda) {
+	public static void getLangile_kodBD(ArrayList<langilea> zerrenda, int kod) {
 		Connection conexion = null;
 		Statement s = null;
 
@@ -275,19 +274,13 @@ public class Kontsultak {
 			conexion = DriverManager.getConnection("jdbc:mysql://localhost/mydb", "root", "");
 			s = (Statement) conexion.createStatement();
 
-			String sql = "SELECT * FROM enplegatua WHERE izena = Ramon";
+			String sql = "SELECT langile_kod FROM enplegatua WHERE langile_kod = '" + kod + "'";
 
 			PreparedStatement preparedStatement = conexion.prepareStatement(sql);
 
 			ResultSet resultSet = preparedStatement.executeQuery();
 
 			int id = resultSet.getInt("Kodea");
-			String izena = resultSet.getString("Izena");
-			int departamentua_dept_no = resultSet.getInt("Departamentua_dept_no");
-			int soldata = resultSet.getInt("Soldata");
-			String abizena = resultSet.getString("Abizena");
-			String ardura = resultSet.getString("Ardura");
-			int nagusia = resultSet.getInt("Nagusia");
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -694,7 +687,7 @@ public class Kontsultak {
 		Statement s = null;
 		int kodea=0;
 		int departamentua=0;
-		Double soldata=0.0;
+		int soldata=0;
 		String izena="";
 		String abizena="";
 		int nagusia=0;
@@ -717,7 +710,7 @@ public class Kontsultak {
 				
 				kodea = resultSet.getInt(1);
 				departamentua = resultSet.getInt(2);
-				soldata = resultSet.getDouble(3);
+				soldata = resultSet.getInt(3);
 				izena =resultSet.getString(4);
 				abizena = resultSet.getString(5);
 				nagusia = resultSet.getInt(6);
