@@ -89,9 +89,10 @@ public class Kontsultak {
 	}
 
 	// Enplegatuen datu berriak sarzeko.
-	public static void datuakSartu2(langilea l1) { //la usa aitor
+	public static int datuakSartu2(langilea l1) { //la usa aitor
 		Connection conexion = null;
 		Statement s = null;
+		int sartuTaulara = 0;
 
 		try {
 
@@ -115,7 +116,7 @@ public class Kontsultak {
 			preparedStatement.setString(7, l1.getArdura());
 			preparedStatement.setString(8, l1.getDataOrdua());
 
-			int sartuTaulara = preparedStatement.executeUpdate();
+			sartuTaulara = preparedStatement.executeUpdate();
 			
 			
 		}catch (SQLException n) {
@@ -126,6 +127,8 @@ public class Kontsultak {
 			System.out.println(e.getCause());
 		
 		}
+		
+		return sartuTaulara;
 	}
 
 	/**
@@ -161,7 +164,7 @@ public class Kontsultak {
 		}
 	}
 
-	public static void datuakBerritu1() { // Enplegatuen datuak berritzeko.
+	public static void datuakBerritu1(langilea l1) { // Enplegatuen datuak berritzeko.
 		Connection conexion = null;
 		Statement s = null;
 
@@ -178,14 +181,14 @@ public class Kontsultak {
 
 			PreparedStatement preparedStatement = conexion.prepareStatement(sql);
 
-			preparedStatement.setInt(1, 02);
-			preparedStatement.setInt(2, 01);
-			preparedStatement.setInt(3, 2000);
-			preparedStatement.setString(4, "Paco");
-			preparedStatement.setString(5, "Perez");
-			preparedStatement.setInt(6, 02);
-			preparedStatement.setString(7, "Irakasle");
-			preparedStatement.setString(8, "2019/10/29");
+			preparedStatement.setInt(1, l1.getLangile_kod());
+			preparedStatement.setInt(2, l1.getDept_nozenbakia());
+			preparedStatement.setDouble(3, l1.getSoldata());
+			preparedStatement.setString(4, l1.getIzena());
+			preparedStatement.setString(5, l1.getAbizena());
+			preparedStatement.setInt(6, l1.getNagusia());
+			preparedStatement.setString(7, l1.getArdura());
+			preparedStatement.setString(8, l1.getDataOrdua());
 
 			int sartuTaulara = preparedStatement.executeUpdate();
 		} catch (Exception e) {
