@@ -90,6 +90,7 @@ public class Kontsultak {
 
 	// Enplegatuen datu berriak sarzeko.
 	public static int datuakSartu2(langilea l1) { //la usa aitor
+		//departamentu zenbakia datu basean ez bada existitzen ez INSERT-a egingo!!!
 		Connection conexion = null;
 		Statement s = null;
 		int sartuTaulara = 0;
