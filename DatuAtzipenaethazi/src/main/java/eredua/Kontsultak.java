@@ -89,7 +89,7 @@ public class Kontsultak {
 	}
 
 	// Enplegatuen datu berriak sarzeko.
-	public static void datuakSartu2(langilea l1) {
+	public static void datuakSartu2(langilea l1) { //la usa aitor
 		Connection conexion = null;
 		Statement s = null;
 
@@ -120,6 +120,7 @@ public class Kontsultak {
 			
 		}catch (SQLException n) {
 			System.out.println(n.getMessage());
+			logger.error(n.getErrorCode());
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			System.out.println(e.getCause());

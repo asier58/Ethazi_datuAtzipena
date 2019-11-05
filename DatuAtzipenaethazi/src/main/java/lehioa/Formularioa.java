@@ -141,6 +141,17 @@ public class Formularioa extends JFrame {
 		textField_dataOrdua.setColumns(10);
 		
 		comboBox = new JComboBox();
+		comboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (comboBox.getSelectedItem().equals("Aldatu")) {
+					textField_langKod.setEditable(false);
+					textField_langKod.setEnabled(false);
+				}else if (comboBox.getSelectedItem().equals("Ezabatu")) {
+					textField_izena.setEditable(false);
+					
+				}
+			}
+		});
 		comboBox.setModel(new DefaultComboBoxModel(new String[] { "Txertatu", "Ezabatu", "Aldatu" }));
 		comboBox.setBounds(300, 12, 124, 18);
 		contentPane.add(comboBox);
@@ -149,12 +160,13 @@ public class Formularioa extends JFrame {
 		btnGorde.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-//				if (comboBox.getSelectedItem().equals("Aldatu")) {
-//					textField_langKod.setEditable(false);
-//				}else if (comboBox.getSelectedItem().equals("Ezabatu")) {
-//					
-//					
-//				}
+				if (comboBox.getSelectedItem().equals("Aldatu")) {
+					textField_langKod.setEditable(false);
+					textField_langKod.setEnabled(false);
+				}else if (comboBox.getSelectedItem().equals("Ezabatu")) {
+					textField_izena.setEditable(false);
+					
+				}
 				
 				int langKod = Integer.parseInt(textField_langKod.getText());
 				int soldata = Integer.parseInt(textField_soldata.getText());

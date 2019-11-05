@@ -169,6 +169,7 @@ public class Menukontroladorea {
 	
 	public void getData(langilea l1) {
 		Kontsultak.datuakSartu2(l1);
+		logger.info("Elementu bat sartu egin da: " + l1.getIzena());
 	}
 
 	public void departamentutikMenura() {
