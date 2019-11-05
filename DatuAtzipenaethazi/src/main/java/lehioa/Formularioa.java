@@ -30,6 +30,8 @@ import eredua.langilea;
 import kontroladorea.Menukontroladorea;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Formularioa extends JFrame {
 
@@ -69,6 +71,15 @@ public class Formularioa extends JFrame {
 		contentPane.setLayout(null);
 
 		textField_langKod = new JTextField();
+		textField_langKod.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char a =e.getKeyChar();
+				if (!Character.isDigit(a)){
+				e.consume();
+				}
+			}
+		});
 		textField_langKod.setBounds(109, 11, 181, 20);
 		contentPane.add(textField_langKod);
 		textField_langKod.setColumns(10);
@@ -82,6 +93,15 @@ public class Formularioa extends JFrame {
 		contentPane.add(lblIzena);
 
 		textField_izena = new JTextField();
+		textField_izena.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char a =e.getKeyChar();
+				if (( ((int)a>=33 && (int)a<=64))||((int)a>=91 && (int)a<=96)|| ((int)a>=123 && (int)a<=223)){
+					e.consume();}
+					
+				}
+		});
 		textField_izena.setBounds(51, 45, 239, 20);
 		contentPane.add(textField_izena);
 		textField_izena.setColumns(10);
@@ -91,6 +111,15 @@ public class Formularioa extends JFrame {
 		contentPane.add(lblAbizena);
 
 		textField_abizena = new JTextField();
+		textField_abizena.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char a =e.getKeyChar();
+				if (( ((int)a>=33 && (int)a<=64))||((int)a>=91 && (int)a<=96)|| ((int)a>=123 && (int)a<=223)){
+					e.consume();}
+					
+				}
+		});
 		textField_abizena.setBounds(61, 81, 229, 20);
 		contentPane.add(textField_abizena);
 		textField_abizena.setColumns(10);
@@ -100,6 +129,15 @@ public class Formularioa extends JFrame {
 		contentPane.add(lblDeptKod);
 
 		textField_deptKod = new JTextField();
+		textField_deptKod.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char a =e.getKeyChar();
+				if (!Character.isDigit(a)){
+				e.consume();
+				}
+			}
+		});
 		textField_deptKod.setBounds(122, 119, 168, 20);
 		contentPane.add(textField_deptKod);
 		textField_deptKod.setColumns(10);
@@ -109,6 +147,15 @@ public class Formularioa extends JFrame {
 		contentPane.add(lblSoldata);
 
 		textField_soldata = new JTextField();
+		textField_soldata.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char a =e.getKeyChar();
+				if (!Character.isDigit(a) && a !=','){
+				e.consume();
+				}
+			}
+		});
 		textField_soldata.setBounds(61, 154, 229, 20);
 		contentPane.add(textField_soldata);
 		textField_soldata.setColumns(10);
@@ -118,6 +165,15 @@ public class Formularioa extends JFrame {
 		contentPane.add(lblNagusia);
 
 		textField_nagusia = new JTextField();
+		textField_nagusia.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char a =e.getKeyChar();
+				if (!Character.isDigit(a)){
+				e.consume();
+				}
+			}
+		});
 		textField_nagusia.setBounds(61, 188, 229, 20);
 		contentPane.add(textField_nagusia);
 		textField_nagusia.setColumns(10);
@@ -127,6 +183,15 @@ public class Formularioa extends JFrame {
 		contentPane.add(lblArdura);
 
 		textField_ardura = new JTextField();
+		textField_ardura.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char a =e.getKeyChar();
+				if (( ((int)a>=33 && (int)a<=64))||((int)a>=91 && (int)a<=96)|| ((int)a>=123 && (int)a<=223)){
+					e.consume();}
+					
+				}
+		});
 		textField_ardura.setBounds(61, 219, 229, 20);
 		contentPane.add(textField_ardura);
 		textField_ardura.setColumns(10);

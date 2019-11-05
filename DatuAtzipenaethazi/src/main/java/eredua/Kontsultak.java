@@ -442,16 +442,20 @@ public class Kontsultak {
 			conexion = DriverManager.getConnection("jdbc:mysql://localhost/mydb", "root", "");
 			s = (Statement) conexion.createStatement();
 
-			String sql = ("SELECT * FROM departamentua WHERE dept_no ="+Dept.getDept_no());
+			String sql = ("SELECT * FROM departamentua WHERE dept_no = "+Dept.getDept_no());
 
-			PreparedStatement preparedStatement = conexion.prepareStatement(sql);
-
-			ResultSet resultSet = preparedStatement.executeQuery();
-			if(resultSet.getRow()>0) {
-				existitu=true;
-				
+			
+			Statement statement = conexion.createStatement();
+			ResultSet result = statement.executeQuery(sql);
+			
+			int zenbakia = result.getRow();
+			while (result.next()) {
+				System.out.println(result.getInt(1));
+				System.out.println(result.getString(2));
+				existitu = true;
 			}
-
+			
+			
 			
 			
 			
@@ -588,7 +592,7 @@ public class Kontsultak {
 			PreparedStatement preparedStatement = conexion.prepareStatement(sql);
 
 			ResultSet resultSet = preparedStatement.executeQuery();
-			if(resultSet.getRow()!=-1) {
+			while(resultSet.next()) {
 				existitu=true;
 			}
 
