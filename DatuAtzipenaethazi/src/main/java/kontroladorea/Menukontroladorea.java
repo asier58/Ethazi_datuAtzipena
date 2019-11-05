@@ -69,6 +69,11 @@ public class Menukontroladorea {
 		Kontsultak.getLangile_kodBD(zerrenda, kod);
 		logger.info("Langilearen kodea ondo lortu da.");
 	}
+	
+	public void eguneratuEnplegatuakKontr(langilea l1) {
+		Kontsultak.datuakEguneratuBD(l1);
+	}
+	
 	// *************************
 	// DEPARTAMENTUA
 	public void departamentuaPantailara() {

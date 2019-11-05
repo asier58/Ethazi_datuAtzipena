@@ -261,7 +261,9 @@ public class Formularioa extends JFrame {
 				if(comboBox.getSelectedItem().equals("Txertatu")) {
 					menukontroladorea.getData(l1);
 				}else if (comboBox.getSelectedItem().equals("Aldatu")) {
-					menukontroladorea.enplegatuaBerritu(l1);
+					menukontroladorea.eguneratuEnplegatuakKontr(l1);
+				}else if (comboBox.getSelectedItem().equals("Ezabatu")) {
+//					menukontroladorea
 				}
 			}
 		});
