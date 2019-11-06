@@ -1,37 +1,28 @@
 package lehioa;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import org.apache.log4j.Logger;
 
-import kontroladorea.Menukontroladorea;
-
-import javax.swing.JTextField;
-import javax.swing.JLabel;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
-
 import eredua.langilea;
 import kontroladorea.Menukontroladorea;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 public class Formularioa extends JFrame {
 
@@ -51,7 +42,6 @@ public class Formularioa extends JFrame {
 	private JTextField textField_soldata;
 	private JTextField textField_nagusia;
 	private JTextField textField_ardura;
-	private JTextField textField_dataOrdua;
 	private JButton btnGorde;
 	private JButton btnEzabatu;
 	private JButton btnAtzera;
@@ -74,9 +64,9 @@ public class Formularioa extends JFrame {
 		textField_langKod.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
-				char a =e.getKeyChar();
-				if (!Character.isDigit(a)){
-				e.consume();
+				char a = e.getKeyChar();
+				if (!Character.isDigit(a)) {
+					e.consume();
 				}
 			}
 		});
@@ -96,11 +86,13 @@ public class Formularioa extends JFrame {
 		textField_izena.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
-				char a =e.getKeyChar();
-				if (( ((int)a>=33 && (int)a<=64))||((int)a>=91 && (int)a<=96)|| ((int)a>=123 && (int)a<=223)){
-					e.consume();}
-					
+				char a = e.getKeyChar();
+				if ((((int) a >= 33 && (int) a <= 64)) || ((int) a >= 91 && (int) a <= 96)
+						|| ((int) a >= 123 && (int) a <= 223)) {
+					e.consume();
 				}
+
+			}
 		});
 		textField_izena.setBounds(51, 45, 239, 20);
 		contentPane.add(textField_izena);
@@ -114,11 +106,13 @@ public class Formularioa extends JFrame {
 		textField_abizena.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
-				char a =e.getKeyChar();
-				if (( ((int)a>=33 && (int)a<=64))||((int)a>=91 && (int)a<=96)|| ((int)a>=123 && (int)a<=223)){
-					e.consume();}
-					
+				char a = e.getKeyChar();
+				if ((((int) a >= 33 && (int) a <= 64)) || ((int) a >= 91 && (int) a <= 96)
+						|| ((int) a >= 123 && (int) a <= 223)) {
+					e.consume();
 				}
+
+			}
 		});
 		textField_abizena.setBounds(61, 81, 229, 20);
 		contentPane.add(textField_abizena);
@@ -132,9 +126,9 @@ public class Formularioa extends JFrame {
 		textField_deptKod.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
-				char a =e.getKeyChar();
-				if (!Character.isDigit(a)){
-				e.consume();
+				char a = e.getKeyChar();
+				if (!Character.isDigit(a)) {
+					e.consume();
 				}
 			}
 		});
@@ -150,9 +144,9 @@ public class Formularioa extends JFrame {
 		textField_soldata.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
-				char a =e.getKeyChar();
-				if (!Character.isDigit(a) && a !=','){
-				e.consume();
+				char a = e.getKeyChar();
+				if (!Character.isDigit(a) && a != ',') {
+					e.consume();
 				}
 			}
 		});
@@ -168,9 +162,9 @@ public class Formularioa extends JFrame {
 		textField_nagusia.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
-				char a =e.getKeyChar();
-				if (!Character.isDigit(a)){
-				e.consume();
+				char a = e.getKeyChar();
+				if (!Character.isDigit(a)) {
+					e.consume();
 				}
 			}
 		});
@@ -186,60 +180,66 @@ public class Formularioa extends JFrame {
 		textField_ardura.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
-				char a =e.getKeyChar();
-				if (( ((int)a>=33 && (int)a<=64))||((int)a>=91 && (int)a<=96)|| ((int)a>=123 && (int)a<=223)){
-					e.consume();}
-					
+				char a = e.getKeyChar();
+				if ((((int) a >= 33 && (int) a <= 64)) || ((int) a >= 91 && (int) a <= 96)
+						|| ((int) a >= 123 && (int) a <= 223)) {
+					e.consume();
 				}
+
+			}
 		});
 		textField_ardura.setBounds(61, 219, 229, 20);
 		contentPane.add(textField_ardura);
 		textField_ardura.setColumns(10);
 
-		lblDataOrdua = new JLabel("Data / Ordua");
-		lblDataOrdua.setBounds(10, 257, 63, 14);
-		contentPane.add(lblDataOrdua);
-
-		textField_dataOrdua = new JTextField();
-		textField_dataOrdua.setBounds(83, 254, 206, 17);
-		contentPane.add(textField_dataOrdua);
-		textField_dataOrdua.setColumns(10);
-		
 		comboBox = new JComboBox();
 		comboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (comboBox.getSelectedItem().equals("Aldatu")) {
-					while(textField_langKod.getText().equals()) {
-						
-					}
-				}else if (comboBox.getSelectedItem().equals("Ezabatu")) {
-					textField_langKod.setEditable(true);
 					textField_langKod.setEnabled(true);
-					
-					textField_izena.setEditable(false);
-					textField_abizena.setEditable(false);
-					textField_ardura.setEditable(false);
-					textField_deptKod.setEditable(false);
-					textField_nagusia.setEditable(false);
-					textField_soldata.setEditable(false);
-					textField_dataOrdua.setEditable(false);
-					textField_izena.setEnabled(false);
-					textField_abizena.setEnabled(false);
-					textField_ardura.setEnabled(false);
-					textField_deptKod.setEnabled(false);
-					textField_nagusia.setEnabled(false);
-					textField_soldata.setEnabled(false);
-					textField_dataOrdua.setEnabled(false);
-				}else if (comboBox.getSelectedItem().equals("Txertatu")) {
-					textField_langKod.setEnabled(true);
-					
+					textField_izena.setEnabled(true);
+					textField_abizena.setEnabled(true);
+					textField_ardura.setEnabled(true);
+					textField_deptKod.setEnabled(true);
+					textField_nagusia.setEnabled(true);
+					textField_soldata.setEnabled(true);
 					textField_izena.setEditable(true);
 					textField_abizena.setEditable(true);
 					textField_ardura.setEditable(true);
 					textField_deptKod.setEditable(true);
 					textField_nagusia.setEditable(true);
 					textField_soldata.setEditable(true);
-					textField_dataOrdua.setEditable(true);
+					
+					while (textField_langKod.getText().equals(menukontroladorea.returnKodea())) {
+						System.out.println("Kodea ez da existitzen!");
+						JOptionPane.showMessageDialog(null, "Kodea ez da existitzen", "InfoBox",
+								JOptionPane.INFORMATION_MESSAGE);
+					}
+				} else if (comboBox.getSelectedItem().equals("Ezabatu")) {
+					textField_langKod.setEditable(true);
+					textField_langKod.setEnabled(true);
+
+					textField_izena.setEditable(false);
+					textField_abizena.setEditable(false);
+					textField_ardura.setEditable(false);
+					textField_deptKod.setEditable(false);
+					textField_nagusia.setEditable(false);
+					textField_soldata.setEditable(false);
+					textField_izena.setEnabled(false);
+					textField_abizena.setEnabled(false);
+					textField_ardura.setEnabled(false);
+					textField_deptKod.setEnabled(false);
+					textField_nagusia.setEnabled(false);
+					textField_soldata.setEnabled(false);
+				} else if (comboBox.getSelectedItem().equals("Txertatu")) {
+					textField_langKod.setEnabled(true);
+
+					textField_izena.setEditable(true);
+					textField_abizena.setEditable(true);
+					textField_ardura.setEditable(true);
+					textField_deptKod.setEditable(true);
+					textField_nagusia.setEditable(true);
+					textField_soldata.setEditable(true);
 				}
 			}
 		});
@@ -250,20 +250,22 @@ public class Formularioa extends JFrame {
 		btnGorde = new JButton("GORDE");
 		btnGorde.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Date date = new Date();
+				DateFormat hourdateFormat = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
 
 				int langKod = Integer.parseInt(textField_langKod.getText());
 				int soldata = Integer.parseInt(textField_soldata.getText());
 				int dept_noZenbkia = Integer.parseInt(textField_deptKod.getText());
 				int nagusia = Integer.parseInt(textField_nagusia.getText());
-				
-				l1 = new langilea(langKod, dept_noZenbkia, soldata, textField_izena.getText(),
-						textField_abizena.getText(), nagusia, textField_ardura.getText(), textField_dataOrdua.getText());
 
-				if(comboBox.getSelectedItem().equals("Txertatu")) {
+				l1 = new langilea(langKod, dept_noZenbkia, soldata, textField_izena.getText(),
+						textField_abizena.getText(), nagusia, textField_ardura.getText(), hourdateFormat.format(date));
+
+				if (comboBox.getSelectedItem().equals("Txertatu")) {
 					menukontroladorea.getData(l1);
-				}else if (comboBox.getSelectedItem().equals("Aldatu")) {
+				} else if (comboBox.getSelectedItem().equals("Aldatu")) {
 					menukontroladorea.eguneratuEnplegatuakKontr(l1);
-				}else if (comboBox.getSelectedItem().equals("Ezabatu")) {
+				} else if (comboBox.getSelectedItem().equals("Ezabatu")) {
 //					menukontroladorea
 				}
 			}
@@ -281,7 +283,6 @@ public class Formularioa extends JFrame {
 				textField_soldata.setText(null);
 				textField_nagusia.setText(null);
 				textField_ardura.setText(null);
-				textField_dataOrdua.setText(null);
 
 			}
 		});
@@ -291,8 +292,7 @@ public class Formularioa extends JFrame {
 		btnAtzera = new JButton("ATZERA");
 		btnAtzera.setBounds(137, 303, 89, 23);
 		contentPane.add(btnAtzera);
-		
-		
+
 	}
 
 	public void nireMenukontroladorea(Menukontroladorea menukontroladorea) {

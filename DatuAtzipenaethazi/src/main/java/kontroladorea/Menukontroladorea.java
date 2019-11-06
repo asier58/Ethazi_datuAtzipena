@@ -137,6 +137,10 @@ public class Menukontroladorea {
 		Kontsultak.datuakBerritu1(l1);
 		logger.info(l1.getIzena() + "-ren datuak berritu egin dira");
 	}
+	
+	public ArrayList<Integer> returnKodea(){
+		return Kontsultak.ateraLangile_Kod();
+	}
 
 	public void parametroakHartu(String fitxategi, String formatua) {
 		File fitx = new File(fitxategi + formatua);

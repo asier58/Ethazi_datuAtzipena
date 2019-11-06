@@ -233,7 +233,8 @@ public class Kontsultak {
 	public static void datuakEguneratuBD(langilea l1) {
 		Connection conexion = null;
 		Statement s = null;
-
+		Date date = new Date();
+		DateFormat hourdateFormat = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
 		try {
 
 			// Cargar el driver
@@ -243,17 +244,18 @@ public class Kontsultak {
 
 			// Se realiza la consulta
 
-			String sql = "UPDATE `enplegatua` set izena = ?, abizena = ?, soldata = ?, departamentua_dept_no = ?, ardura = ?, nagusia = ?, DataOrdua = ?";
+			String sql = "UPDATE `enplegatua` set izena = ?, abizena = ?, soldata = ?, departamentua_dept_no = ?, ardura = ?, nagusia = ?, DataOrdua = ? WHERE Kodea = ?";
 
 			PreparedStatement preparedStatement = conexion.prepareStatement(sql);
 
-			preparedStatement.setString(2, l1.getIzena());
-			preparedStatement.setString(3, l1.getAbizena());
-			preparedStatement.setInt(4, l1.getSoldata());
-			preparedStatement.setInt(5, l1.getDept_nozenbakia());
-			preparedStatement.setString(6, l1.getArdura());
-			preparedStatement.setInt(7, l1.getNagusia());
-			preparedStatement.setString(8, l1.getDataOrdua());
+			preparedStatement.setInt(8, l1.getLangile_kod());
+			preparedStatement.setString(1, l1.getIzena());
+			preparedStatement.setString(2, l1.getAbizena());
+			preparedStatement.setInt(3, l1.getSoldata());
+			preparedStatement.setInt(4, l1.getDept_nozenbakia());
+			preparedStatement.setString(5, l1.getArdura());
+			preparedStatement.setInt(6, l1.getNagusia());
+			preparedStatement.setString(7, hourdateFormat.format(date));
 
 			int sartuTaulara = preparedStatement.executeUpdate();
 		} catch (Exception e) {

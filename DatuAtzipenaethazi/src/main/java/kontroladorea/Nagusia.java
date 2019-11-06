@@ -1,5 +1,7 @@
 package kontroladorea;
 
+import javax.swing.JOptionPane;
+
 import org.apache.log4j.Logger;
 
 import eredua.DBKonexioa;
