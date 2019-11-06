@@ -18,6 +18,7 @@ import kontroladorea.Menukontroladorea;
 
 public class Kontsultak {
 	public static Logger logger = Logger.getLogger(Kontsultak.class);
+
 	/**
 	 * INSERT
 	 */
@@ -89,8 +90,8 @@ public class Kontsultak {
 	}
 
 	// Enplegatuen datu berriak sarzeko.
-	public static int datuakSartu2(langilea l1) { //la usa aitor
-		//departamentu zenbakia datu basean ez bada existitzen ez INSERT-a egingo!!!
+	public static int datuakSartu2(langilea l1) { // la usa aitor
+		// departamentu zenbakia datu basean ez bada existitzen ez INSERT-a egingo!!!
 		Connection conexion = null;
 		Statement s = null;
 		int sartuTaulara = 0;
@@ -117,17 +118,16 @@ public class Kontsultak {
 			preparedStatement.setString(8, l1.getDataOrdua());
 
 			sartuTaulara = preparedStatement.executeUpdate();
-			
-			
-		}catch (SQLException n) {
+
+		} catch (SQLException n) {
 			System.out.println(n.getMessage());
 			logger.error(n.getErrorCode());
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			System.out.println(e.getCause());
-		
+
 		}
-		
+
 		return sartuTaulara;
 	}
 
@@ -292,36 +292,35 @@ public class Kontsultak {
 			System.out.println(e.getMessage());
 		}
 	}
-	
+
 	/**
 	 * DELETE
 	 */
-	
-	public static void datuakEzabatu(ArrayList <langilea> zerrenda) {
+
+	public static void datuakEzabatu(ArrayList<langilea> zerrenda) {
 		Connection conexion = null;
 		Statement s = null;
-		
+
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			conexion = DriverManager.getConnection("jdbc:mysql://localhost/mydb", "root", "");
 			s = (Statement) conexion.createStatement();
-			
+
 			String sql = "DELETE FROM departamentua WHERE langile_kod = ?";
-			
+
 			PreparedStatement preparedStatement = conexion.prepareStatement(sql);
 			ResultSet resultSet = preparedStatement.executeQuery();
-			
+
 			preparedStatement.setInt(1, zerrenda.get(0).getLangile_kod());
-		}catch (Exception e) {
+		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 	}
-	
-	
-	//****Departamentu kudeaketa
-	//***Departamentua
-	public static ArrayList<departamentua> ateraDepartamentuak(){
-		ArrayList<departamentua> zerrenda =  new ArrayList<departamentua> ();
+
+	// ****Departamentu kudeaketa
+	// ***Departamentua
+	public static ArrayList<departamentua> ateraDepartamentuak() {
+		ArrayList<departamentua> zerrenda = new ArrayList<departamentua>();
 		Connection conexion = null;
 		Statement s = null;
 
@@ -336,35 +335,30 @@ public class Kontsultak {
 
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
-				int dept_no =resultSet.getInt(1);
+				int dept_no = resultSet.getInt(1);
 				String izena = resultSet.getString(2);
 				String eraikina = resultSet.getString(3);
 				String zentroa = resultSet.getString(4);
-				
-				departamentua Departamentua =  new departamentua(dept_no, izena, eraikina, zentroa);
+
+				departamentua Departamentua = new departamentua(dept_no, izena, eraikina, zentroa);
 				zerrenda.add(Departamentua);
-				
+
 			}
 
-			
-			
-			
-
-		} 
-		
-		catch(SQLException I) {
-			logger.error(I.getMessage());
 		}
-		catch (Exception e) {
+
+		catch (SQLException I) {
+			logger.error(I.getMessage());
+		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
-		
-		
+
 		return zerrenda;
 	}
+
 	public static int ateraZenbakiamaximoa() {
-		int zenbakia =0;
-		
+		int zenbakia = 0;
+
 		Connection conexion = null;
 		Statement s = null;
 
@@ -380,30 +374,23 @@ public class Kontsultak {
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				zenbakia = resultSet.getInt(1);
-				
+
 			}
 
-			
-			
-			
-
-		} 
-		
-		catch(SQLException I) {
-			logger.error(I.getMessage());
 		}
-		catch (Exception e) {
+
+		catch (SQLException I) {
+			logger.error(I.getMessage());
+		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
-		
-		
-		
-		
+
 		return zenbakia;
-		
+
 	}
+
 	public static int sartuDepartamentua(departamentua Dept) {
-		int zenbakia =0;
+		int zenbakia = 0;
 		Connection conexion = null;
 		Statement s = null;
 		try {
@@ -423,20 +410,20 @@ public class Kontsultak {
 			preparedStatement.setString(3, Dept.getEraikina());
 			preparedStatement.setString(4, Dept.getZentroa());
 			zenbakia = preparedStatement.executeUpdate();
-			
-		} catch(SQLException I) {
+
+		} catch (SQLException I) {
 			logger.error(I.getMessage());
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
-		
-		return zenbakia	;
-		
+
+		return zenbakia;
+
 	}
+
 	public static boolean depart_state(departamentua Dept) {
 		boolean existitu = false;
-		
+
 		Connection conexion = null;
 		Statement s = null;
 
@@ -445,106 +432,90 @@ public class Kontsultak {
 			conexion = DriverManager.getConnection("jdbc:mysql://localhost/mydb", "root", "");
 			s = (Statement) conexion.createStatement();
 
-			String sql = ("SELECT * FROM departamentua WHERE dept_no = "+Dept.getDept_no());
+			String sql = ("SELECT * FROM departamentua WHERE dept_no = " + Dept.getDept_no());
 
-			
 			Statement statement = conexion.createStatement();
 			ResultSet result = statement.executeQuery(sql);
-			
+
 			int zenbakia = result.getRow();
 			while (result.next()) {
 				System.out.println(result.getInt(1));
 				System.out.println(result.getString(2));
 				existitu = true;
 			}
-			
-			
-			
-			
-			
 
-		} catch(SQLException I) {
+		} catch (SQLException I) {
 			logger.error(I.getMessage());
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
-		
-		
-		
+
 		return existitu;
 	}
+
 	public static int departamentuaEzabatuta(departamentua dept) {
-		int zenbakia =58;
+		int zenbakia = 58;
 		Connection conexion = null;
 		Statement s = null;
-		
+
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			conexion = DriverManager.getConnection("jdbc:mysql://localhost/mydb", "root", "");
 			s = (Statement) conexion.createStatement();
-			
+
 			String sql = "DELETE FROM departamentua WHERE dept_no = ?";
-			
+
 			PreparedStatement preparedStatement = conexion.prepareStatement(sql);
 			preparedStatement.setInt(1, dept.getDept_no());
-			//ResultSet resultSet = preparedStatement.executeQuery();
+			// ResultSet resultSet = preparedStatement.executeQuery();
 			zenbakia = preparedStatement.executeUpdate();
-			
-			
-		}catch(SQLException I) {
+
+		} catch (SQLException I) {
 			logger.error(I.getMessage());
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
-		
-		
-		
+
 		return zenbakia;
 	}
+
 	public static int departamentuaAldatu(departamentua dept) {
-		int zenbakia =58;
+		int zenbakia = 58;
 		Connection conexion = null;
 		Statement s = null;
 
 		try {
 
-			
 			Class.forName("com.mysql.jdbc.Driver");
 			conexion = DriverManager.getConnection("jdbc:mysql://localhost/mydb", "root", "");
 			s = (Statement) conexion.createStatement();
 			String sql = "UPDATE departamentua SET Izena=?, eraikina=?, zentroa=? WHERE dept_no=?";
 
 			PreparedStatement preparedStatement = conexion.prepareStatement(sql);
-			
+
 			preparedStatement.setString(1, dept.getIzena());
 			preparedStatement.setString(2, dept.getEraikina());
 			preparedStatement.setString(3, dept.getZentroa());
 			preparedStatement.setInt(4, dept.getDept_no());
 
-			 zenbakia = preparedStatement.executeUpdate();
+			zenbakia = preparedStatement.executeUpdate();
 		}
-			
-			
-		catch(SQLException I) {
+
+		catch (SQLException I) {
 			logger.error(I.getMessage());
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
-		
-		
-		
+
 		return zenbakia;
 	}
-	//Departamentu Amaiera
-	
-	//***Enplegatua
-	//Insert baino lehen kodea ateratzen dugu enplegatuari kode egokiena emateko
+	// Departamentu Amaiera
+
+	// ***Enplegatua
+	// Insert baino lehen kodea ateratzen dugu enplegatuari kode egokiena emateko
 	public static int ateraEnplegatumaximoa() {
-		int zenbakia =0;
-		
+		int zenbakia = 0;
+
 		Connection conexion = null;
 		Statement s = null;
 
@@ -560,28 +531,25 @@ public class Kontsultak {
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				zenbakia = resultSet.getInt(1);
-				
+
 			}
 
-			} 
-		
-		catch(SQLException I) {
-			logger.error(I.getMessage());
 		}
-		catch (Exception e) {
+
+		catch (SQLException I) {
+			logger.error(I.getMessage());
+		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
-		
-		
-		
-		
+
 		return zenbakia;
-		
+
 	}
-	//Enplegatua existitzen badu ikusten duen metodoa
+
+	// Enplegatua existitzen badu ikusten duen metodoa
 	public static boolean enplegatu_state(langilea lang) {
 		boolean existitu = false;
-		
+
 		Connection conexion = null;
 		Statement s = null;
 
@@ -590,62 +558,53 @@ public class Kontsultak {
 			conexion = DriverManager.getConnection("jdbc:mysql://localhost/mydb", "root", "");
 			s = (Statement) conexion.createStatement();
 
-			String sql = ("SELECT * FROM enplegatua WHERE Kodea ="+lang.getLangile_kod());
+			String sql = ("SELECT * FROM enplegatua WHERE Kodea =" + lang.getLangile_kod());
 
 			PreparedStatement preparedStatement = conexion.prepareStatement(sql);
 
 			ResultSet resultSet = preparedStatement.executeQuery();
-			while(resultSet.next()) {
-				existitu=true;
+			while (resultSet.next()) {
+				existitu = true;
 			}
 
-			
-			
-			
-
-		} catch(SQLException I) {
+		} catch (SQLException I) {
 			logger.error(I.getMessage());
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
-		
-		
-		
+
 		return existitu;
 	}
-	//Enplegatua ezabatzeko metodoa
+
+	// Enplegatua ezabatzeko metodoa
 	public static int enplegatuEzabatuta(langilea lang) {
-		int zenbakia =58;
+		int zenbakia = 58;
 		Connection conexion = null;
 		Statement s = null;
-		
+
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			conexion = DriverManager.getConnection("jdbc:mysql://localhost/mydb", "root", "");
 			s = (Statement) conexion.createStatement();
-			
+
 			String sql = "DELETE FROM enplegatua WHERE Kodea = ?";
-			
+
 			PreparedStatement preparedStatement = conexion.prepareStatement(sql);
 			preparedStatement.setInt(1, lang.getLangile_kod());
-			//ResultSet resultSet = preparedStatement.executeQuery();
+			// ResultSet resultSet = preparedStatement.executeQuery();
 			zenbakia = preparedStatement.executeUpdate();
-			
-			
-		}catch(SQLException I) {
+
+		} catch (SQLException I) {
 			logger.error(I.getMessage());
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
-		
-		
-		
+
 		return zenbakia;
 	}
+
 	public static int enplegatuaAldatu(langilea lang) {
-		int zenbakia =58;
+		int zenbakia = 58;
 		Connection conexion = null;
 		Statement s = null;
 		Date date = new Date();
@@ -655,51 +614,45 @@ public class Kontsultak {
 		String ordua = hourFormat.format(date).toString();
 		try {
 
-			
 			Class.forName("com.mysql.jdbc.Driver");
 			conexion = DriverManager.getConnection("jdbc:mysql://localhost/mydb", "root", "");
 			s = (Statement) conexion.createStatement();
 			String sql = "UPDATE enplegatua SET Departamentua_dept_no=?, Soldata=?, Izena=?, Abizena=?, Nagusia=?, Ardura=?, DataOrdua=? WHERE Kodea=?";
 
 			PreparedStatement preparedStatement = conexion.prepareStatement(sql);
-			
+
 			preparedStatement.setInt(1, lang.getDept_nozenbakia());
 			preparedStatement.setDouble(2, lang.getSoldata());
 			preparedStatement.setString(3, lang.getIzena());
 			preparedStatement.setString(4, lang.getAbizena());
 			preparedStatement.setInt(5, lang.getNagusia());
 			preparedStatement.setString(6, lang.getArdura());
-			preparedStatement.setString(7,data+","+ordua );
-			preparedStatement.setInt(8,lang.getLangile_kod() );
+			preparedStatement.setString(7, data + "," + ordua);
+			preparedStatement.setInt(8, lang.getLangile_kod());
 			zenbakia = preparedStatement.executeUpdate();
 		}
-			
-			
-		catch(SQLException I) {
+
+		catch (SQLException I) {
 			logger.error(I.getMessage());
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
-		
-		
-		
+
 		return zenbakia;
 	}
 
 	public static ArrayList<langilea> ateraLangileak() {
-		ArrayList<langilea> zerrenda =  new ArrayList<langilea> ();
+		ArrayList<langilea> zerrenda = new ArrayList<langilea>();
 		Connection conexion = null;
 		Statement s = null;
-		int kodea=0;
-		int departamentua=0;
-		Double soldata=0.0;
-		String izena="";
-		String abizena="";
-		int nagusia=0;
-		String Ardura="";
-		String dataOrdua ="";
-		
+		int kodea = 0;
+		int departamentua = 0;
+		Double soldata = 0.0;
+		String izena = "";
+		String abizena = "";
+		int nagusia = 0;
+		String Ardura = "";
+		String dataOrdua = "";
 
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -712,39 +665,66 @@ public class Kontsultak {
 
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
-				
-				
+
 				kodea = resultSet.getInt(1);
 				departamentua = resultSet.getInt(2);
 				soldata = resultSet.getDouble(3);
-				izena =resultSet.getString(4);
+				izena = resultSet.getString(4);
 				abizena = resultSet.getString(5);
 				nagusia = resultSet.getInt(6);
-				Ardura =  resultSet.getString(7);
+				Ardura = resultSet.getString(7);
 				dataOrdua = resultSet.getString(8);
-				
-				langilea lang = new langilea(kodea,departamentua,soldata,izena,abizena,nagusia,Ardura,dataOrdua);
+
+				langilea lang = new langilea(kodea, departamentua, soldata, izena, abizena, nagusia, Ardura, dataOrdua);
 				zerrenda.add(lang);
-				
+
 			}
 
-			
-			
-			
-
-		} 
-		
-		catch(SQLException I) {
-			logger.error(I.getMessage());
 		}
-		catch (Exception e) {
+
+		catch (SQLException I) {
+			logger.error(I.getMessage());
+		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
-		
-		
+
 		return zerrenda;
 	}
-	
-	//**Enplegatu Amaiera
-	//****
+
+	public static ArrayList<Integer> ateraLangile_Kod() {
+		ArrayList<langilea> zerrenda = new ArrayList<langilea>();
+		ArrayList<Integer> langileKodArrayList = new ArrayList<Integer>();
+		Connection conexion = null;
+		Statement s = null;
+		int kodea = 0;
+
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conexion = DriverManager.getConnection("jdbc:mysql://localhost/mydb", "root", "");
+			s = (Statement) conexion.createStatement();
+
+			String sql = "SELECT Kodea FROM enplegatua";
+
+			PreparedStatement preparedStatement = conexion.prepareStatement(sql);
+
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+
+				kodea = resultSet.getInt(1);
+				langileKodArrayList.add(kodea);
+			}
+
+		}
+
+		catch (SQLException I) {
+			logger.error(I.getMessage());
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+
+		return langileKodArrayList;
+	}
+
+	// **Enplegatu Amaiera
+	// ****
 }

@@ -209,8 +209,9 @@ public class Formularioa extends JFrame {
 		comboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (comboBox.getSelectedItem().equals("Aldatu")) {
-					textField_langKod.setEditable(false);
-					textField_langKod.setEnabled(false);
+					while(textField_langKod.getText().equals()) {
+						
+					}
 				}else if (comboBox.getSelectedItem().equals("Ezabatu")) {
 					textField_langKod.setEditable(true);
 					textField_langKod.setEnabled(true);
