@@ -96,7 +96,6 @@ public class Kontsultak {
 		int sartuTaulara = 0;
 
 		try {
-
 			// Cargar el driver
 			Class.forName("com.mysql.jdbc.Driver");
 			conexion = DriverManager.getConnection("jdbc:mysql://localhost/mydb", "root", "");
