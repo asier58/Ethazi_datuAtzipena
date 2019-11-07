@@ -202,25 +202,21 @@ public class Formularioa extends JFrame {
 				if (comboBox.getSelectedItem().equals("Aldatu")) {
 					textField_langKod.setEditable(false);
 					textField_langKod.setEnabled(false);
-					textField_langKod.setEnabled(true);
+					
 					textField_izena.setEnabled(true);
 					textField_abizena.setEnabled(true);
-					textField_ardura.setEnabled(true);
 					textField_deptKod.setEnabled(true);
 					textField_nagusia.setEnabled(true);
 					textField_soldata.setEnabled(true);
+					comboBox_ardura.setEnabled(true);
+					
 					textField_izena.setEditable(true);
 					textField_abizena.setEditable(true);
 					comboBox_ardura.setEditable(true);
-					comboBox_ardura.setEnabled(true);
 					textField_deptKod.setEditable(true);
 					textField_nagusia.setEditable(true);
 					textField_soldata.setEditable(true);
-					textField_izena.setEnabled(true);
-					textField_abizena.setEnabled(true);
-					textField_deptKod.setEnabled(true);
-					textField_nagusia.setEnabled(true);
-					textField_soldata.setEnabled(true);
+
 				} else if (comboBox.getSelectedItem().equals("Ezabatu")) {
 					textField_langKod.setEditable(true);
 					textField_langKod.setEnabled(true);
