@@ -214,7 +214,8 @@ public class Menukontroladorea {
 		}
 		
 		else {
-			formularioa2.ezdago();		
+			formularioa2.ezdago();
+			logger.error("Ezin izan da elementua ezabatu, ez da existitzen.");
 			}
 	}
 	public void aldatuDepartamentu(departamentua dept) {
@@ -229,7 +230,8 @@ public class Menukontroladorea {
 		}
 		
 		else {
-			formularioa2.ezdago();		}
+			formularioa2.ezdago();
+			logger.error("Elementua ez da existitzen.");}
 		
 	}
 	//Amaiera departamentua

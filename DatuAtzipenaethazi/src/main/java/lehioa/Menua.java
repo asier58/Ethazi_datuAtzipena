@@ -12,9 +12,11 @@ import org.apache.log4j.Logger;
 
 import kontroladorea.Menukontroladorea;
 import kontroladorea.Nagusia;
+import net.sf.jasperreports.engine.JRException;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 
 public class Menua extends JFrame {
@@ -56,6 +58,19 @@ public class Menua extends JFrame {
 		contentPane.add(enplegatua);
 
 		JButton txostena = new JButton("Txostena");
+		txostena.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					eredua.Jasper.sortuPdf();
+				} catch (JRException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
 		txostena.setBounds(117, 267, 381, 47);
 		contentPane.add(txostena);
 		logger.info("Menu Pantailan sartu da");
