@@ -30,14 +30,14 @@ public class langilea {
 
 	private int langile_kod;
 	private int dept_nozenbakia;
-	private double soldata;
+	private int soldata;
 	private String izena;
 	private String abizena;
 	private int nagusia;
 	private String ardura;
 	private String dataOrdua;
 
-	public langilea(int langile_kod, int dept_nozenbakia, double soldata, String izena, String abizena, int nagusia,
+	public langilea(int langile_kod, int dept_nozenbakia, int soldata, String izena, String abizena, int nagusia,
 			String ardura, String dataOrdua) {
 		super();
 		this.langile_kod = langile_kod;
@@ -48,6 +48,10 @@ public class langilea {
 		this.nagusia = nagusia;
 		this.ardura = ardura;
 		this.dataOrdua = dataOrdua;
+	}
+
+	public langilea(int kodea, int departamentua, Double soldata2, String izena2, String abizena2, int nagusia2,
+			String ardura2, String dataOrdua2) {
 	}
 
 	public int getLangile_kod() {
@@ -74,11 +78,11 @@ public class langilea {
 		this.abizena = abizena;
 	}
 
-	public double getSoldata() {
+	public int getSoldata() {
 		return soldata;
 	}
 
-	public void setSoldata(double soldata) {
+	public void setSoldata(int soldata) {
 		this.soldata = soldata;
 	}
 
@@ -130,7 +134,7 @@ public class langilea {
 			// hacer una lectura comoda (disponer del metodo readLine()).
 			int kodea = 0;
 			int departamentua = 0;
-			Double soldata = 0.0;
+			int soldata = 0;
 			String izena = "";
 			String abizena = "";
 			int nagusia = 0;
@@ -155,7 +159,6 @@ public class langilea {
 	        		   System.out.println(departamentua);
 	        	     break;
 	        	   case 3:
-	        		   soldata = Double.parseDouble(ateraDatua(linea));
 	        		   System.out.println(soldata);
 	        		   soldata = soldata*1000;
 	        	     break;
@@ -256,7 +259,7 @@ public class langilea {
 			ArrayList<langilea> zerrenda = new ArrayList<langilea>();
 			int kodea=0;
 			int departamentua=0;
-			Double soldata=0.0;
+			int soldata=0;
 			String izena="";
 			String abizena="";
 			int nagusia=0;
@@ -278,7 +281,7 @@ public class langilea {
 		            	 if(contador!=0) {
 		            		 kodea = Integer.parseInt(csvRecord.get(0));
 		            		 departamentua = Integer.parseInt(csvRecord.get(1));
-		            		 soldata = Double.parseDouble(csvRecord.get(2));
+		            		 soldata = Integer.parseInt(csvRecord.get(2));
 		            		 izena = csvRecord.get(3);
 		            		 abizena = csvRecord.get(4);
 		            		 nagusia = Integer.parseInt(csvRecord.get(5));
@@ -304,7 +307,7 @@ public class langilea {
 		ArrayList<langilea> zerrenda = new ArrayList<langilea>();
 		int kodea=0;
 		int departamentua=0;
-		Double soldata=0.0;
+		int soldata=0;
 		String izena="";
 		String abizena="";
 		int nagusia=0;
@@ -344,7 +347,7 @@ public class langilea {
        	        	  kontagailua+=1;
        	        	     
        	        	   case 3:
-       	        		soldata = Double.parseDouble(element.getElementsByTagName("soldata").item(0).getTextContent());
+       	        		soldata = Integer.parseInt(element.getElementsByTagName("soldata").item(0).getTextContent());
        	        		soldata = soldata*1000;
        	        		  
        	        	     System.out.println(soldata);

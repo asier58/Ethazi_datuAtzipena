@@ -56,7 +56,24 @@ public class Menukontroladorea {
 	public void nireTxostena(langTxostena langtxostena) {
 		this.langtxostena=langtxostena;
 	}
+	/**
+	 * ENPLEGATUA
+	 */
 
+	public void getData(langilea l1) {
+		Kontsultak.datuakSartu2(l1);
+		logger.info("Elementu bat sartu egin da: " + l1.getIzena());
+	}
+	
+	public void getLangileKodKontr(ArrayList<langilea> zerrenda, int kod) {
+		Kontsultak.getLangile_kodBD(zerrenda, kod);
+		logger.info("Langilearen kodea ondo lortu da.");
+	}
+	
+	public void eguneratuEnplegatuakKontr(langilea l1) {
+		Kontsultak.datuakEguneratuBD(l1);
+	}
+	
 	// *************************
 	// DEPARTAMENTUA
 	public void departamentuaPantailara() {
@@ -105,8 +122,6 @@ public class Menukontroladorea {
 			langtxostena.setVisible(false);
 			departamentua.setVisible(true);
 		}
-	
-	
 
 	public void langilePantailara() {
 		menua.setVisible(false);
@@ -119,6 +134,15 @@ public class Menukontroladorea {
 	public void enplegatuaBerritu(langilea l1) {
 		Kontsultak.datuakBerritu1(l1);
 		logger.info(l1.getIzena() + "-ren datuak berritu egin dira");
+	}
+	
+	public void enplegatuaEzabatu(langilea l1) {
+		Kontsultak.enplegatuEzabatuta(l1);
+		logger.info(l1.getIzena() + " enplegatua ezabatu egin da.");
+	}
+
+	public ArrayList<Integer> returnKodea(){
+		return Kontsultak.ateraLangile_Kod();
 	}
 
 	public void parametroakHartu(String fitxategi, String formatua) {
@@ -169,10 +193,7 @@ public class Menukontroladorea {
 
 	}
 	
-	public void getData(langilea l1) {
-		Kontsultak.datuakSartu2(l1);
-		logger.info("Elementu bat sartu egin da: " + l1.getIzena());
-	}
+	
 
 	public void departamentutikMenura() {
 		departamentua.setVisible(false);
@@ -184,7 +205,17 @@ public class Menukontroladorea {
 		menua.setVisible(true);
 	}
 	
+	public ArrayList<String> getArduraZuz(langilea l1){
+		ArrayList<String> al = new ArrayList<String>();
+		al = Kontsultak.arduraZuzendari(l1);
+		return al;
+	}
 	
+	public ArrayList<String> getArduraIB(langilea l1){
+		ArrayList<String> al = new ArrayList<String>();
+		al = Kontsultak.arduraIkasketaBurua(l1);
+		return al;
+	}
 	
 	
 	//***Formularioen kudeaketa
