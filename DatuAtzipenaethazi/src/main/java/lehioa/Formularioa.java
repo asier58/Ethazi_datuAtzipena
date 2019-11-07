@@ -46,14 +46,15 @@ public class Formularioa extends JFrame {
 	private JButton btnEzabatu;
 	private JButton btnAtzera;
 	private JComboBox comboBox;
-	private ArrayList<langilea> langileArr = new ArrayList<langilea>();
-	private langilea l1;
 	private String data = null;
 	private String ordua = null;
 	private Date date = new Date();
 	private JComboBox comboBox_ardura;
-
+	
+	ArrayList<langilea> langileArr = new ArrayList<langilea>();;
+	langilea l1;
 	public static Logger logger = Logger.getLogger(Menua.class);
+
 	private Menukontroladorea menukontroladorea;
 
 	public Formularioa() {
@@ -74,7 +75,7 @@ public class Formularioa extends JFrame {
 				}
 			}
 		});
-		textField_langKod.setBounds(177, 11, 181, 20);
+		textField_langKod.setBounds(109, 11, 181, 20);
 		contentPane.add(textField_langKod);
 		textField_langKod.setColumns(10);
 
@@ -98,7 +99,7 @@ public class Formularioa extends JFrame {
 
 			}
 		});
-		textField_izena.setBounds(119, 45, 239, 20);
+		textField_izena.setBounds(51, 45, 239, 20);
 		contentPane.add(textField_izena);
 		textField_izena.setColumns(10);
 
@@ -118,7 +119,7 @@ public class Formularioa extends JFrame {
 
 			}
 		});
-		textField_abizena.setBounds(127, 81, 229, 20);
+		textField_abizena.setBounds(61, 81, 229, 20);
 		contentPane.add(textField_abizena);
 		textField_abizena.setColumns(10);
 
@@ -136,7 +137,7 @@ public class Formularioa extends JFrame {
 				}
 			}
 		});
-		textField_deptKod.setBounds(188, 119, 168, 20);
+		textField_deptKod.setBounds(122, 119, 168, 20);
 		contentPane.add(textField_deptKod);
 		textField_deptKod.setColumns(10);
 
@@ -154,7 +155,7 @@ public class Formularioa extends JFrame {
 				}
 			}
 		});
-		textField_soldata.setBounds(127, 154, 229, 20);
+		textField_soldata.setBounds(61, 154, 229, 20);
 		contentPane.add(textField_soldata);
 		textField_soldata.setColumns(10);
 
@@ -172,7 +173,7 @@ public class Formularioa extends JFrame {
 				}
 			}
 		});
-		textField_nagusia.setBounds(127, 188, 229, 20);
+		textField_nagusia.setBounds(61, 188, 229, 20);
 		contentPane.add(textField_nagusia);
 		textField_nagusia.setColumns(10);
 
@@ -221,57 +222,43 @@ public class Formularioa extends JFrame {
 					textField_langKod.setEditable(true);
 					textField_langKod.setEnabled(true);
 
-					textField_izena.setEditable(false);
-					textField_abizena.setEditable(false);
-					textField_deptKod.setEditable(false);
-					textField_nagusia.setEditable(false);
-					textField_soldata.setEditable(false);
 					textField_izena.setEnabled(false);
-					comboBox_ardura.setEditable(false);
-					comboBox_ardura.setEnabled(false);
 					textField_abizena.setEnabled(false);
 					textField_deptKod.setEnabled(false);
 					textField_nagusia.setEnabled(false);
 					textField_soldata.setEnabled(false);
-				} else if (comboBox.getSelectedItem().equals("Txertatu")) {
-					textField_langKod.setEnabled(true);
-					comboBox_ardura.setEditable(true);
-					comboBox_ardura.setEnabled(true);
-					textField_izena.setEditable(true);
-					textField_abizena.setEditable(true);
+					comboBox_ardura.setEnabled(false);
 					
-					while (textField_langKod.getText().equals(menukontroladorea.returnKodea())) {
-						System.out.println("Kodea ez da existitzen!");
-						JOptionPane.showMessageDialog(null, "Kodea ez da existitzen", "InfoBox",
-								JOptionPane.INFORMATION_MESSAGE);
-					}
-				} else if (comboBox.getSelectedItem().equals("Ezabatu")) {
+					textField_izena.setEditable(false);
+					textField_abizena.setEditable(false);
+					comboBox_ardura.setEditable(false);
+					textField_deptKod.setEditable(false);
+					textField_nagusia.setEditable(false);
+					textField_soldata.setEditable(false);
+				} else if (comboBox.getSelectedItem().equals("Txertatu")) {
+					
 					textField_langKod.setEditable(true);
 					textField_langKod.setEnabled(true);
-
-					textField_izena.setEditable(false);
-					textField_abizena.setEditable(false);
-					textField_ardura.setEditable(false);
-					textField_deptKod.setEditable(false);
-					textField_nagusia.setEditable(false);
-					textField_soldata.setEditable(false);
-					textField_izena.setEnabled(false);
-					textField_abizena.setEnabled(false);
-					textField_ardura.setEnabled(false);
-					textField_deptKod.setEnabled(false);
-					textField_nagusia.setEnabled(false);
-					textField_soldata.setEnabled(false);
-				} else if (comboBox.getSelectedItem().equals("Txertatu")) {
-					textField_langKod.setEnabled(true);
-
+					
+					textField_izena.setEnabled(true);
+					textField_abizena.setEnabled(true);
+					textField_deptKod.setEnabled(true);
+					textField_nagusia.setEnabled(true);
+					textField_soldata.setEnabled(true);
+					comboBox_ardura.setEnabled(true);
+					
 					textField_izena.setEditable(true);
 					textField_abizena.setEditable(true);
-					textField_ardura.setEditable(true);
+					comboBox_ardura.setEditable(true);
 					textField_deptKod.setEditable(true);
 					textField_nagusia.setEditable(true);
 					textField_soldata.setEditable(true);
-				}
+					
+					while (textField_langKod.getText().equals(menukontroladorea.returnKodea())) {
+						System.out.println("Kodea ez da existitzen!");
+					}
 			}
+		}
 		});
 		comboBox.setModel(new DefaultComboBoxModel(new String[] { "Txertatu", "Ezabatu", "Aldatu" }));
 		comboBox.setBounds(10, 305, 115, 18);
@@ -296,10 +283,6 @@ public class Formularioa extends JFrame {
 						int soldata = Integer.parseInt(textField_soldata.getText());
 						int dept_noZenbkia = Integer.parseInt(textField_deptKod.getText());
 						int nagusia = Integer.parseInt(textField_nagusia.getText());
-				int langKod = Integer.parseInt(textField_langKod.getText());
-				int soldata = Integer.parseInt(textField_soldata.getText());
-				int dept_noZenbkia = Integer.parseInt(textField_deptKod.getText());
-				int nagusia = Integer.parseInt(textField_nagusia.getText());
 						l1 = new langilea(langKod, dept_noZenbkia, soldata, textField_izena.getText(),
 								textField_abizena.getText(), nagusia, (String) comboBox.getSelectedItem(),
 								ordua + ", " + data);
@@ -326,17 +309,8 @@ public class Formularioa extends JFrame {
 
 						menukontroladorea.enplegatuaEzabatu(l1);
 					}
-				l1 = new langilea(langKod, dept_noZenbkia, soldata, textField_izena.getText(),
-						textField_abizena.getText(), nagusia, textField_ardura.getText(), hourdateFormat.format(date));
-
-				if (comboBox.getSelectedItem().equals("Txertatu")) {
-					menukontroladorea.getData(l1);
-				} else if (comboBox.getSelectedItem().equals("Aldatu")) {
-					menukontroladorea.eguneratuEnplegatuakKontr(l1);
-				} else if (comboBox.getSelectedItem().equals("Ezabatu")) {
-//					menukontroladorea
-				}
 			}
+		}
 		});
 		btnGorde.setBounds(335, 303, 89, 23);
 		contentPane.add(btnGorde);
@@ -361,17 +335,9 @@ public class Formularioa extends JFrame {
 		btnAtzera.setBounds(137, 303, 89, 23);
 		contentPane.add(btnAtzera);
 
-		comboBox_ardura = new JComboBox();
-		comboBox_ardura.setModel(new DefaultComboBoxModel(
-				new String[] { "", "Irakasle", "Irakasketa Burua", "Zuzedari", "Eskolazain" }));
-		comboBox_ardura.setBounds(153, 218, 205, 20);
-		contentPane.add(comboBox_ardura);
-
-	
+	}
 
 	public void nireMenukontroladorea(Menukontroladorea menukontroladorea) {
 		this.menukontroladorea = menukontroladorea;
 	}
-		
-		
-	
+}
