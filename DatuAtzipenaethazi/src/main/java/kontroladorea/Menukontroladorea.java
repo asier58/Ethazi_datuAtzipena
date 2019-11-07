@@ -56,7 +56,24 @@ public class Menukontroladorea {
 	public void nireTxostena(langTxostena langtxostena) {
 		this.langtxostena=langtxostena;
 	}
+	/**
+	 * ENPLEGATUA
+	 */
 
+	public void getData(langilea l1) {
+		Kontsultak.datuakSartu2(l1);
+		logger.info("Elementu bat sartu egin da: " + l1.getIzena());
+	}
+	
+	public void getLangileKodKontr(ArrayList<langilea> zerrenda, int kod) {
+		Kontsultak.getLangile_kodBD(zerrenda, kod);
+		logger.info("Langilearen kodea ondo lortu da.");
+	}
+	
+	public void eguneratuEnplegatuakKontr(langilea l1) {
+		Kontsultak.datuakEguneratuBD(l1);
+	}
+	
 	// *************************
 	// DEPARTAMENTUA
 	public void departamentuaPantailara() {
@@ -124,6 +141,10 @@ public class Menukontroladorea {
 		logger.info(l1.getIzena() + " enplegatua ezabatu egin da.");
 	}
 
+	public ArrayList<Integer> returnKodea(){
+		return Kontsultak.ateraLangile_Kod();
+	}
+
 	public void parametroakHartu(String fitxategi, String formatua) {
 		File fitx = new File(fitxategi + formatua);
 		if (!fitx.exists()) {
@@ -172,10 +193,7 @@ public class Menukontroladorea {
 
 	}
 	
-	public void getData(langilea l1) {
-		Kontsultak.datuakSartu2(l1);
-		logger.info("Elementu bat sartu egin da: " + l1.getIzena());
-	}
+	
 
 	public void departamentutikMenura() {
 		departamentua.setVisible(false);

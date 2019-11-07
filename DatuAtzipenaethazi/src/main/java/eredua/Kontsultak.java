@@ -99,7 +99,6 @@ public class Kontsultak {
 		int sartuTaulara = 0;
 
 		try {
-
 			// Cargar el driver
 			Class.forName("com.mysql.jdbc.Driver");
 			conexion = DriverManager.getConnection("jdbc:mysql://localhost/mydb", "root", "");
@@ -128,10 +127,12 @@ public class Kontsultak {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			System.out.println(e.getCause());
-
+			logger.error(e.getMessage());
 		}
 
 		return sartuTaulara;
+		
+		
 	}
 
 	/**
@@ -196,7 +197,7 @@ public class Kontsultak {
 			int sartuTaulara = preparedStatement.executeUpdate();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			System.out.println("jajanotira");
+			logger.error(e.getMessage());
 		}
 	}
 
@@ -231,10 +232,11 @@ public class Kontsultak {
 		}
 	}
 
-	public static void datuakHustu1() {
+	public static void datuakEguneratuBD(langilea l1) {
 		Connection conexion = null;
 		Statement s = null;
-
+		Date date = new Date();
+		DateFormat hourdateFormat = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
 		try {
 
 			// Cargar el driver
@@ -244,23 +246,23 @@ public class Kontsultak {
 
 			// Se realiza la consulta
 
-			String sql = "UPDATE `enplegatua` set kodea = ?, izena = ?, abizena = ?, soldata = ?, departamentua_dept_no = ?, ardura = ?, nagusia = ?, DataOrdua = ?";
+			String sql = "UPDATE `enplegatua` set izena = ?, abizena = ?, soldata = ?, departamentua_dept_no = ?, ardura = ?, nagusia = ?, DataOrdua = ? WHERE Kodea = ?";
 
 			PreparedStatement preparedStatement = conexion.prepareStatement(sql);
 
-			preparedStatement.setInt(1, 00);
-			preparedStatement.setString(2, "");
-			preparedStatement.setString(3, "");
-			preparedStatement.setInt(4, 00);
-			preparedStatement.setInt(5, 00);
-			preparedStatement.setString(6, "");
-			preparedStatement.setString(7, "");
-			preparedStatement.setString(8, "");
+			preparedStatement.setInt(8, l1.getLangile_kod());
+			preparedStatement.setString(1, l1.getIzena());
+			preparedStatement.setString(2, l1.getAbizena());
+			preparedStatement.setInt(3, l1.getSoldata());
+			preparedStatement.setInt(4, l1.getDept_nozenbakia());
+			preparedStatement.setString(5, l1.getArdura());
+			preparedStatement.setInt(6, l1.getNagusia());
+			preparedStatement.setString(7, hourdateFormat.format(date));
 
 			int sartuTaulara = preparedStatement.executeUpdate();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			System.out.println("jajanotira");
+			logger.error(e.getMessage());
 		}
 	}
 
@@ -335,6 +337,7 @@ public class Kontsultak {
 	 */
 
 	public static void datuakEzabatu(ArrayList<langilea> zerrenda) {
+//	public static void getLangile_kodBD(ArrayList<langilea> zerrenda, int kod) {
 		Connection conexion = null;
 		Statement s = null;
 
@@ -342,13 +345,13 @@ public class Kontsultak {
 			Class.forName("com.mysql.jdbc.Driver");
 			conexion = DriverManager.getConnection("jdbc:mysql://localhost/mydb", "root", "");
 			s = (Statement) conexion.createStatement();
-
 			String sql = "DELETE FROM departamentua WHERE langile_kod = ?";
+//			String sql = "SELECT langile_kod FROM enplegatua WHERE langile_kod = '" + kod + "'";
 
 			PreparedStatement preparedStatement = conexion.prepareStatement(sql);
 			ResultSet resultSet = preparedStatement.executeQuery();
-
 			preparedStatement.setInt(1, zerrenda.get(0).getLangile_kod());
+			int id = resultSet.getInt("Kodea");
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -690,6 +693,8 @@ public class Kontsultak {
 		int nagusia = 0;
 		String Ardura = "";
 		String dataOrdua = "";
+		
+		
 
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -726,6 +731,62 @@ public class Kontsultak {
 		}
 
 		return zerrenda;
+	}
+
+	public static void getLangile_kodBD(ArrayList<langilea> zerrenda, int kod) {
+		Connection conexion = null;
+		Statement s = null;
+
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conexion = DriverManager.getConnection("jdbc:mysql://localhost/mydb", "root", "");
+			s = (Statement) conexion.createStatement();
+
+			String sql = "SELECT langile_kod FROM enplegatua WHERE langile_kod = '" + kod + "'";
+
+			PreparedStatement preparedStatement = conexion.prepareStatement(sql);
+
+			ResultSet resultSet = preparedStatement.executeQuery();
+
+			int id = resultSet.getInt("Kodea");
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	public static ArrayList<Integer> ateraLangile_Kod() {
+		ArrayList<langilea> zerrenda = new ArrayList<langilea>();
+		ArrayList<Integer> langileKodArrayList = new ArrayList<Integer>();
+		Connection conexion = null;
+		Statement s = null;
+		int kodea = 0;
+
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conexion = DriverManager.getConnection("jdbc:mysql://localhost/mydb", "root", "");
+			s = (Statement) conexion.createStatement();
+
+			String sql = "SELECT Kodea FROM enplegatua";
+
+			PreparedStatement preparedStatement = conexion.prepareStatement(sql);
+
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+
+				kodea = resultSet.getInt(1);
+				langileKodArrayList.add(kodea);
+			}
+
+		}
+
+		catch (SQLException I) {
+			logger.error(I.getMessage());
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+
+		return langileKodArrayList;
 	}
 
 	// **Enplegatu Amaiera
