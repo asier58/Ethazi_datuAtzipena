@@ -51,7 +51,7 @@ public class Formularioa extends JFrame {
 	private String ordua = null;
 	private Date date = new Date();
 	private JComboBox comboBox_ardura;
-	
+
 	public static Logger logger = Logger.getLogger(Menua.class);
 
 	private Menukontroladorea menukontroladorea;
@@ -238,26 +238,44 @@ public class Formularioa extends JFrame {
 				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 				data = dateFormat.format(date).toString();
 				ordua = hourFormat.format(date).toString();
-				
-				int langKod = Integer.parseInt(textField_langKod.getText());
-				int soldata = Integer.parseInt(textField_soldata.getText());
-				int dept_noZenbkia = Integer.parseInt(textField_deptKod.getText());
-				int nagusia = Integer.parseInt(textField_nagusia.getText());
 
-				l1 = new langilea(langKod, dept_noZenbkia, soldata, textField_izena.getText(),
-						textField_abizena.getText(), nagusia, (String) comboBox.getSelectedItem(),
-						ordua + ", " + data);
+				if (menukontroladorea.getArduraZuz(l1).equals("Zuzendari")) {
+					logger.info("Ardura hori badago artuta.");
+				} else if (menukontroladorea.getArduraIB(l1).equals("Ikasketa Burua")) {
+					logger.info("Ardura hori badago artuta.");
+				} else {
+					if (comboBox.getSelectedItem().equals("Txertatu")) {
+						int langKod = Integer.parseInt(textField_langKod.getText());
+						int soldata = Integer.parseInt(textField_soldata.getText());
+						int dept_noZenbkia = Integer.parseInt(textField_deptKod.getText());
+						int nagusia = Integer.parseInt(textField_nagusia.getText());
 
-				if(!menukontroladorea.getArdura(l1).equals(null)) {
-					JOptionPane.showMessageDialog(null, "Kodea ez da existitzen", "InfoBox",
-							JOptionPane.INFORMATION_MESSAGE);
-				}
-				if (comboBox.getSelectedItem().equals("Txertatu")) {
-					menukontroladorea.getData(l1);
-				} else if (comboBox.getSelectedItem().equals("Aldatu")) {
-					menukontroladorea.enplegatuaBerritu(l1);
-				} else if (comboBox.getSelectedItem().equals("Ezabatu")) {
-					menukontroladorea.enplegatuaEzabatu(l1);
+						l1 = new langilea(langKod, dept_noZenbkia, soldata, textField_izena.getText(),
+								textField_abizena.getText(), nagusia, (String) comboBox.getSelectedItem(),
+								ordua + ", " + data);
+
+						menukontroladorea.getData(l1);
+
+					} else if (comboBox.getSelectedItem().equals("Aldatu")) {
+						int langKod = Integer.parseInt(textField_langKod.getText());
+						int soldata = Integer.parseInt(textField_soldata.getText());
+						int dept_noZenbkia = Integer.parseInt(textField_deptKod.getText());
+						int nagusia = Integer.parseInt(textField_nagusia.getText());
+
+						l1 = new langilea(langKod, dept_noZenbkia, soldata, textField_izena.getText(),
+								textField_abizena.getText(), nagusia, (String) comboBox.getSelectedItem(),
+								ordua + ", " + data);
+
+						menukontroladorea.enplegatuaBerritu(l1);
+
+					} else if (comboBox.getSelectedItem().equals("Ezabatu")) {
+
+						int langKod = Integer.parseInt(textField_langKod.getText());
+
+						l1 = new langilea(langKod, 0, 0, null, null, 0, null, null);
+
+						menukontroladorea.enplegatuaEzabatu(l1);
+					}
 				}
 			}
 		});
@@ -273,7 +291,6 @@ public class Formularioa extends JFrame {
 				textField_deptKod.setText(null);
 				textField_soldata.setText(null);
 				textField_nagusia.setText(null);
-
 			}
 		});
 		btnEzabatu.setBounds(236, 303, 89, 23);
@@ -282,9 +299,10 @@ public class Formularioa extends JFrame {
 		btnAtzera = new JButton("ATZERA");
 		btnAtzera.setBounds(137, 303, 89, 23);
 		contentPane.add(btnAtzera);
-		
+
 		comboBox_ardura = new JComboBox();
-		comboBox_ardura.setModel(new DefaultComboBoxModel(new String[] {"", "Irakasle", "Irakasketa Burua", "Zuzedari", "Eskolazain"}));
+		comboBox_ardura.setModel(new DefaultComboBoxModel(
+				new String[] { "", "Irakasle", "Irakasketa Burua", "Zuzedari", "Eskolazain" }));
 		comboBox_ardura.setBounds(153, 218, 205, 20);
 		contentPane.add(comboBox_ardura);
 

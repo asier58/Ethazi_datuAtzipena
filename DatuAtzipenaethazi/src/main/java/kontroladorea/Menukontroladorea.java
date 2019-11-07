@@ -187,9 +187,15 @@ public class Menukontroladorea {
 		menua.setVisible(true);
 	}
 	
-	public ArrayList<String> getArdura(langilea l1){
+	public ArrayList<String> getArduraZuz(langilea l1){
 		ArrayList<String> al = new ArrayList<String>();
 		al = Kontsultak.arduraZuzendari(l1);
+		return al;
+	}
+	
+	public ArrayList<String> getArduraIB(langilea l1){
+		ArrayList<String> al = new ArrayList<String>();
+		al = Kontsultak.arduraIkasketaBurua(l1);
 		return al;
 	}
 	

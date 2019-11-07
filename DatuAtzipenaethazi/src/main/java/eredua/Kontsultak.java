@@ -12,6 +12,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.swing.JOptionPane;
+
 import org.apache.log4j.Logger;
 
 import kontroladorea.Menukontroladorea;
@@ -266,33 +268,6 @@ public class Kontsultak {
 	 * SELECT
 	 */
 
-	public static void datuakEskatu(ArrayList<langilea> zerrenda) {
-		Connection conexion = null;
-		Statement s = null;
-
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			conexion = DriverManager.getConnection("jdbc:mysql://localhost/mydb", "root", "");
-			s = (Statement) conexion.createStatement();
-
-			String sql = "SELECT * FROM enplegatua WHERE izena = Ramon";
-
-			PreparedStatement preparedStatement = conexion.prepareStatement(sql);
-
-			ResultSet resultSet = preparedStatement.executeQuery();
-
-			int id = resultSet.getInt("Kodea");
-			String izena = resultSet.getString("Izena");
-			int departamentua_dept_no = resultSet.getInt("Departamentua_dept_no");
-			int soldata = resultSet.getInt("Soldata");
-			String abizena = resultSet.getString("Abizena");
-			String ardura = resultSet.getString("Ardura");
-			int nagusia = resultSet.getInt("Nagusia");
-
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-	}
 	
 	public static ArrayList<String> arduraZuzendari(langilea l1) {
 		Connection conexion = null;
@@ -309,7 +284,7 @@ public class Kontsultak {
 			PreparedStatement preparedStatement = conexion.prepareStatement(sql);
 			
 			preparedStatement.setInt(1, l1.getDept_nozenbakia());
-			preparedStatement.setString(1, "Zuzendari");
+			preparedStatement.setString(2, "Zuzendari");
 
 			ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -318,11 +293,43 @@ public class Kontsultak {
 			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
+			JOptionPane.showMessageDialog(null, e.getMessage(),"InfoBox",
+					JOptionPane.INFORMATION_MESSAGE);
 		}
 		
 		return arduraArr;
 	}
 
+	public static ArrayList<String> arduraIkasketaBurua(langilea l1) {
+		Connection conexion = null;
+		Statement s = null;
+		ArrayList<String> arduraArr = new ArrayList<String>();
+
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conexion = DriverManager.getConnection("jdbc:mysql://localhost/mydb", "root", "");
+			s = (Statement) conexion.createStatement();
+
+			String sql = "SELECT Ardura FROM enplegatua WHERE Departamentua_dept_no = ? And Ardura LIKE ?";
+
+			PreparedStatement preparedStatement = conexion.prepareStatement(sql);
+			
+			preparedStatement.setInt(1, l1.getDept_nozenbakia());
+			preparedStatement.setString(2, "Irakasketa Burua");
+
+			ResultSet resultSet = preparedStatement.executeQuery();
+
+			String ardura = resultSet.getString("Ardura");
+			arduraArr.add(ardura);
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			JOptionPane.showMessageDialog(null, e.getMessage(),"InfoBox",
+					JOptionPane.INFORMATION_MESSAGE);
+		}
+		
+		return arduraArr;
+	}
 	/**
 	 * DELETE
 	 */
