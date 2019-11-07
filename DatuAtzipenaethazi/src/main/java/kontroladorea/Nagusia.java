@@ -1,6 +1,8 @@
 package kontroladorea;
 
 import org.apache.log4j.Logger;
+
+import eredua.DBKonexioa;
 import lehioa.Departamentua;
 import lehioa.Enplegatua;
 import lehioa.Formularioa;
@@ -8,14 +10,13 @@ import lehioa.Formularioa2;
 import lehioa.Menua;
 import lehioa.deptTxostena;
 import lehioa.langTxostena;
-import eredua.DBKonexioa;
 
 public class Nagusia {
 
-	public static Logger logger = Logger.getLogger(Nagusia.class);
+	public static Logger logger;
 
 	public static void main(String[] args) {
-
+		logger = Logger.getLogger(Nagusia.class);
 		/**
 		 * Datu baserako konexioa
 		 */
@@ -29,11 +30,6 @@ public class Nagusia {
 ////		eredua.Kontsultak.datuakSartu();
 //		eredua.Kontsultak.datuakBerritu();
 
-
-		//ugadooooooooooooooooooooooooo
-//		String basedatos = "mydb";
-//		DBKonexioa con1 = new DBKonexioa();
-//		con1.conectarDB();
 		Menukontroladorea menukontroladorea = new Menukontroladorea();
 		Departamentua departamentua = new Departamentua();
 		Enplegatua enplegatua =  new Enplegatua();

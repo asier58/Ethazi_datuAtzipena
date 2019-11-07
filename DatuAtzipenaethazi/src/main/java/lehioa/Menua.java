@@ -59,6 +59,7 @@ public class Menua extends JFrame {
 		txostena.setBounds(117, 267, 381, 47);
 		contentPane.add(txostena);
 		logger.info("Menu Pantailan sartu da");
+
 	}
 
 	public void nireMenukontroladorea(Menukontroladorea menukontroladorea) {

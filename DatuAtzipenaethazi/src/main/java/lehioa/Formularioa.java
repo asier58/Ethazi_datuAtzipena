@@ -7,6 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import org.apache.log4j.Logger;
+
 import kontroladorea.Menukontroladorea;
 
 import javax.swing.JTextField;
@@ -54,8 +56,9 @@ public class Formularioa extends JFrame {
 	private JButton btnEzabatu;
 	private JButton btnAtzera;
 	private JComboBox comboBox;
-	ArrayList<langilea> langileArr;
+	ArrayList<langilea> langileArr = new ArrayList<langilea>();;
 	langilea l1;
+	public static Logger logger = Logger.getLogger(Menua.class);
 
 	private Menukontroladorea menukontroladorea;
 
@@ -203,6 +206,42 @@ public class Formularioa extends JFrame {
 		textField_dataOrdua.setColumns(10);
 		
 		comboBox = new JComboBox();
+		comboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (comboBox.getSelectedItem().equals("Aldatu")) {
+					textField_langKod.setEditable(false);
+					textField_langKod.setEnabled(false);
+				}else if (comboBox.getSelectedItem().equals("Ezabatu")) {
+					textField_langKod.setEditable(true);
+					textField_langKod.setEnabled(true);
+					
+					textField_izena.setEditable(false);
+					textField_abizena.setEditable(false);
+					textField_ardura.setEditable(false);
+					textField_deptKod.setEditable(false);
+					textField_nagusia.setEditable(false);
+					textField_soldata.setEditable(false);
+					textField_dataOrdua.setEditable(false);
+					textField_izena.setEnabled(false);
+					textField_abizena.setEnabled(false);
+					textField_ardura.setEnabled(false);
+					textField_deptKod.setEnabled(false);
+					textField_nagusia.setEnabled(false);
+					textField_soldata.setEnabled(false);
+					textField_dataOrdua.setEnabled(false);
+				}else if (comboBox.getSelectedItem().equals("Txertatu")) {
+					textField_langKod.setEnabled(true);
+					
+					textField_izena.setEditable(true);
+					textField_abizena.setEditable(true);
+					textField_ardura.setEditable(true);
+					textField_deptKod.setEditable(true);
+					textField_nagusia.setEditable(true);
+					textField_soldata.setEditable(true);
+					textField_dataOrdua.setEditable(true);
+				}
+			}
+		});
 		comboBox.setModel(new DefaultComboBoxModel(new String[] { "Txertatu", "Ezabatu", "Aldatu" }));
 		comboBox.setBounds(300, 12, 124, 18);
 		contentPane.add(comboBox);
@@ -211,29 +250,19 @@ public class Formularioa extends JFrame {
 		btnGorde.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				if (comboBox.getSelectedItem().equals("UPDATE")) {
-					textField_langKod.setEditable(false);
-				}else if (comboBox.getSelectedItem().equals("DELETE")) {
-					
-				}
-				
 				int langKod = Integer.parseInt(textField_langKod.getText());
 				int soldata = Integer.parseInt(textField_soldata.getText());
 				int dept_noZenbkia = Integer.parseInt(textField_deptKod.getText());
 				int nagusia = Integer.parseInt(textField_nagusia.getText());
-
-				l1.setIzena(textField_izena.getText());
-				l1.setAbizena(textField_abizena.getText());
-				l1.setLangile_kod(langKod);
-				l1.setSoldata(soldata);
-				l1.setArdura(textField_ardura.getText());
-				l1.setDept_nozenbakia(dept_noZenbkia);
-				l1.setNagusia(nagusia);
-				l1.setDataOrdua(textField_dataOrdua.getText());
-
-				langileArr.add(l1);
 				
-				menukontroladorea.getData(langileArr);
+				l1 = new langilea(langKod, dept_noZenbkia, soldata, textField_izena.getText(),
+						textField_abizena.getText(), nagusia, textField_ardura.getText(), textField_dataOrdua.getText());
+
+				if(comboBox.getSelectedItem().equals("Txertatu")) {
+					menukontroladorea.getData(l1);
+				}else if (comboBox.getSelectedItem().equals("Aldatu")) {
+					menukontroladorea.enplegatuaBerritu(l1);
+				}
 			}
 		});
 		btnGorde.setBounds(335, 303, 89, 23);
@@ -259,7 +288,8 @@ public class Formularioa extends JFrame {
 		btnAtzera = new JButton("ATZERA");
 		btnAtzera.setBounds(137, 303, 89, 23);
 		contentPane.add(btnAtzera);
-
+		
+		
 	}
 
 	public void nireMenukontroladorea(Menukontroladorea menukontroladorea) {
