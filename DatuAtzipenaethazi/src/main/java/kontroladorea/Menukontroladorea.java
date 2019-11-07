@@ -105,8 +105,6 @@ public class Menukontroladorea {
 			langtxostena.setVisible(false);
 			departamentua.setVisible(true);
 		}
-	
-	
 
 	public void langilePantailara() {
 		menua.setVisible(false);
@@ -119,6 +117,11 @@ public class Menukontroladorea {
 	public void enplegatuaBerritu(langilea l1) {
 		Kontsultak.datuakBerritu1(l1);
 		logger.info(l1.getIzena() + "-ren datuak berritu egin dira");
+	}
+	
+	public void enplegatuaEzabatu(langilea l1) {
+		Kontsultak.enplegatuEzabatuta(l1);
+		logger.info(l1.getIzena() + " enplegatua ezabatu egin da.");
 	}
 
 	public void parametroakHartu(String fitxategi, String formatua) {
@@ -184,7 +187,11 @@ public class Menukontroladorea {
 		menua.setVisible(true);
 	}
 	
-	
+	public ArrayList<String> getArdura(langilea l1){
+		ArrayList<String> al = new ArrayList<String>();
+		al = Kontsultak.arduraZuzendari(l1);
+		return al;
+	}
 	
 	
 	//***Formularioen kudeaketa
