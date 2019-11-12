@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -48,14 +49,16 @@ public class Formularioa extends JFrame {
 	private String data = null;
 	private String ordua = null;
 	private Date date = new Date();
+	
 	private JComboBox comboBox_ardura;
 	private JComboBox comboBox_kodea;
 	
-	ArrayList<langilea> langileArr = new ArrayList<langilea>();;
+	ArrayList<langilea> langileArr = new ArrayList<langilea>();
 	langilea l1;
 	public static Logger logger = Logger.getLogger(Menua.class);
 
 	private Menukontroladorea menukontroladorea;
+	private ArrayList<Integer> langKod = new ArrayList<Integer>();
 	
 
 	public Formularioa() {
@@ -174,7 +177,11 @@ public class Formularioa extends JFrame {
 		contentPane.add(comboBox_ardura);
 
 		comboBox_kodea = new JComboBox();
-		comboBox_kodea.setModel(new DefaultComboBoxModel(new String[] {"Zuzendari", "Ikasketa burua", "Irakaslea", "Bedela"}));
+		kargatuAL(menukontroladorea.pasatuLangileKod());
+		for(int i = 0; i < langKod.size(); i++){
+			comboBox_kodea.setModel(new DefaultComboBoxModel((Object[]) langKod.get(i)));
+		}
+		
 		comboBox_kodea.setBounds(109, 11, 181, 20);
 		contentPane.add(comboBox_kodea);
 
@@ -204,7 +211,7 @@ public class Formularioa extends JFrame {
 					textField_deptKod.setEnabled(false);
 					textField_nagusia.setEnabled(false);
 					textField_soldata.setEnabled(false);
-					comboBox_ardura.setEnabled(false);/*//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+					comboBox_ardura.setEnabled(false);
 					
 					textField_izena.setEditable(false);
 					textField_abizena.setEditable(false);
@@ -310,6 +317,10 @@ public class Formularioa extends JFrame {
 		
 		
 
+	}
+	public void kargatuAL(ArrayList <Integer> kodeak){
+		langKod = kodeak;
+		
 	}
 
 	public void nireMenukontroladorea(Menukontroladorea menukontroladorea) {

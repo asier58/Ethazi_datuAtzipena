@@ -137,6 +137,15 @@ public class Menukontroladorea {
 		enplegatua.setVisible(false);
 		formularioa.setVisible(true);
 	}
+	
+	public ArrayList<Integer> pasatuLangileKod(){
+		ArrayList<Integer> ret;
+		
+		ret = Kontsultak.ateraEnplegatuKod();
+		
+		return ret;
+	}
+	
 	public void enplegatuaBerritu(langilea l1) {
 		Kontsultak.datuakBerritu1(l1);
 		logger.info(l1.getIzena() + "-ren datuak berritu egin dira");

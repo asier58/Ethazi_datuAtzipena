@@ -1,7 +1,5 @@
 package kontroladorea;
 
-import javax.swing.JOptionPane;
-
 import org.apache.log4j.Logger;
 
 import eredua.DBKonexioa;
@@ -27,11 +25,22 @@ public class Nagusia {
 		DBKonexioa con1 = new DBKonexioa();
 		con1.conectarDB();
 		
-//		eredua.Kontsultak.datuakSartu1(null);
-//
-////		eredua.Kontsultak.datuakSartu();
-//		eredua.Kontsultak.datuakBerritu();
+//		ArrayList<Integer> x = Kontsultak.ateraLangile_Kod();
+//		try {
+//			for (int i = 0; i < x.size(); i++) {
+//				System.out.println(x.get(i));
+//			}
+//		}catch(Exception e) {
+//			System.out.println(e.getMessage());
+//			System.out.println(e.getCause());
+//			logger.error(e.getLocalizedMessage());
+//		}
+		
+		eredua.Kontsultak.datuakSartu1(null);
 
+//		eredua.Kontsultak.datuakSartu();
+		eredua.Kontsultak.datuakBerritu();
+		Menua menua = new Menua();
 		Menukontroladorea menukontroladorea = new Menukontroladorea();
 		Departamentua departamentua = new Departamentua();
 		Enplegatua enplegatua =  new Enplegatua();
@@ -41,7 +50,7 @@ public class Nagusia {
 		langTxostena langtxostena = new langTxostena();
 
 		// Lehioak
-		Menua menua = new Menua();
+		
 
 		// ***********
 		menukontroladorea.nireMenua(menua);

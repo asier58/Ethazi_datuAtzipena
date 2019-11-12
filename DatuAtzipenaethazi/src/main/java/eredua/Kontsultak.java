@@ -585,6 +585,38 @@ public class Kontsultak {
 		return zenbakia;
 
 	}
+	
+	public static ArrayList<Integer> ateraEnplegatuKod() {
+		ArrayList<Integer> zenbakia = null;
+
+		Connection conexion = null;
+		Statement s = null;
+
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conexion = DriverManager.getConnection("jdbc:mysql://localhost/mydb", "root", "");
+			s = (Statement) conexion.createStatement();
+
+			String sql = "SELECT Kodea FROM enplegatua";
+
+			PreparedStatement preparedStatement = conexion.prepareStatement(sql);
+
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+					zenbakia.add(resultSet.getInt(1));	
+			}
+
+		}
+
+		catch (SQLException I) {
+			logger.error(I.getMessage());
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+
+		return zenbakia;
+
+	}
 
 	// Enplegatua existitzen badu ikusten duen metodoa
 	public static boolean enplegatu_state(langilea lang) {
