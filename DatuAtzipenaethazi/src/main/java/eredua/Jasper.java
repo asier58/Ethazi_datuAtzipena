@@ -1,8 +1,6 @@
 package eredua;
 
 import java.sql.DriverManager;
-
-
 import java.sql.SQLException;
 
 import net.sf.jasperreports.engine.JRException;

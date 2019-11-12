@@ -92,6 +92,12 @@ public class Menukontroladorea {
 		formularioa2.setVisible(false);
 		departamentua.setVisible(true);
 	}
+	
+	public int maxEmpleKod() {
+		int maxEmpleKod = Kontsultak.ateraEnplegatumaximoa();
+		
+		return maxEmpleKod + 1;
+	}
 	//**
 	
 	

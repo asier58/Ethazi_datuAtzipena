@@ -35,7 +35,6 @@ public class Formularioa extends JFrame {
 	private JLabel lblNagusia;
 	private JLabel lblArdura;
 	private JLabel lblDataOrdua;
-	private JTextField textField_langKod;
 	private JTextField textField_izena;
 	private JTextField textField_abizena;
 	private JTextField textField_deptKod;
@@ -45,17 +44,19 @@ public class Formularioa extends JFrame {
 	private JButton btnGorde;
 	private JButton btnEzabatu;
 	private JButton btnAtzera;
-	private JComboBox comboBox;
+	private JComboBox comboBox_aukera;
 	private String data = null;
 	private String ordua = null;
 	private Date date = new Date();
 	private JComboBox comboBox_ardura;
+	private JComboBox comboBox_kodea;
 	
 	ArrayList<langilea> langileArr = new ArrayList<langilea>();;
 	langilea l1;
 	public static Logger logger = Logger.getLogger(Menua.class);
 
 	private Menukontroladorea menukontroladorea;
+	
 
 	public Formularioa() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -64,20 +65,6 @@ public class Formularioa extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
-		textField_langKod = new JTextField();
-		textField_langKod.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyTyped(KeyEvent e) {
-				char a = e.getKeyChar();
-				if (!Character.isDigit(a)) {
-					e.consume();
-				}
-			}
-		});
-		textField_langKod.setBounds(109, 11, 181, 20);
-		contentPane.add(textField_langKod);
-		textField_langKod.setColumns(10);
 
 		lblLangKod = new JLabel("Langilearen kodea");
 		lblLangKod.setBounds(10, 11, 89, 20);
@@ -180,29 +167,21 @@ public class Formularioa extends JFrame {
 		lblArdura = new JLabel("Ardura");
 		lblArdura.setBounds(10, 221, 33, 14);
 		contentPane.add(lblArdura);
+		
+		comboBox_ardura = new JComboBox();
+		comboBox_ardura.setModel(new DefaultComboBoxModel(new String[] {"Zuzendari", "Ikasketa burua", "Irakaslea", "Bedela"}));
+		comboBox_ardura.setBounds(51, 218, 239, 23);
+		contentPane.add(comboBox_ardura);
 
-		textField_ardura = new JTextField();
-		textField_ardura.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyTyped(KeyEvent e) {
-				char a = e.getKeyChar();
-				if ((((int) a >= 33 && (int) a <= 64)) || ((int) a >= 91 && (int) a <= 96)
-						|| ((int) a >= 123 && (int) a <= 223)) {
-					e.consume();
-				}
+		comboBox_kodea = new JComboBox();
+		comboBox_kodea.setModel(new DefaultComboBoxModel(new String[] {"Zuzendari", "Ikasketa burua", "Irakaslea", "Bedela"}));
+		comboBox_kodea.setBounds(109, 11, 181, 20);
+		contentPane.add(comboBox_kodea);
 
-			}
-		});
-		textField_ardura.setBounds(61, 219, 229, 20);
-		contentPane.add(textField_ardura);
-		textField_ardura.setColumns(10);
-
-		comboBox = new JComboBox();
-		comboBox.addActionListener(new ActionListener() {
+		comboBox_aukera = new JComboBox();
+		comboBox_aukera.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (comboBox.getSelectedItem().equals("Aldatu")) {
-					textField_langKod.setEditable(false);
-					textField_langKod.setEnabled(false);
+				if (comboBox_aukera.getSelectedItem().equals("Aldatu")) {
 					
 					textField_izena.setEnabled(true);
 					textField_abizena.setEnabled(true);
@@ -218,16 +197,14 @@ public class Formularioa extends JFrame {
 					textField_nagusia.setEditable(true);
 					textField_soldata.setEditable(true);
 
-				} else if (comboBox.getSelectedItem().equals("Ezabatu")) {
-					textField_langKod.setEditable(true);
-					textField_langKod.setEnabled(true);
+				} else if (comboBox_aukera.getSelectedItem().equals("Ezabatu")) {
 
 					textField_izena.setEnabled(false);
 					textField_abizena.setEnabled(false);
 					textField_deptKod.setEnabled(false);
 					textField_nagusia.setEnabled(false);
 					textField_soldata.setEnabled(false);
-					comboBox_ardura.setEnabled(false);
+					comboBox_ardura.setEnabled(false);/*//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 					
 					textField_izena.setEditable(false);
 					textField_abizena.setEditable(false);
@@ -235,10 +212,7 @@ public class Formularioa extends JFrame {
 					textField_deptKod.setEditable(false);
 					textField_nagusia.setEditable(false);
 					textField_soldata.setEditable(false);
-				} else if (comboBox.getSelectedItem().equals("Txertatu")) {
-					
-					textField_langKod.setEditable(true);
-					textField_langKod.setEnabled(true);
+				} else if (comboBox_aukera.getSelectedItem().equals("Txertatu")) {
 					
 					textField_izena.setEnabled(true);
 					textField_abizena.setEnabled(true);
@@ -254,15 +228,15 @@ public class Formularioa extends JFrame {
 					textField_nagusia.setEditable(true);
 					textField_soldata.setEditable(true);
 					
-					while (textField_langKod.getText().equals(menukontroladorea.returnKodea())) {
+					while (comboBox_kodea.getSelectedItem().equals(menukontroladorea.returnKodea())) {
 						System.out.println("Kodea ez da existitzen!");
 					}
 			}
 		}
 		});
-		comboBox.setModel(new DefaultComboBoxModel(new String[] { "Txertatu", "Ezabatu", "Aldatu" }));
-		comboBox.setBounds(10, 305, 115, 18);
-		contentPane.add(comboBox);
+		comboBox_aukera.setModel(new DefaultComboBoxModel(new String[] { "Txertatu", "Ezabatu", "Aldatu" }));
+		comboBox_aukera.setBounds(10, 305, 115, 18);
+		contentPane.add(comboBox_aukera);
 
 		btnGorde = new JButton("GORDE");
 		btnGorde.addActionListener(new ActionListener() {
@@ -278,32 +252,32 @@ public class Formularioa extends JFrame {
 				} else if (menukontroladorea.getArduraIB(l1).equals("Ikasketa Burua")) {
 					logger.info("Ardura hori badago artuta.");
 				} else {
-					if (comboBox.getSelectedItem().equals("Txertatu")) {
-						int langKod = Integer.parseInt(textField_langKod.getText());
+					if (comboBox_aukera.getSelectedItem().equals("Txertatu")) {
+						int langKod = menukontroladorea.maxEmpleKod();
 						int soldata = Integer.parseInt(textField_soldata.getText());
 						int dept_noZenbkia = Integer.parseInt(textField_deptKod.getText());
 						int nagusia = Integer.parseInt(textField_nagusia.getText());
 						l1 = new langilea(langKod, dept_noZenbkia, soldata, textField_izena.getText(),
-								textField_abizena.getText(), nagusia, (String) comboBox.getSelectedItem(),
+								textField_abizena.getText(), nagusia, (String) comboBox_aukera.getSelectedItem(),
 								ordua + ", " + data);
 
 						menukontroladorea.getData(l1);
 
-					} else if (comboBox.getSelectedItem().equals("Aldatu")) {
-						int langKod = Integer.parseInt(textField_langKod.getText());
+					} else if (comboBox_aukera.getSelectedItem().equals("Aldatu")) {
+						int langKod = Integer.parseInt((String) comboBox_kodea.getSelectedItem());
 						int soldata = Integer.parseInt(textField_soldata.getText());
 						int dept_noZenbkia = Integer.parseInt(textField_deptKod.getText());
 						int nagusia = Integer.parseInt(textField_nagusia.getText());
 
 						l1 = new langilea(langKod, dept_noZenbkia, soldata, textField_izena.getText(),
-								textField_abizena.getText(), nagusia, (String) comboBox.getSelectedItem(),
+								textField_abizena.getText(), nagusia, (String) comboBox_ardura.getSelectedItem(),
 								ordua + ", " + data);
 
 						menukontroladorea.enplegatuaBerritu(l1);
 
-					} else if (comboBox.getSelectedItem().equals("Ezabatu")) {
+					} else if (comboBox_aukera.getSelectedItem().equals("Ezabatu")) {
 
-						int langKod = Integer.parseInt(textField_langKod.getText());
+						int langKod = Integer.parseInt((String) comboBox_kodea.getSelectedItem());
 
 						l1 = new langilea(langKod, 0, 0, null, null, 0, null, null);
 
@@ -318,7 +292,6 @@ public class Formularioa extends JFrame {
 		btnEzabatu = new JButton("EZABATU");
 		btnEzabatu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				textField_langKod.setText(null);
 				textField_izena.setText(null);
 				textField_abizena.setText(null);
 				textField_deptKod.setText(null);
@@ -334,6 +307,8 @@ public class Formularioa extends JFrame {
 		btnAtzera = new JButton("ATZERA");
 		btnAtzera.setBounds(137, 303, 89, 23);
 		contentPane.add(btnAtzera);
+		
+		
 
 	}
 
