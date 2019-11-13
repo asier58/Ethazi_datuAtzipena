@@ -36,10 +36,10 @@ public class Nagusia {
 //			logger.error(e.getLocalizedMessage());
 //		}
 		
-		eredua.Kontsultak.datuakSartu1(null);
+//		eredua.Kontsultak.datuakSartu1(null);
 
 //		eredua.Kontsultak.datuakSartu();
-		eredua.Kontsultak.datuakBerritu();
+//		eredua.Kontsultak.datuakBerritu();
 		Menua menua = new Menua();
 		Menukontroladorea menukontroladorea = new Menukontroladorea();
 		Departamentua departamentua = new Departamentua();

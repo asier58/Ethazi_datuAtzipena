@@ -1,14 +1,13 @@
 package kontroladorea;
 
 import java.io.File;
-
 import java.util.ArrayList;
 
 import org.apache.log4j.Logger;
 
 import eredua.Kontsultak;
-import eredua.langilea;
 import eredua.departamentua;
+import eredua.langilea;
 import lehioa.Departamentua;
 import lehioa.Enplegatua;
 import lehioa.Formularioa;
@@ -27,6 +26,7 @@ public class Menukontroladorea {
 	private Formularioa2 formularioa2;
 	private deptTxostena depttxostena;
 	private langTxostena langtxostena;
+	
 
 	public void nireMenua(Menua menua) {
 		this.menua = menua;
@@ -44,7 +44,7 @@ public class Menukontroladorea {
 	}
 	public void nireFormularioa(Formularioa formularioa) {
 		this.formularioa = formularioa;
-
+		
 	}
 	public void nireFormularioa2(Formularioa2 formularioa2) {
 		this.formularioa2 = formularioa2;
@@ -60,6 +60,8 @@ public class Menukontroladorea {
 	 * ENPLEGATUA
 	 */
 
+	
+	
 	public void getData(langilea l1) {
 		Kontsultak.datuakSartu2(l1);
 		logger.info("Elementu bat sartu egin da: " + l1.getIzena());
@@ -135,6 +137,9 @@ public class Menukontroladorea {
 	}
 	public void formularioPantailara() {
 		enplegatua.setVisible(false);
+		
+		ArrayList<Integer> abiyua = Kontsultak.ateraEnplegatuKod(); 
+		formularioa.kargatuAL(abiyua);
 		formularioa.setVisible(true);
 	}
 	

@@ -587,7 +587,7 @@ public class Kontsultak {
 	}
 	
 	public static ArrayList<Integer> ateraEnplegatuKod() {
-		ArrayList<Integer> zenbakia = null;
+		ArrayList<Integer> zenbakia = new ArrayList<Integer>();
 
 		Connection conexion = null;
 		Statement s = null;
@@ -595,15 +595,16 @@ public class Kontsultak {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			conexion = DriverManager.getConnection("jdbc:mysql://localhost/mydb", "root", "");
-			s = (Statement) conexion.createStatement();
+//			s = (Statement) conexion.createStatement();
 
 			String sql = "SELECT Kodea FROM enplegatua";
 
-			PreparedStatement preparedStatement = conexion.prepareStatement(sql);
-
-			ResultSet resultSet = preparedStatement.executeQuery();
-			while (resultSet.next()) {
-					zenbakia.add(resultSet.getInt(1));	
+			
+			Statement statement = conexion.createStatement();
+			ResultSet result = statement.executeQuery(sql);
+			while (result.next()) {
+				int kode = result.getInt(1);
+					zenbakia.add(kode);	
 			}
 
 		}
@@ -612,6 +613,7 @@ public class Kontsultak {
 			logger.error(I.getMessage());
 		} catch (Exception e) {
 			logger.error(e.getMessage());
+			System.out.println(e.getMessage());
 		}
 
 		return zenbakia;

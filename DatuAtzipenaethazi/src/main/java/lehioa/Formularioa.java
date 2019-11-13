@@ -49,7 +49,7 @@ public class Formularioa extends JFrame {
 	private String data = null;
 	private String ordua = null;
 	private Date date = new Date();
-	
+	private int cont = 0;	
 	private JComboBox comboBox_ardura;
 	private JComboBox comboBox_kodea;
 	
@@ -58,7 +58,8 @@ public class Formularioa extends JFrame {
 	public static Logger logger = Logger.getLogger(Menua.class);
 
 	private Menukontroladorea menukontroladorea;
-	private ArrayList<Integer> langKod = new ArrayList<Integer>();
+	private ArrayList<String> langKod = new ArrayList<String>();
+	private ArrayList<Integer> langKodInteger = new ArrayList<Integer>();
 	
 
 	public Formularioa() {
@@ -177,9 +178,14 @@ public class Formularioa extends JFrame {
 		contentPane.add(comboBox_ardura);
 
 		comboBox_kodea = new JComboBox();
-		kargatuAL(menukontroladorea.pasatuLangileKod());
+		
 		for(int i = 0; i < langKod.size(); i++){
-			comboBox_kodea.setModel(new DefaultComboBoxModel((Object[]) langKod.get(i)));
+			
+			if(cont == 0) {
+				comboBox_kodea.addItem("");
+				cont++;
+			}
+			
 		}
 		
 		comboBox_kodea.setBounds(109, 11, 181, 20);
@@ -319,7 +325,14 @@ public class Formularioa extends JFrame {
 
 	}
 	public void kargatuAL(ArrayList <Integer> kodeak){
-		langKod = kodeak;
+		for (int n = 0; n < kodeak.size(); n++) {
+			String kodeStr;
+			kodeStr = Integer.toString(kodeak.get(n));
+			langKod.add(kodeStr);
+			comboBox_kodea.addItem(kodeStr);
+		}
+//		langKodInteger= kodeak;
+		
 		
 	}
 
