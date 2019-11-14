@@ -196,6 +196,9 @@ public class Formularioa extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (comboBox_aukera.getSelectedItem().equals("Aldatu")) {
 					
+					comboBox_kodea.setEnabled(true);
+					comboBox_kodea.setEditable(true);
+					
 					textField_izena.setEnabled(true);
 					textField_abizena.setEnabled(true);
 					textField_deptKod.setEnabled(true);
@@ -211,6 +214,8 @@ public class Formularioa extends JFrame {
 					textField_soldata.setEditable(true);
 
 				} else if (comboBox_aukera.getSelectedItem().equals("Ezabatu")) {
+					comboBox_kodea.setEnabled(true);
+					comboBox_kodea.setEditable(true);
 
 					textField_izena.setEnabled(false);
 					textField_abizena.setEnabled(false);
@@ -333,7 +338,11 @@ public class Formularioa extends JFrame {
 		}
 //		langKodInteger= kodeak;
 		
-		
+	}
+	
+	public void blokeatuKodea() {
+		this.comboBox_kodea.setEditable(false);
+		this.comboBox_kodea.setEnabled(false);
 	}
 
 	public void nireMenukontroladorea(Menukontroladorea menukontroladorea) {

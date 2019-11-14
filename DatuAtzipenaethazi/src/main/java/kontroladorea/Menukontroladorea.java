@@ -140,6 +140,7 @@ public class Menukontroladorea {
 		
 		ArrayList<Integer> abiyua = Kontsultak.ateraEnplegatuKod(); 
 		formularioa.kargatuAL(abiyua);
+		formularioa.blokeatuKodea();
 		formularioa.setVisible(true);
 	}
 	
