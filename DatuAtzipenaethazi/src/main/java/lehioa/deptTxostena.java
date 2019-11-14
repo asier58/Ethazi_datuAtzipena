@@ -112,7 +112,9 @@ public void filtroapart() {
 			}	
 
 	}
-public void gordeTxostena(ArrayList<eredua.departamentua> arr) {
-	zerrenda=arr;
-}
+	public void gordeTxostena(ArrayList<eredua.departamentua> arr) {
+		zerrenda=arr;
+	}
+	
+
 }
