@@ -253,7 +253,7 @@ public class Formularioa extends JFrame {
 		}
 		});
 		comboBox_aukera.setModel(new DefaultComboBoxModel(new String[] { "Txertatu", "Ezabatu", "Aldatu" }));
-		comboBox_aukera.setBounds(10, 305, 115, 18);
+		comboBox_aukera.setBounds(12, 304, 115, 21);
 		contentPane.add(comboBox_aukera);
 
 		btnGorde = new JButton("GORDE");
@@ -323,6 +323,11 @@ public class Formularioa extends JFrame {
 		contentPane.add(btnEzabatu);
 
 		btnAtzera = new JButton("ATZERA");
+		btnAtzera.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {		
+				menukontroladorea.langilePantailara();
+			}
+		});
 		btnAtzera.setBounds(137, 303, 89, 23);
 		contentPane.add(btnAtzera);
 		
