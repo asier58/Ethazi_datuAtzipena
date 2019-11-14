@@ -253,7 +253,7 @@ public class Kontsultak {
 			preparedStatement.setInt(8, l1.getLangile_kod());
 			preparedStatement.setString(1, l1.getIzena());
 			preparedStatement.setString(2, l1.getAbizena());
-			preparedStatement.setInt(3, l1.getSoldata());
+			preparedStatement.setDouble(3, l1.getSoldata());
 			preparedStatement.setInt(4, l1.getDept_nozenbakia());
 			preparedStatement.setString(5, l1.getArdura());
 			preparedStatement.setInt(6, l1.getNagusia());
@@ -719,17 +719,17 @@ public class Kontsultak {
 		ArrayList<langilea> zerrenda = new ArrayList<langilea>();
 		Connection conexion = null;
 		Statement s = null;
-		int kodea = 0;
-		int departamentua = 0;
-		Double soldata = 0.0;
-		String izena = "";
-		String abizena = "";
-		int nagusia = 0;
-		String Ardura = "";
-		String dataOrdua = "";
+		int kodeaa = 0;
+		int departamentuaa = 0;
+		Double soldataa = 0.0;
+		String izenaa = "";
+		String abizenaa = "";
+		int nagusiaa = 0;
+		String Arduraa = "";
+		String dataOrduaa = "";
+		System.out.println();
+		langilea Langileaa;
 		
-		
-
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			conexion = DriverManager.getConnection("jdbc:mysql://localhost/mydb", "root", "");
@@ -742,22 +742,23 @@ public class Kontsultak {
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 
-				kodea = resultSet.getInt(1);
-				departamentua = resultSet.getInt(2);
-				soldata = resultSet.getDouble(3);
-				izena = resultSet.getString(4);
-				abizena = resultSet.getString(5);
-				nagusia = resultSet.getInt(6);
-				Ardura = resultSet.getString(7);
-				dataOrdua = resultSet.getString(8);
+				kodeaa = resultSet.getInt(1);
+				departamentuaa = resultSet.getInt(2);
+				soldataa = resultSet.getDouble(3);
+				izenaa = resultSet.getString(4);
+				abizenaa = resultSet.getString(5);
+				nagusiaa = resultSet.getInt(6);
+				Arduraa = resultSet.getString(7);
+				dataOrduaa = resultSet.getString(8);
 
-				langilea lang = new langilea(kodea, departamentua, soldata, izena, abizena, nagusia, Ardura, dataOrdua);
-				zerrenda.add(lang);
+				Langileaa = new langilea(kodeaa, departamentuaa, soldataa, izenaa, abizenaa, nagusiaa, Arduraa, dataOrduaa);
+				zerrenda.add(Langileaa);
 
 			}
 
 		}
 
+		
 		catch (SQLException I) {
 			logger.error(I.getMessage());
 		} catch (Exception e) {
