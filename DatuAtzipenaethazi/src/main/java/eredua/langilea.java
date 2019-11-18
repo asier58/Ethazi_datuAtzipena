@@ -28,16 +28,7 @@ import org.w3c.dom.NodeList;
 
 public class langilea {
 
-	private int langile_kod;
-	private int dept_nozenbakia;
-	private int soldata;
-	private String izena;
-	private String abizena;
-	private int nagusia;
-	private String ardura;
-	private String dataOrdua;
-
-	public langilea(int langile_kod, int dept_nozenbakia, int soldata, String izena, String abizena, int nagusia,
+	public langilea(int langile_kod, int dept_nozenbakia, double soldata, String izena, String abizena, int nagusia,
 			String ardura, String dataOrdua) {
 		super();
 		this.langile_kod = langile_kod;
@@ -50,9 +41,24 @@ public class langilea {
 		this.dataOrdua = dataOrdua;
 	}
 
-	public langilea(int kodea, int departamentua, Double soldata2, String izena2, String abizena2, int nagusia2,
-			String ardura2, String dataOrdua2) {
-	}
+
+
+	private int langile_kod;
+	private int dept_nozenbakia;
+	private double soldata;
+	private String izena;
+	private String abizena;
+	private int nagusia;
+	private String ardura;
+	private String dataOrdua;
+
+	
+
+	
+
+	
+
+
 
 	public int getLangile_kod() {
 		return langile_kod;
@@ -78,11 +84,11 @@ public class langilea {
 		this.abizena = abizena;
 	}
 
-	public int getSoldata() {
+	public double getSoldata() {
 		return soldata;
 	}
 
-	public void setSoldata(int soldata) {
+	public void setSoldata(double soldata) {
 		this.soldata = soldata;
 	}
 
