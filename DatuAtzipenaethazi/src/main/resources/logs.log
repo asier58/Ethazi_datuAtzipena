@@ -154,6 +154,7 @@
 13/nov/2019 09:00:12,680- Departamentua: Departamentu Pantailan sartu da
 13/nov/2019 09:00:12,687- Enplegatua: Departamentu Pantailan sartu da
 13/nov/2019 09:00:12,779- Nagusia: Programa Hasierati egin da
+<<<<<<< HEAD
 20/nov/2019 16:58:18,623- Menua: Menu Pantailan sartu da
 20/nov/2019 16:58:18,857- Departamentua: Departamentu Pantailan sartu da
 20/nov/2019 16:58:18,863- Enplegatua: Departamentu Pantailan sartu da
@@ -191,3 +192,60 @@
 20/nov/2019 21:36:14,766- Departamentua: Departamentu Pantailan sartu da
 20/nov/2019 21:36:14,782- Enplegatua: Departamentu Pantailan sartu da
 20/nov/2019 21:36:14,860- Nagusia: Programa Hasierati egin da
+=======
+14/nov/2019 08:14:27,375- Menua: Menu Pantailan sartu da
+14/nov/2019 08:14:27,566- Departamentua: Departamentu Pantailan sartu da
+14/nov/2019 08:14:27,606- Enplegatua: Departamentu Pantailan sartu da
+14/nov/2019 08:14:27,800- Nagusia: Programa Hasierati egin da
+14/nov/2019 08:14:51,248- Kontsultak: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+14/nov/2019 08:15:15,377- Kontsultak: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+14/nov/2019 08:39:40,989- Menua: Menu Pantailan sartu da
+14/nov/2019 08:39:41,091- Departamentua: Departamentu Pantailan sartu da
+14/nov/2019 08:39:41,120- Enplegatua: Departamentu Pantailan sartu da
+14/nov/2019 08:39:41,246- Nagusia: Programa Hasierati egin da
+14/nov/2019 08:39:48,824- Kontsultak: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+14/nov/2019 09:11:23,746- Menua: Menu Pantailan sartu da
+14/nov/2019 09:11:23,820- Departamentua: Departamentu Pantailan sartu da
+14/nov/2019 09:11:23,827- Enplegatua: Departamentu Pantailan sartu da
+14/nov/2019 09:11:23,932- Nagusia: Programa Hasierati egin da
+14/nov/2019 09:11:37,390- Kontsultak: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+14/nov/2019 09:11:49,900- Kontsultak: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+14/nov/2019 09:12:11,898- Menua: Menu Pantailan sartu da
+14/nov/2019 09:12:11,965- Departamentua: Departamentu Pantailan sartu da
+14/nov/2019 09:12:11,972- Enplegatua: Departamentu Pantailan sartu da
+14/nov/2019 09:12:12,048- Nagusia: Programa Hasierati egin da
+14/nov/2019 09:12:23,229- Kontsultak: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+14/nov/2019 09:13:11,154- Menua: Menu Pantailan sartu da
+14/nov/2019 09:13:11,228- Departamentua: Departamentu Pantailan sartu da
+14/nov/2019 09:13:11,236- Enplegatua: Departamentu Pantailan sartu da
+14/nov/2019 09:13:11,331- Nagusia: Programa Hasierati egin da
+14/nov/2019 09:13:20,081- Kontsultak: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+14/nov/2019 09:13:39,103- Menua: Menu Pantailan sartu da
+14/nov/2019 09:13:39,167- Departamentua: Departamentu Pantailan sartu da
+14/nov/2019 09:13:39,174- Enplegatua: Departamentu Pantailan sartu da
+14/nov/2019 09:13:39,251- Nagusia: Programa Hasierati egin da
+14/nov/2019 09:13:45,592- Kontsultak: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+14/nov/2019 09:18:40,707- Menua: Menu Pantailan sartu da
+14/nov/2019 09:18:40,782- Departamentua: Departamentu Pantailan sartu da
+14/nov/2019 09:18:40,789- Enplegatua: Departamentu Pantailan sartu da
+14/nov/2019 09:18:40,879- Nagusia: Programa Hasierati egin da
+14/nov/2019 09:18:50,122- Kontsultak: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+>>>>>>> branch 'Aitor' of https://github.com/asier58/Ethazi_datuAtzipena.git

@@ -57,6 +57,7 @@ public class langTxostena extends JFrame {
 		btnAtzera.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				menukontroladorea.txostenaToEnplegatua();
+				menukontroladorea.langilePantailara();
 			}
 		});
 		btnAtzera.setBounds(103, 500, 89, 23);

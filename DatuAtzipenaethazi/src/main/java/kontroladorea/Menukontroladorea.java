@@ -133,6 +133,7 @@ public class Menukontroladorea {
 //		}
 
 	public void langilePantailara() {
+		langtxostena.setVisible(false);
 		menua.setVisible(false);
 		enplegatua.setVisible(true);
 	}
