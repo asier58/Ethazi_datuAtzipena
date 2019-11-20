@@ -34,7 +34,7 @@ public class Enplegatua extends JFrame {
 	private String formatua;
 	private JComboBox comboBox;
 	public static Logger logger = Logger.getLogger(Enplegatua.class);
-	private JLabel lblNewLabel;
+	public static  JLabel lblNewLabel;
 
 	/**
 	 * Create the frame.
@@ -132,9 +132,15 @@ public class Enplegatua extends JFrame {
 		this.menukontroladorea = menukontroladorea;
 	}
 
+	
 	public void erroreaAtera() {
+		lblNewLabel.setText("Fitxategia ez da existitzen");
 		lblNewLabel.setVisible(true);
 
+	}
+	public static void txertatuErrorea() {
+		lblNewLabel.setText("Badaude Parametroak txertatu barik");
+		lblNewLabel.setVisible(true);
 	}
 
 }

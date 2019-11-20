@@ -18,6 +18,8 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.pattern.LogEvent;
 
 import kontroladorea.Menukontroladorea;
+import lehioa.Departamentua;
+import lehioa.Enplegatua;
 
 public class Kontsultak {
 	public static Logger logger = Logger.getLogger(Kontsultak.class);
@@ -92,8 +94,8 @@ public class Kontsultak {
 
 				int sartuTaulara = preparedStatement.executeUpdate();
 			} catch (Exception e) {
-				System.out.println(e.getMessage());
-				System.out.println("jajanotira");
+				logger.error(e.getMessage());
+				Departamentua.txertatuErrorea();
 			}
 		}
 		try {
@@ -136,10 +138,12 @@ public class Kontsultak {
 		} catch (SQLException n) {
 			System.out.println(n.getMessage());
 			logger.error(n.getErrorCode());
+			Enplegatua.txertatuErrorea();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			System.out.println(e.getCause());
 			logger.error(e.getMessage());
+			Enplegatua.txertatuErrorea();
 		}
 		try {
 			conexion.close();
