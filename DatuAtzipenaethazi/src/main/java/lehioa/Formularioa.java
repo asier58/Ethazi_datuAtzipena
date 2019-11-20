@@ -324,6 +324,12 @@ public class Formularioa extends JFrame {
 
 		btnAtzera = new JButton("ATZERA");
 		btnAtzera.setBounds(137, 303, 89, 23);
+		btnAtzera.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				menukontroladorea.formularioToEnplegatua();
+
+			}
+		});
 		contentPane.add(btnAtzera);
 		
 		

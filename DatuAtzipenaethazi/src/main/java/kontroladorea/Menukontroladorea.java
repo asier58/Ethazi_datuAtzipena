@@ -127,10 +127,10 @@ public class Menukontroladorea {
 			enplegatua.setVisible(false);
 			langtxostena.setVisible(true);
 		}
-		public void langiletikDepartamentura() {
-			langtxostena.setVisible(false);
-			departamentua.setVisible(true);
-		}
+//		public void langiletikDepartamentura() {
+//			langtxostena.setVisible(false);
+//			departamentua.setVisible(true);
+//		}
 
 	public void langilePantailara() {
 		menua.setVisible(false);
@@ -286,6 +286,16 @@ public class Menukontroladorea {
 			formularioa2.ezdago();
 			logger.error("Elementua ez da existitzen.");}
 		
+	}
+	
+	public void formularioToEnplegatua() {
+		formularioa.setVisible(false);
+		enplegatua.setVisible(true);
+	}
+	
+	public void txostenaToEnplegatua() {
+		langtxostena.setVisible(false);
+		enplegatua.setVisible(true);
 	}
 	//Amaiera departamentua
 

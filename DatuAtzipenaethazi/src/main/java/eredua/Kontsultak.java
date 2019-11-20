@@ -12,7 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import javax.swing.JOptionPane;
+
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.pattern.LogEvent;
@@ -332,8 +332,6 @@ public class Kontsultak {
 			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			JOptionPane.showMessageDialog(null, e.getMessage(),"InfoBox",
-					JOptionPane.INFORMATION_MESSAGE);
 		}
 		try {
 			conexion.close();
@@ -367,8 +365,6 @@ public class Kontsultak {
 			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			JOptionPane.showMessageDialog(null, e.getMessage(),"InfoBox",
-					JOptionPane.INFORMATION_MESSAGE);
 		}
 		try {
 			conexion.close();
