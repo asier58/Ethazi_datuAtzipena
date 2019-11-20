@@ -15,6 +15,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import eredua.Converter;
+import kontroladorea.Menukontroladorea;
+import lehioa.Departamentua;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -92,42 +94,27 @@ public class departamentua {
 	}
 	
 	
-	public  static void txtKudeatu(String fitxategi, String formatua)  {
+	public  static void jsonKudeatu(String fitxategi, String formatua)  {
 		JSONObject oharrita_mezuak = new JSONObject();
 		JSONObject oharrita = new JSONObject();
 		JSONArray zerrenda_oh = new JSONArray();
 		ArrayList<departamentua> zerrenda =  new ArrayList<departamentua>();
 		departamentua dept =  new departamentua(20, "Diseinu eta 3D modelatua", "5", "Elorrieta");
-		try {
-			oharrita_mezuak.put("dept_no", dept.getDept_no());
-			oharrita_mezuak.put("Izena", dept.getIzena());
-			oharrita_mezuak.put("eraikina", dept.getEraikina());
-			oharrita_mezuak.put("zentroa", dept.getZentroa());
-			oharrita.put("oharrak",oharrita_mezuak);
-			zerrenda_oh.add(oharrita);
-			
-			departamentua dept2 =  new departamentua(21, "Excel Master and Commander", "2", "Errekamari");
-			
-			oharrita_mezuak.put("dept_no", dept2.getDept_no());
-			oharrita_mezuak.put("Izena", dept2.getIzena());
-			oharrita_mezuak.put("eraikina", dept2.getEraikina());
-			oharrita_mezuak.put("zentroa", dept2.getZentroa());
-			oharrita.put("oharrak",oharrita_mezuak);
-			zerrenda_oh.add(oharrita);
-			try {
-				PrintWriter pw = new PrintWriter("departamentua.json");
-				pw.write(zerrenda_oh.toJSONString());
-				pw.flush();
-				pw.close();
-				
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}catch(Exception e) {
-			
-		}
+	
+		JSONParser jsonParser = new JSONParser();
 		
+		try {
+			FileReader reader = new FileReader(fitxategi+formatua);
+			Object obj = jsonParser.parse(reader);
+			JSONArray employeeList = (JSONArray) obj;
+			employeeList.forEach(emp ->  parseDepObject((JSONObject) emp));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 		
 //		String kk =  System.getProperty("line.separator");
 //		File archivo = new File (fitxategi+formatua);
@@ -224,6 +211,26 @@ public class departamentua {
 //		Kontsultak.datuakSartu1(zerrenda);
 //		Converter con =  new Converter();
 //	    con.convertToXML("enplegatua.csv", "enplegatua.xml");
+	}
+	
+	
+	private static void  parseDepObject(JSONObject employee) {
+		JSONObject oharraObject = (JSONObject) employee.get("departamentua");
+
+		long dept_no =  (long) oharraObject.get("dept_no");
+		int departament = Math.toIntExact(dept_no);
+		String Izena = (String) oharraObject.get("Izena");
+		String eraikina = (String) oharraObject.get("eraikina");
+		String zentroa = (String) oharraObject.get("zentroa");
+
+		departamentua dept =  new departamentua(departament,Izena,eraikina,zentroa);
+		int zenbakia = Kontsultak.sartuDepartamentua(dept);
+		if(zenbakia==0){
+			Departamentua.txertatuErrorea();
+		}
+		
+		
+		
 	}
 	private static String ateraDatua(String linea) {
 		String hitza = "";

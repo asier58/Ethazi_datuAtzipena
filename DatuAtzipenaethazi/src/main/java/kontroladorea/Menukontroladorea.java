@@ -177,7 +177,7 @@ public class Menukontroladorea {
 		else {
 
 			if (formatua.equalsIgnoreCase(".Json")) {
-				eredua.departamentua.txtKudeatu(fitxategi, formatua);
+				eredua.departamentua.jsonKudeatu(fitxategi, formatua);
 			}
 
 			if (formatua.equalsIgnoreCase(".xml")) {
@@ -199,8 +199,8 @@ public class Menukontroladorea {
 
 		else {
 
-			if (formatua.equalsIgnoreCase(".txt")) {
-				eredua.langilea.txtKudeatu2(fitxategi, formatua);
+			if (formatua.equalsIgnoreCase(".Json")) {
+				eredua.langilea.jsonKudeatu2(fitxategi, formatua);
 			}
 
 			
@@ -288,5 +288,19 @@ public class Menukontroladorea {
 		
 	}
 	//Amaiera departamentua
+	public  void departamentuKontrolerrorea() {
+		departamentua.txertatuErrorea();
+	}
+
+	public void formularioToenplegatua() {
+		formularioa.setVisible(false);
+		enplegatua.setVisible(true);
+	}
+
+	public void txostenaTOenplegatua() {
+		langtxostena.setVisible(false);
+		enplegatua.setVisible(true);
+		
+	}
 
 }

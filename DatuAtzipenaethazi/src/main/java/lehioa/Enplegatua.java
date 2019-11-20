@@ -115,7 +115,7 @@ public class Enplegatua extends JFrame {
 
 		fitxategiMota.add(".Csv");
 		fitxategiMota.add(".Xml");
-		fitxategiMota.add(".Txt");
+		fitxategiMota.add(".Json");
 		int cont = 0;
 		for (int i = 0; i < fitxategiMota.size(); i++) {
 			if (cont == 0) {

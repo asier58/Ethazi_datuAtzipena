@@ -36,7 +36,7 @@ public class Departamentua extends JFrame {
 	private JComboBox comboBox  = new JComboBox();
 	public static Logger logger = Logger.getLogger(Departamentua.class);
 
-	private JLabel lblNewLabel;
+	private static JLabel lblNewLabel;
 
 	/**
 	 * Launch the application.
@@ -147,7 +147,12 @@ public class Departamentua extends JFrame {
 	}
 
 	public void erroreaAtera() {
+		lblNewLabel.setText("Fitxategia ez da existitzen");
 		lblNewLabel.setVisible(true);
 
+	}
+	public static void txertatuErrorea() {
+		lblNewLabel.setText("Badaude Parametroak txertatu barik");
+		lblNewLabel.setVisible(true);
 	}
 }
