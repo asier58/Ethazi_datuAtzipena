@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 import org.apache.log4j.Logger;
+import org.json.JSONException;
 
 import eredua.Kontsultak;
 import eredua.departamentua;
@@ -166,7 +167,7 @@ public class Menukontroladorea {
 		return Kontsultak.ateraLangile_Kod();
 	}
 
-	public void parametroakHartu(String fitxategi, String formatua) {
+	public void parametroakHartu(String fitxategi, String formatua)  {
 		File fitx = new File(fitxategi + formatua);
 		if (!fitx.exists()) {
 			logger.error("Fitxategia ez da existitzen");
@@ -175,7 +176,7 @@ public class Menukontroladorea {
 
 		else {
 
-			if (formatua.equalsIgnoreCase(".txt")) {
+			if (formatua.equalsIgnoreCase(".Json")) {
 				eredua.departamentua.txtKudeatu(fitxategi, formatua);
 			}
 

@@ -42,7 +42,7 @@ public class Formularioa2 extends JFrame {
 
 	public Formularioa2() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 376);
+		setBounds(100, 100, 616, 410);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -58,12 +58,12 @@ public class Formularioa2 extends JFrame {
 				}
 			}
 		});
-		textField_depKod.setBounds(144, 11, 181, 20);
+		textField_depKod.setBounds(160, 11, 181, 20);
 		contentPane.add(textField_depKod);
 		textField_depKod.setColumns(10);
 		
 		lblLangKod = new JLabel("Departamentu Zenbakia:");
-		lblLangKod.setBounds(10, 11, 124, 20);
+		lblLangKod.setBounds(10, 11, 140, 20);
 		contentPane.add(lblLangKod);
 		
 		lblIzena = new JLabel("Izena:");
@@ -80,7 +80,7 @@ public class Formularioa2 extends JFrame {
 				
 			}
 		});
-		textField_izena.setBounds(144, 42, 181, 20);
+		textField_izena.setBounds(160, 42, 181, 20);
 		contentPane.add(textField_izena);
 		textField_izena.setColumns(10);
 		
@@ -98,7 +98,7 @@ public class Formularioa2 extends JFrame {
 				}
 			}
 		});
-		textField_eraikina.setBounds(144, 81, 181, 20);
+		textField_eraikina.setBounds(160, 81, 181, 20);
 		contentPane.add(textField_eraikina);
 		textField_eraikina.setColumns(10);
 		
@@ -220,7 +220,7 @@ public class Formularioa2 extends JFrame {
 				zentroa = (String) comboBox_1.getSelectedItem();
 			}
 		});
-		comboBox_1.setBounds(144, 119, 124, 20);
+		comboBox_1.setBounds(160, 119, 124, 20);
 		contentPane.add(comboBox_1);
 		comboBox_1.addItem("");
 		comboBox_1.addItem("Elorrieta");

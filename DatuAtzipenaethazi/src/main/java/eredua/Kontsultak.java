@@ -15,6 +15,7 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 
 import org.apache.log4j.Logger;
+import org.apache.log4j.pattern.LogEvent;
 
 import kontroladorea.Menukontroladorea;
 
@@ -59,6 +60,12 @@ public class Kontsultak {
 			}
 
 		}
+		try {
+			conexion.close();
+		}catch(SQLException SQ) {
+			logger.error(SQ.getMessage());
+		}
+		
 	}
 
 	public static void datuakSartu1(ArrayList<departamentua> zerrenda) {
@@ -88,6 +95,11 @@ public class Kontsultak {
 				System.out.println(e.getMessage());
 				System.out.println("jajanotira");
 			}
+		}
+		try {
+			conexion.close();
+		}catch(SQLException SQ) {
+			logger.error(SQ.getMessage());
 		}
 	}
 
@@ -129,7 +141,11 @@ public class Kontsultak {
 			System.out.println(e.getCause());
 			logger.error(e.getMessage());
 		}
-
+		try {
+			conexion.close();
+		}catch(SQLException SQ) {
+			logger.error(SQ.getMessage());
+		}
 		return sartuTaulara;
 		
 		
@@ -166,6 +182,11 @@ public class Kontsultak {
 			System.out.println(e.getMessage());
 			System.out.println("jajanotira");
 		}
+		try {
+			conexion.close();
+		}catch(SQLException SQ) {
+			logger.error(SQ.getMessage());
+		}
 	}
 
 	public static void datuakBerritu1(langilea l1) { // Enplegatuen datuak berritzeko.
@@ -199,6 +220,12 @@ public class Kontsultak {
 			System.out.println(e.getMessage());
 			logger.error(e.getMessage());
 		}
+		
+		try {
+			conexion.close();
+		}catch(SQLException SQ) {
+			logger.error(SQ.getMessage());
+		}
 	}
 
 	// Departamentuko datuak hutsik sartzeko. Berritzen dugu 0ak edo espazio hutsak
@@ -229,6 +256,11 @@ public class Kontsultak {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			System.out.println("jajanotira");
+		}
+		try {
+			conexion.close();
+		}catch(SQLException SQ) {
+			logger.error(SQ.getMessage());
 		}
 	}
 
@@ -264,6 +296,11 @@ public class Kontsultak {
 			System.out.println(e.getMessage());
 			logger.error(e.getMessage());
 		}
+		try {
+			conexion.close();
+		}catch(SQLException SQ) {
+			logger.error(SQ.getMessage());
+		}
 	}
 
 	/**
@@ -298,7 +335,11 @@ public class Kontsultak {
 			JOptionPane.showMessageDialog(null, e.getMessage(),"InfoBox",
 					JOptionPane.INFORMATION_MESSAGE);
 		}
-		
+		try {
+			conexion.close();
+		}catch(SQLException SQ) {
+			logger.error(SQ.getMessage());
+		}
 		return arduraArr;
 	}
 
@@ -329,7 +370,11 @@ public class Kontsultak {
 			JOptionPane.showMessageDialog(null, e.getMessage(),"InfoBox",
 					JOptionPane.INFORMATION_MESSAGE);
 		}
-		
+		try {
+			conexion.close();
+		}catch(SQLException SQ) {
+			logger.error(SQ.getMessage());
+		}
 		return arduraArr;
 	}
 	/**
@@ -354,6 +399,11 @@ public class Kontsultak {
 			int id = resultSet.getInt("Kodea");
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
+		}
+		try {
+			conexion.close();
+		}catch(SQLException SQ) {
+			logger.error(SQ.getMessage());
 		}
 	}
 
@@ -384,6 +434,7 @@ public class Kontsultak {
 				zerrenda.add(Departamentua);
 
 			}
+			
 
 		}
 
@@ -392,7 +443,11 @@ public class Kontsultak {
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
-
+		try {
+			conexion.close();
+		}catch(SQLException SQ) {
+			logger.error(SQ.getMessage());
+		}
 		return zerrenda;
 	}
 
@@ -424,15 +479,29 @@ public class Kontsultak {
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
-
+		try {
+			conexion.close();
+		}catch(SQLException SQ) {
+			logger.error(SQ.getMessage());
+		}
 		return zenbakia;
 
 	}
 
 	public static int sartuDepartamentua(departamentua Dept) {
 		int zenbakia = 0;
+		ArrayList<String> departamentuak =  new ArrayList<String>();
+		departamentuak = departamentuZerrenda();
+		boolean existituta = false;
+		for(int i=0;i<departamentuak.size();i++) {
+			if (Dept.getIzena().equalsIgnoreCase(departamentuak.get(i))) {
+				existituta = true;
+				break;
+			}
+		}
 		Connection conexion = null;
 		Statement s = null;
+		if(existituta==false) {
 		try {
 
 			// Cargar el driver
@@ -456,10 +525,56 @@ public class Kontsultak {
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
+		
+		try {
+			conexion.close();
+		}catch(SQLException SQ) {
+			logger.error(SQ.getMessage());
+		}}
+		else {
+			zenbakia=0;
+		}
 
 		return zenbakia;
 
 	}
+	
+	private static ArrayList<String> departamentuZerrenda() {
+		ArrayList<String> izenak = new ArrayList<String>();
+		Connection conexion = null;
+		Statement s = null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conexion = DriverManager.getConnection("jdbc:mysql://localhost/mydb", "root", "");
+			s = (Statement) conexion.createStatement();
+
+			String sql = ("SELECT Izena FROM departamentua" );
+
+			Statement statement = conexion.createStatement();
+			ResultSet result = statement.executeQuery(sql);
+
+			while (result.next()) {
+				String hitza = result.getString(1);
+				izenak.add(hitza);
+				
+				
+				
+			}
+
+		} catch (SQLException I) {
+			logger.error(I.getMessage());
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		try {
+			conexion.close();
+		}catch(SQLException SQ) {
+			logger.error(SQ.getMessage());
+		}
+		return izenak;
+	}
+
+	
 
 	public static boolean depart_state(departamentua Dept) {
 		boolean existitu = false;
@@ -489,6 +604,11 @@ public class Kontsultak {
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
+		try {
+			conexion.close();
+		}catch(SQLException SQ) {
+			logger.error(SQ.getMessage());
+		}
 
 		return existitu;
 	}
@@ -514,6 +634,11 @@ public class Kontsultak {
 			logger.error(I.getMessage());
 		} catch (Exception e) {
 			logger.error(e.getMessage());
+		}
+		try {
+			conexion.close();
+		}catch(SQLException SQ) {
+			logger.error(SQ.getMessage());
 		}
 
 		return zenbakia;
@@ -546,7 +671,11 @@ public class Kontsultak {
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
-
+		try {
+			conexion.close();
+		}catch(SQLException SQ) {
+			logger.error(SQ.getMessage());
+		}
 		return zenbakia;
 	}
 	// Departamentu Amaiera
@@ -581,7 +710,12 @@ public class Kontsultak {
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
-
+		try {
+			conexion.close();
+		}catch(SQLException SQ) {
+			logger.error(SQ.getMessage());
+		}
+		
 		return zenbakia;
 
 	}
@@ -615,7 +749,11 @@ public class Kontsultak {
 			logger.error(e.getMessage());
 			System.out.println(e.getMessage());
 		}
-
+		try {
+			conexion.close();
+		}catch(SQLException SQ) {
+			logger.error(SQ.getMessage());
+		}
 		return zenbakia;
 
 	}
@@ -646,7 +784,12 @@ public class Kontsultak {
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
-
+		
+		try {
+			conexion.close();
+		}catch(SQLException SQ) {
+			logger.error(SQ.getMessage());
+		}
 		return existitu;
 	}
 
@@ -672,6 +815,12 @@ public class Kontsultak {
 			logger.error(I.getMessage());
 		} catch (Exception e) {
 			logger.error(e.getMessage());
+		}
+		
+		try {
+			conexion.close();
+		}catch(SQLException SQ) {
+			logger.error(SQ.getMessage());
 		}
 
 		return zenbakia;
@@ -711,7 +860,12 @@ public class Kontsultak {
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
-
+		
+		try {
+			conexion.close();
+		}catch(SQLException SQ) {
+			logger.error(SQ.getMessage());
+		}
 		return zenbakia;
 	}
 
@@ -764,7 +918,12 @@ public class Kontsultak {
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
-
+		try {
+			conexion.close();
+		}catch(SQLException SQ) {
+			logger.error(SQ.getMessage());
+		}
+		
 		return zerrenda;
 	}
 
@@ -787,6 +946,11 @@ public class Kontsultak {
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
+		}
+		try {
+			conexion.close();
+		}catch(SQLException SQ) {
+			logger.error(SQ.getMessage());
 		}
 	}
 	
@@ -819,6 +983,12 @@ public class Kontsultak {
 			logger.error(I.getMessage());
 		} catch (Exception e) {
 			logger.error(e.getMessage());
+		}
+		
+		try {
+			conexion.close();
+		}catch(SQLException SQ) {
+			logger.error(SQ.getMessage());
 		}
 
 		return langileKodArrayList;
