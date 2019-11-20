@@ -20,6 +20,8 @@ import org.apache.log4j.pattern.LogEvent;
 import kontroladorea.Menukontroladorea;
 import lehioa.Departamentua;
 import lehioa.Enplegatua;
+import lehioa.Formularioa;
+import lehioa.Formularioa2;
 
 public class Kontsultak {
 	public static Logger logger = Logger.getLogger(Kontsultak.class);
@@ -134,6 +136,7 @@ public class Kontsultak {
 			preparedStatement.setString(8, l1.getDataOrdua());
 
 			sartuTaulara = preparedStatement.executeUpdate();
+			Formularioa.operazioa();
 
 		} catch (SQLException n) {
 			System.out.println(n.getMessage());
@@ -223,6 +226,7 @@ public class Kontsultak {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			logger.error(e.getMessage());
+			Formularioa.txertatuErrorea();
 		}
 		
 		try {
@@ -336,8 +340,8 @@ public class Kontsultak {
 			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			JOptionPane.showMessageDialog(null, e.getMessage(),"InfoBox",
-					JOptionPane.INFORMATION_MESSAGE);
+//			JOptionPane.showMessageDialog(null, e.getMessage(),"InfoBox",
+//					JOptionPane.INFORMATION_MESSAGE);
 		}
 		try {
 			conexion.close();
@@ -371,8 +375,8 @@ public class Kontsultak {
 			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			JOptionPane.showMessageDialog(null, e.getMessage(),"InfoBox",
-					JOptionPane.INFORMATION_MESSAGE);
+//			JOptionPane.showMessageDialog(null, e.getMessage(),"InfoBox",
+//					JOptionPane.INFORMATION_MESSAGE);
 		}
 		try {
 			conexion.close();
@@ -817,8 +821,10 @@ public class Kontsultak {
 
 		} catch (SQLException I) {
 			logger.error(I.getMessage());
+			Formularioa.ezabatuLangile();
 		} catch (Exception e) {
 			logger.error(e.getMessage());
+			Formularioa.ezabatuLangile();
 		}
 		
 		try {
@@ -943,6 +949,7 @@ public class Kontsultak {
 			String sql = "SELECT langile_kod FROM enplegatua WHERE langile_kod = '" + kod + "'";
 
 			PreparedStatement preparedStatement = conexion.prepareStatement(sql);
+			
 
 			ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -1000,4 +1007,107 @@ public class Kontsultak {
 
 	// **Enplegatu Amaiera
 	// ****
+	public static int departamentuBurua(langilea lang) {
+		int zenbakia = 0;
+		Connection conexion = null;
+		Statement s = null;
+
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conexion = DriverManager.getConnection("jdbc:mysql://localhost/mydb", "root", "");
+			s = (Statement) conexion.createStatement();
+
+			String sql = "SELECT Ardura FROM enplegatua WHERE Departamentua_dept_no = ? And Ardura LIKE ?";
+
+			PreparedStatement preparedStatement = conexion.prepareStatement(sql);
+			preparedStatement.setInt(1, lang.getDept_nozenbakia());
+			preparedStatement.setString(2, "Ikasketa burua");
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				zenbakia++;
+			}
+		}
+		catch (SQLException I) {
+			logger.error(I.getMessage());
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		try {
+			conexion.close();
+		}catch(SQLException SQ) {
+			logger.error(SQ.getMessage());
+		}
+		return zenbakia;
+	}
+
+	public static int zuzendari(langilea l1) {
+		int zenbakia = 0;
+		Connection conexion = null;
+		Statement s = null;
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conexion = DriverManager.getConnection("jdbc:mysql://localhost/mydb", "root", "");
+			s = (Statement) conexion.createStatement();
+
+			String sql = "SELECT * FROM departamentua WHERE dept_no = ? ";
+
+			PreparedStatement preparedStatement = conexion.prepareStatement(sql);
+			preparedStatement.setInt(1, l1.getDept_nozenbakia());
+			
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				zenbakia++;
+			}
+		}
+		catch (SQLException I) {
+			logger.error(I.getMessage());
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		try {
+			conexion.close();
+		}catch(SQLException SQ) {
+			logger.error(SQ.getMessage());
+		}
+		return zenbakia;
+	
+		
+	}
+
+	public static int zuzendariakAtera(langilea l1) {
+		int zenbakia = 0;
+		Connection conexion = null;
+		Statement s = null;
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conexion = DriverManager.getConnection("jdbc:mysql://localhost/mydb", "root", "");
+			s = (Statement) conexion.createStatement();
+
+			String sql = "SELECT * FROM enplegatua WHERE Ardura = ? ";
+
+			PreparedStatement preparedStatement = conexion.prepareStatement(sql);
+			preparedStatement.setString(1, l1.getArdura());
+			
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				zenbakia++;
+			}
+		}
+		catch (SQLException I) {
+			logger.error(I.getMessage());
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		try {
+			conexion.close();
+		}catch(SQLException SQ) {
+			logger.error(SQ.getMessage());
+		}
+		return zenbakia;
+	
+		
+		
+	}
 }

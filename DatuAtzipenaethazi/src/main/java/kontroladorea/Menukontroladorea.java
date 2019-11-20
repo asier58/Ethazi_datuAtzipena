@@ -64,8 +64,40 @@ public class Menukontroladorea {
 	
 	
 	public void getData(langilea l1) {
-		Kontsultak.datuakSartu2(l1);
-		logger.info("Elementu bat sartu egin da: " + l1.getIzena());
+		//Kontsultak.datuakSartu2(l1);
+		int departamentuaExistituta=0;
+		departamentuaExistituta = Kontsultak.zuzendari(l1);
+		if(departamentuaExistituta >0) {
+		if(l1.getArdura().equalsIgnoreCase("zuzendari")) {
+			int zenbakia = Kontsultak.zuzendariakAtera(l1);
+			if(zenbakia==2) {
+				formularioa.txertatuErrorea();
+			}
+			else {
+				Kontsultak.datuakSartu2(l1);
+				formularioa.operazioa();
+			}
+		}
+		else {
+		if(l1.getArdura().equalsIgnoreCase("Ikasketa burua")) {
+		int zenbakia = Kontsultak.departamentuBurua(l1);
+		if(zenbakia>0) {
+			formularioa.txertatuErrorea();
+		}
+		else {
+			formularioa.operazioa();
+			Kontsultak.datuakSartu2(l1);
+			logger.info("Elementu bat sartu egin da: " + l1.getIzena());
+		}}
+		else {
+			Kontsultak.datuakSartu2(l1);
+		}
+			}
+		}
+		else {
+			formularioa.departamentuaEzdaexistitzen();
+		}
+		
 	}
 	
 	public void getLangileKodKontr(ArrayList<langilea> zerrenda, int kod) {
@@ -300,6 +332,10 @@ public class Menukontroladorea {
 	public void txostenaTOenplegatua() {
 		langtxostena.setVisible(false);
 		enplegatua.setVisible(true);
+		
+	}
+	public Boolean zuzendariZentroa(langilea lang) {
+		return null;
 		
 	}
 

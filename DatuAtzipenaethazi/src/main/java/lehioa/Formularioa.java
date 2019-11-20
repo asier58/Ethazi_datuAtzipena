@@ -52,6 +52,7 @@ public class Formularioa extends JFrame {
 	private int cont = 0;	
 	private JComboBox comboBox_ardura;
 	private JComboBox comboBox_kodea;
+	public static JLabel lblNewLabel;
 	
 	ArrayList<langilea> langileArr = new ArrayList<langilea>();
 	langilea l1;
@@ -267,8 +268,10 @@ public class Formularioa extends JFrame {
 				DateFormat hourdateFormat = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
 				if (menukontroladorea.getArduraZuz(l1).equals("Zuzendari")) {
 					logger.info("Ardura hori badago artuta.");
+					lblNewLabel.setText("Ardura hori badago artuta.");
 				} else if (menukontroladorea.getArduraIB(l1).equals("Ikasketa Burua")) {
 					logger.info("Ardura hori badago artuta.");
+					lblNewLabel.setText("Ardura hori badago artuta.");
 				} else {
 					if (comboBox_aukera.getSelectedItem().equals("Txertatu")) {
 						int langKod = menukontroladorea.maxEmpleKod();
@@ -276,7 +279,7 @@ public class Formularioa extends JFrame {
 						int dept_noZenbkia = Integer.parseInt(textField_deptKod.getText());
 						int nagusia = Integer.parseInt(textField_nagusia.getText());
 						l1 = new langilea(langKod, dept_noZenbkia, soldata, textField_izena.getText(),
-								textField_abizena.getText(), nagusia, (String) comboBox_aukera.getSelectedItem(),
+								textField_abizena.getText(), nagusia, (String) comboBox_ardura.getSelectedItem(),
 								ordua + ", " + data);
 
 						menukontroladorea.getData(l1);
@@ -333,6 +336,11 @@ public class Formularioa extends JFrame {
 		btnAtzera.setBounds(137, 303, 89, 23);
 		contentPane.add(btnAtzera);
 		
+		 lblNewLabel = new JLabel("");
+		lblNewLabel.setBounds(149, 268, 388, 14);
+		contentPane.add(lblNewLabel);
+		lblNewLabel.setText("");
+		
 		
 
 	}
@@ -354,5 +362,25 @@ public class Formularioa extends JFrame {
 
 	public void nireMenukontroladorea(Menukontroladorea menukontroladorea) {
 		this.menukontroladorea = menukontroladorea;
+	}
+	public static void operazioa() {
+		lblNewLabel.setVisible(true);
+		lblNewLabel.setText("Langile operazioa ondo atera da.");
+		
+	}
+	public static void txertatuErrorea() {
+		lblNewLabel.setVisible(true);
+		lblNewLabel.setText("Langile ezin izan da txertatu edo aldatu, kontsultatu log.");
+		
+	}
+	public static void ezabatuLangile() {
+		lblNewLabel.setVisible(true);
+		lblNewLabel.setText("Langile ezin izan da ezabatu edo aldatu, kontsultatu log.");
+		
+	}
+	public void departamentuaEzdaexistitzen() {
+		lblNewLabel.setVisible(true);
+		lblNewLabel.setText("Departmentua ez da existitzen");
+		
 	}
 }
