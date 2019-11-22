@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import org.apache.log4j.Logger;
+import org.json.JSONException;
 
 import eredua.departamentua;
 import kontroladorea.Menukontroladorea;
@@ -32,10 +33,10 @@ public class Departamentua extends JFrame {
 	private JTextField textField;
 	private String fitxategi;
 	private String formatua;
-	private JComboBox comboBox;
+	private JComboBox comboBox  = new JComboBox();
 	public static Logger logger = Logger.getLogger(Departamentua.class);
 
-	private JLabel lblNewLabel;
+	private static JLabel lblNewLabel;
 
 	/**
 	 * Launch the application.
@@ -100,9 +101,9 @@ public class Departamentua extends JFrame {
 		contentPane.add(textField);
 		textField.setColumns(10);
 
-		JComboBox comboBox = new JComboBox();
+		
 
-		comboBox = new JComboBox();
+		
 
 		comboBox.setBounds(289, 278, 86, 20);
 		contentPane.add(comboBox);
@@ -128,7 +129,7 @@ public class Departamentua extends JFrame {
 
 		fitxategiMota.add(".Csv");
 		fitxategiMota.add(".Xml");
-		fitxategiMota.add(".Txt");
+		fitxategiMota.add(".Json");
 		int cont = 0;
 		for (int i = 0; i < fitxategiMota.size(); i++) {
 			if (cont == 0) {
@@ -146,7 +147,12 @@ public class Departamentua extends JFrame {
 	}
 
 	public void erroreaAtera() {
+		lblNewLabel.setText("Fitxategia ez da existitzen");
 		lblNewLabel.setVisible(true);
 
+	}
+	public static void txertatuErrorea() {
+		lblNewLabel.setText("Badaude Parametroak txertatu barik");
+		lblNewLabel.setVisible(true);
 	}
 }

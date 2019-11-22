@@ -1,18 +1,22 @@
 package eredua;
 
 import java.io.BufferedReader;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import eredua.Converter;
+import kontroladorea.Menukontroladorea;
+import lehioa.Departamentua;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -24,12 +28,22 @@ import javax.xml.transform.stream.StreamResult;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import org.json.JSONException;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-
+import java.util.List;
 
 
 public class departamentua {
@@ -80,102 +94,143 @@ public class departamentua {
 	}
 	
 	
-	public  static void txtKudeatu(String fitxategi, String formatua) {
-		String kk =  System.getProperty("line.separator");
-		File archivo = new File (fitxategi+formatua);
-		FileReader fr = null;
+	public  static void jsonKudeatu(String fitxategi, String formatua)  {
+		JSONObject oharrita_mezuak = new JSONObject();
+		JSONObject oharrita = new JSONObject();
+		JSONArray zerrenda_oh = new JSONArray();
+		ArrayList<departamentua> zerrenda =  new ArrayList<departamentua>();
+		departamentua dept =  new departamentua(20, "Diseinu eta 3D modelatua", "5", "Elorrieta");
+	
+		JSONParser jsonParser = new JSONParser();
+		
 		try {
-			fr = new FileReader (archivo);
-		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			FileReader reader = new FileReader(fitxategi+formatua);
+			Object obj = jsonParser.parse(reader);
+			JSONArray employeeList = (JSONArray) obj;
+			employeeList.forEach(emp ->  parseDepObject((JSONObject) emp));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			e.printStackTrace();
 		}
-        BufferedReader br = new BufferedReader(fr);
-		ArrayList<departamentua> zerrenda = new ArrayList<departamentua>();
-		try {
-	       
-			int zentro_deptno=0;
-			String zentro_izena="";
-			String zentro="";
-			String zentro_eraikina="";
+		
+//		String kk =  System.getProperty("line.separator");
+//		File archivo = new File (fitxategi+formatua);
+//		FileReader fr = null;
+//		try {
+//			fr = new FileReader (archivo);
+//		} catch (FileNotFoundException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
+//        BufferedReader br = new BufferedReader(fr);
+//		ArrayList<departamentua> zerrenda = new ArrayList<departamentua>();
+//		try {
+//	       
+//			int zentro_deptno=0;
+//			String zentro_izena="";
+//			String zentro="";
+//			String zentro_eraikina="";
+//
+//	         // Lectura del fichero
+//	         String linea;
+//	         int kontagailua = 0;
+//	         while((linea=br.readLine())!=null) {
+//	        	 kontagailua+=1;
+//	        	 switch (kontagailua) {
+//	        	   case 1:
+//	        		   zentro_deptno = Integer.parseInt(ateraDatua(linea));
+//	        		   System.out.println(zentro_deptno);
+//	        		 break;
+//	        	   case 2:
+//	        		   zentro_izena = ateraDatua(linea);
+//	        	     System.out.println(zentro);
+//	        	     break;
+//	        	   case 3:
+//	        		   zentro_eraikina = ateraDatua(linea);
+//	        	     System.out.println(zentro_eraikina);
+//	        	     break;
+//	        	   case 4:
+//	        		   zentro = ateraDatua(linea);
+//	        	     System.out.println(zentro);
+//	        	     break;
+//	        	   case 5:
+//	        		   departamentua dep = new departamentua(zentro_deptno,zentro_izena,zentro_eraikina,zentro);
+//	        		   zerrenda.add(dep);
+//	        		   //idatxi(dep);
+////	        		   idatxiXML(dep);
+//	        	     break;
+//	        	  
+//	        	   
+//	        	 }	
+//	        	 
+//	        	 
+//	        	 
+//	        	 if(kontagailua ==5) {
+//	        		 kontagailua=0;
+//	        	 }
+//	        	 
+//	        	 
+//	        	 
+//	        	 
+//	        	 
+//	        	 
+//	        	 
+//	        	 
+//	        	 
+//	        	 
+//	        	 
+//	        	 
+//	        	 
+//	        	 
+//	        	 
+//	        	 
+//	        	 
+//	           
+//	         }
+//	      }
+//	      catch(IOException e){
+//	         e.printStackTrace();
+//	      }finally{
+//	         // En el finally cerramos el fichero, para asegurarnos
+//	         // que se cierra tanto si todo va bien como si salta 
+//	         // una excepcion.
+//	         try{                    
+//	            if( null != fr ){   
+//	               fr.close();  
+//	   
+//	               
+//	            }                  
+//	         }catch (Exception e2){ 
+//	            e2.printStackTrace();
+//	         }
+//	      }
+//
+//		Kontsultak.datuakSartu1(zerrenda);
+//		Converter con =  new Converter();
+//	    con.convertToXML("enplegatua.csv", "enplegatua.xml");
+	}
+	
+	
+	private static void  parseDepObject(JSONObject employee) {
+		JSONObject oharraObject = (JSONObject) employee.get("departamentua");
 
-	         // Lectura del fichero
-	         String linea;
-	         int kontagailua = 0;
-	         while((linea=br.readLine())!=null) {
-	        	 kontagailua+=1;
-	        	 switch (kontagailua) {
-	        	   case 1:
-	        		   zentro_deptno = Integer.parseInt(ateraDatua(linea));
-	        		   System.out.println(zentro_deptno);
-	        		 break;
-	        	   case 2:
-	        		   zentro_izena = ateraDatua(linea);
-	        	     System.out.println(zentro);
-	        	     break;
-	        	   case 3:
-	        		   zentro_eraikina = ateraDatua(linea);
-	        	     System.out.println(zentro_eraikina);
-	        	     break;
-	        	   case 4:
-	        		   zentro = ateraDatua(linea);
-	        	     System.out.println(zentro);
-	        	     break;
-	        	   case 5:
-	        		   departamentua dep = new departamentua(zentro_deptno,zentro_izena,zentro_eraikina,zentro);
-	        		   zerrenda.add(dep);
-	        		   //idatxi(dep);
-//	        		   idatxiXML(dep);
-	        	     break;
-	        	  
-	        	   
-	        	 }	
-	        	 
-	        	 
-	        	 
-	        	 if(kontagailua ==5) {
-	        		 kontagailua=0;
-	        	 }
-	        	 
-	        	 
-	        	 
-	        	 
-	        	 
-	        	 
-	        	 
-	        	 
-	        	 
-	        	 
-	        	 
-	        	 
-	        	 
-	        	 
-	        	 
-	        	 
-	        	 
-	           
-	         }
-	      }
-	      catch(IOException e){
-	         e.printStackTrace();
-	      }finally{
-	         // En el finally cerramos el fichero, para asegurarnos
-	         // que se cierra tanto si todo va bien como si salta 
-	         // una excepcion.
-	         try{                    
-	            if( null != fr ){   
-	               fr.close();  
-	   
-	               
-	            }                  
-	         }catch (Exception e2){ 
-	            e2.printStackTrace();
-	         }
-	      }
+		long dept_no =  (long) oharraObject.get("dept_no");
+		int departament = Math.toIntExact(dept_no);
+		String Izena = (String) oharraObject.get("Izena");
+		String eraikina = (String) oharraObject.get("eraikina");
+		String zentroa = (String) oharraObject.get("zentroa");
 
-		Kontsultak.datuakSartu1(zerrenda);
-		Converter con =  new Converter();
-	    con.convertToXML("enplegatua.csv", "enplegatua.xml");
+		departamentua dept =  new departamentua(departament,Izena,eraikina,zentroa);
+		int zenbakia = Kontsultak.sartuDepartamentua(dept);
+		if(zenbakia==0){
+			Departamentua.txertatuErrorea();
+		}
+		
+		
+		
 	}
 	private static String ateraDatua(String linea) {
 		String hitza = "";

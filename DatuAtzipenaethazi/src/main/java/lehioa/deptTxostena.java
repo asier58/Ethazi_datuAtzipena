@@ -28,22 +28,7 @@ public class deptTxostena extends JFrame {
 	private ArrayList<eredua.departamentua> zerrenda =  new ArrayList<eredua.departamentua>();
 	private JTable table;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					deptTxostena frame = new deptTxostena();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
+	
 	/**
 	 * Create the frame.
 	 */

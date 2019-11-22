@@ -15,8 +15,13 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 
 import org.apache.log4j.Logger;
+import org.apache.log4j.pattern.LogEvent;
 
 import kontroladorea.Menukontroladorea;
+import lehioa.Departamentua;
+import lehioa.Enplegatua;
+import lehioa.Formularioa;
+import lehioa.Formularioa2;
 
 public class Kontsultak {
 	public static Logger logger = Logger.getLogger(Kontsultak.class);
@@ -59,6 +64,12 @@ public class Kontsultak {
 			}
 
 		}
+		try {
+			conexion.close();
+		}catch(SQLException SQ) {
+			logger.error(SQ.getMessage());
+		}
+		
 	}
 
 	public static void datuakSartu1(ArrayList<departamentua> zerrenda) {
@@ -85,9 +96,14 @@ public class Kontsultak {
 
 				int sartuTaulara = preparedStatement.executeUpdate();
 			} catch (Exception e) {
-				System.out.println(e.getMessage());
-				System.out.println("jajanotira");
+				logger.error(e.getMessage());
+				Departamentua.txertatuErrorea();
 			}
+		}
+		try {
+			conexion.close();
+		}catch(SQLException SQ) {
+			logger.error(SQ.getMessage());
 		}
 	}
 
@@ -120,16 +136,23 @@ public class Kontsultak {
 			preparedStatement.setString(8, l1.getDataOrdua());
 
 			sartuTaulara = preparedStatement.executeUpdate();
+			Formularioa.operazioa();
 
 		} catch (SQLException n) {
 			System.out.println(n.getMessage());
 			logger.error(n.getErrorCode());
+			Enplegatua.txertatuErrorea();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			System.out.println(e.getCause());
 			logger.error(e.getMessage());
+			Enplegatua.txertatuErrorea();
 		}
-
+		try {
+			conexion.close();
+		}catch(SQLException SQ) {
+			logger.error(SQ.getMessage());
+		}
 		return sartuTaulara;
 		
 		
@@ -166,6 +189,11 @@ public class Kontsultak {
 			System.out.println(e.getMessage());
 			System.out.println("jajanotira");
 		}
+		try {
+			conexion.close();
+		}catch(SQLException SQ) {
+			logger.error(SQ.getMessage());
+		}
 	}
 
 	public static void datuakBerritu1(langilea l1) { // Enplegatuen datuak berritzeko.
@@ -198,6 +226,13 @@ public class Kontsultak {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			logger.error(e.getMessage());
+			Formularioa.txertatuErrorea();
+		}
+		
+		try {
+			conexion.close();
+		}catch(SQLException SQ) {
+			logger.error(SQ.getMessage());
 		}
 	}
 
@@ -229,6 +264,11 @@ public class Kontsultak {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			System.out.println("jajanotira");
+		}
+		try {
+			conexion.close();
+		}catch(SQLException SQ) {
+			logger.error(SQ.getMessage());
 		}
 	}
 
@@ -264,6 +304,11 @@ public class Kontsultak {
 			System.out.println(e.getMessage());
 			logger.error(e.getMessage());
 		}
+		try {
+			conexion.close();
+		}catch(SQLException SQ) {
+			logger.error(SQ.getMessage());
+		}
 	}
 
 	/**
@@ -295,10 +340,14 @@ public class Kontsultak {
 			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			JOptionPane.showMessageDialog(null, e.getMessage(),"InfoBox",
-					JOptionPane.INFORMATION_MESSAGE);
+//			JOptionPane.showMessageDialog(null, e.getMessage(),"InfoBox",
+//					JOptionPane.INFORMATION_MESSAGE);
 		}
-		
+		try {
+			conexion.close();
+		}catch(SQLException SQ) {
+			logger.error(SQ.getMessage());
+		}
 		return arduraArr;
 	}
 
@@ -326,10 +375,14 @@ public class Kontsultak {
 			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			JOptionPane.showMessageDialog(null, e.getMessage(),"InfoBox",
-					JOptionPane.INFORMATION_MESSAGE);
+//			JOptionPane.showMessageDialog(null, e.getMessage(),"InfoBox",
+//					JOptionPane.INFORMATION_MESSAGE);
 		}
-		
+		try {
+			conexion.close();
+		}catch(SQLException SQ) {
+			logger.error(SQ.getMessage());
+		}
 		return arduraArr;
 	}
 	/**
@@ -354,6 +407,11 @@ public class Kontsultak {
 			int id = resultSet.getInt("Kodea");
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
+		}
+		try {
+			conexion.close();
+		}catch(SQLException SQ) {
+			logger.error(SQ.getMessage());
 		}
 	}
 
@@ -384,6 +442,7 @@ public class Kontsultak {
 				zerrenda.add(Departamentua);
 
 			}
+			
 
 		}
 
@@ -392,7 +451,11 @@ public class Kontsultak {
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
-
+		try {
+			conexion.close();
+		}catch(SQLException SQ) {
+			logger.error(SQ.getMessage());
+		}
 		return zerrenda;
 	}
 
@@ -424,15 +487,29 @@ public class Kontsultak {
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
-
+		try {
+			conexion.close();
+		}catch(SQLException SQ) {
+			logger.error(SQ.getMessage());
+		}
 		return zenbakia;
 
 	}
 
 	public static int sartuDepartamentua(departamentua Dept) {
 		int zenbakia = 0;
+		ArrayList<String> departamentuak =  new ArrayList<String>();
+		departamentuak = departamentuZerrenda();
+		boolean existituta = false;
+		for(int i=0;i<departamentuak.size();i++) {
+			if (Dept.getIzena().equalsIgnoreCase(departamentuak.get(i))) {
+				existituta = true;
+				break;
+			}
+		}
 		Connection conexion = null;
 		Statement s = null;
+		if(existituta==false) {
 		try {
 
 			// Cargar el driver
@@ -456,10 +533,56 @@ public class Kontsultak {
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
+		
+		try {
+			conexion.close();
+		}catch(SQLException SQ) {
+			logger.error(SQ.getMessage());
+		}}
+		else {
+			zenbakia=0;
+		}
 
 		return zenbakia;
 
 	}
+	
+	private static ArrayList<String> departamentuZerrenda() {
+		ArrayList<String> izenak = new ArrayList<String>();
+		Connection conexion = null;
+		Statement s = null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conexion = DriverManager.getConnection("jdbc:mysql://localhost/mydb", "root", "");
+			s = (Statement) conexion.createStatement();
+
+			String sql = ("SELECT Izena FROM departamentua" );
+
+			Statement statement = conexion.createStatement();
+			ResultSet result = statement.executeQuery(sql);
+
+			while (result.next()) {
+				String hitza = result.getString(1);
+				izenak.add(hitza);
+				
+				
+				
+			}
+
+		} catch (SQLException I) {
+			logger.error(I.getMessage());
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		try {
+			conexion.close();
+		}catch(SQLException SQ) {
+			logger.error(SQ.getMessage());
+		}
+		return izenak;
+	}
+
+	
 
 	public static boolean depart_state(departamentua Dept) {
 		boolean existitu = false;
@@ -489,6 +612,11 @@ public class Kontsultak {
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
+		try {
+			conexion.close();
+		}catch(SQLException SQ) {
+			logger.error(SQ.getMessage());
+		}
 
 		return existitu;
 	}
@@ -514,6 +642,11 @@ public class Kontsultak {
 			logger.error(I.getMessage());
 		} catch (Exception e) {
 			logger.error(e.getMessage());
+		}
+		try {
+			conexion.close();
+		}catch(SQLException SQ) {
+			logger.error(SQ.getMessage());
 		}
 
 		return zenbakia;
@@ -546,7 +679,11 @@ public class Kontsultak {
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
-
+		try {
+			conexion.close();
+		}catch(SQLException SQ) {
+			logger.error(SQ.getMessage());
+		}
 		return zenbakia;
 	}
 	// Departamentu Amaiera
@@ -581,7 +718,12 @@ public class Kontsultak {
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
-
+		try {
+			conexion.close();
+		}catch(SQLException SQ) {
+			logger.error(SQ.getMessage());
+		}
+		
 		return zenbakia;
 
 	}
@@ -615,7 +757,11 @@ public class Kontsultak {
 			logger.error(e.getMessage());
 			System.out.println(e.getMessage());
 		}
-
+		try {
+			conexion.close();
+		}catch(SQLException SQ) {
+			logger.error(SQ.getMessage());
+		}
 		return zenbakia;
 
 	}
@@ -646,7 +792,12 @@ public class Kontsultak {
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
-
+		
+		try {
+			conexion.close();
+		}catch(SQLException SQ) {
+			logger.error(SQ.getMessage());
+		}
 		return existitu;
 	}
 
@@ -670,8 +821,16 @@ public class Kontsultak {
 
 		} catch (SQLException I) {
 			logger.error(I.getMessage());
+			Formularioa.ezabatuLangile();
 		} catch (Exception e) {
 			logger.error(e.getMessage());
+			Formularioa.ezabatuLangile();
+		}
+		
+		try {
+			conexion.close();
+		}catch(SQLException SQ) {
+			logger.error(SQ.getMessage());
 		}
 
 		return zenbakia;
@@ -711,7 +870,12 @@ public class Kontsultak {
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
-
+		
+		try {
+			conexion.close();
+		}catch(SQLException SQ) {
+			logger.error(SQ.getMessage());
+		}
 		return zenbakia;
 	}
 
@@ -764,7 +928,12 @@ public class Kontsultak {
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
-
+		try {
+			conexion.close();
+		}catch(SQLException SQ) {
+			logger.error(SQ.getMessage());
+		}
+		
 		return zerrenda;
 	}
 
@@ -780,6 +949,7 @@ public class Kontsultak {
 			String sql = "SELECT langile_kod FROM enplegatua WHERE langile_kod = '" + kod + "'";
 
 			PreparedStatement preparedStatement = conexion.prepareStatement(sql);
+			
 
 			ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -787,6 +957,11 @@ public class Kontsultak {
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
+		}
+		try {
+			conexion.close();
+		}catch(SQLException SQ) {
+			logger.error(SQ.getMessage());
 		}
 	}
 	
@@ -820,10 +995,119 @@ public class Kontsultak {
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
+		
+		try {
+			conexion.close();
+		}catch(SQLException SQ) {
+			logger.error(SQ.getMessage());
+		}
 
 		return langileKodArrayList;
 	}
 
 	// **Enplegatu Amaiera
 	// ****
+	public static int departamentuBurua(langilea lang) {
+		int zenbakia = 0;
+		Connection conexion = null;
+		Statement s = null;
+
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conexion = DriverManager.getConnection("jdbc:mysql://localhost/mydb", "root", "");
+			s = (Statement) conexion.createStatement();
+
+			String sql = "SELECT Ardura FROM enplegatua WHERE Departamentua_dept_no = ? And Ardura LIKE ?";
+
+			PreparedStatement preparedStatement = conexion.prepareStatement(sql);
+			preparedStatement.setInt(1, lang.getDept_nozenbakia());
+			preparedStatement.setString(2, "Ikasketa burua");
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				zenbakia++;
+			}
+		}
+		catch (SQLException I) {
+			logger.error(I.getMessage());
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		try {
+			conexion.close();
+		}catch(SQLException SQ) {
+			logger.error(SQ.getMessage());
+		}
+		return zenbakia;
+	}
+
+	public static int zuzendari(langilea l1) {
+		int zenbakia = 0;
+		Connection conexion = null;
+		Statement s = null;
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conexion = DriverManager.getConnection("jdbc:mysql://localhost/mydb", "root", "");
+			s = (Statement) conexion.createStatement();
+
+			String sql = "SELECT * FROM departamentua WHERE dept_no = ? ";
+
+			PreparedStatement preparedStatement = conexion.prepareStatement(sql);
+			preparedStatement.setInt(1, l1.getDept_nozenbakia());
+			
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				zenbakia++;
+			}
+		}
+		catch (SQLException I) {
+			logger.error(I.getMessage());
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		try {
+			conexion.close();
+		}catch(SQLException SQ) {
+			logger.error(SQ.getMessage());
+		}
+		return zenbakia;
+	
+		
+	}
+
+	public static int zuzendariakAtera(langilea l1) {
+		int zenbakia = 0;
+		Connection conexion = null;
+		Statement s = null;
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conexion = DriverManager.getConnection("jdbc:mysql://localhost/mydb", "root", "");
+			s = (Statement) conexion.createStatement();
+
+			String sql = "SELECT * FROM enplegatua WHERE Ardura = ? ";
+
+			PreparedStatement preparedStatement = conexion.prepareStatement(sql);
+			preparedStatement.setString(1, l1.getArdura());
+			
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				zenbakia++;
+			}
+		}
+		catch (SQLException I) {
+			logger.error(I.getMessage());
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		try {
+			conexion.close();
+		}catch(SQLException SQ) {
+			logger.error(SQ.getMessage());
+		}
+		return zenbakia;
+	
+		
+		
+	}
 }

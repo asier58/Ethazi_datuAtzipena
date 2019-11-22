@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 import org.apache.log4j.Logger;
+import org.json.JSONException;
 
 import eredua.Kontsultak;
 import eredua.departamentua;
@@ -63,8 +64,40 @@ public class Menukontroladorea {
 	
 	
 	public void getData(langilea l1) {
-		Kontsultak.datuakSartu2(l1);
-		logger.info("Elementu bat sartu egin da: " + l1.getIzena());
+		//Kontsultak.datuakSartu2(l1);
+		int departamentuaExistituta=0;
+		departamentuaExistituta = Kontsultak.zuzendari(l1);
+		if(departamentuaExistituta >0) {
+		if(l1.getArdura().equalsIgnoreCase("zuzendari")) {
+			int zenbakia = Kontsultak.zuzendariakAtera(l1);
+			if(zenbakia==2) {
+				formularioa.txertatuErrorea();
+			}
+			else {
+				Kontsultak.datuakSartu2(l1);
+				formularioa.operazioa();
+			}
+		}
+		else {
+		if(l1.getArdura().equalsIgnoreCase("Ikasketa burua")) {
+		int zenbakia = Kontsultak.departamentuBurua(l1);
+		if(zenbakia>0) {
+			formularioa.txertatuErrorea();
+		}
+		else {
+			formularioa.operazioa();
+			Kontsultak.datuakSartu2(l1);
+			logger.info("Elementu bat sartu egin da: " + l1.getIzena());
+		}}
+		else {
+			Kontsultak.datuakSartu2(l1);
+		}
+			}
+		}
+		else {
+			formularioa.departamentuaEzdaexistitzen();
+		}
+		
 	}
 	
 	public void getLangileKodKontr(ArrayList<langilea> zerrenda, int kod) {
@@ -167,7 +200,7 @@ public class Menukontroladorea {
 		return Kontsultak.ateraLangile_Kod();
 	}
 
-	public void parametroakHartu(String fitxategi, String formatua) {
+	public void parametroakHartu(String fitxategi, String formatua)  {
 		File fitx = new File(fitxategi + formatua);
 		if (!fitx.exists()) {
 			logger.error("Fitxategia ez da existitzen");
@@ -176,8 +209,8 @@ public class Menukontroladorea {
 
 		else {
 
-			if (formatua.equalsIgnoreCase(".txt")) {
-				eredua.departamentua.txtKudeatu(fitxategi, formatua);
+			if (formatua.equalsIgnoreCase(".Json")) {
+				eredua.departamentua.jsonKudeatu(fitxategi, formatua);
 			}
 
 			if (formatua.equalsIgnoreCase(".xml")) {
@@ -199,8 +232,8 @@ public class Menukontroladorea {
 
 		else {
 
-			if (formatua.equalsIgnoreCase(".txt")) {
-				eredua.langilea.txtKudeatu2(fitxategi, formatua);
+			if (formatua.equalsIgnoreCase(".Json")) {
+				eredua.langilea.jsonKudeatu2(fitxategi, formatua);
 			}
 
 			
@@ -288,5 +321,23 @@ public class Menukontroladorea {
 		
 	}
 	//Amaiera departamentua
+	public  void departamentuKontrolerrorea() {
+		departamentua.txertatuErrorea();
+	}
+
+	public void formularioToenplegatua() {
+		formularioa.setVisible(false);
+		enplegatua.setVisible(true);
+	}
+
+	public void txostenaTOenplegatua() {
+		langtxostena.setVisible(false);
+		enplegatua.setVisible(true);
+		
+	}
+	public Boolean zuzendariZentroa(langilea lang) {
+		return null;
+		
+	}
 
 }

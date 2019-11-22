@@ -52,6 +52,7 @@ public class Formularioa extends JFrame {
 	private int cont = 0;	
 	private JComboBox comboBox_ardura;
 	private JComboBox comboBox_kodea;
+	public static JLabel lblNewLabel;
 	
 	ArrayList<langilea> langileArr = new ArrayList<langilea>();
 	langilea l1;
@@ -64,18 +65,18 @@ public class Formularioa extends JFrame {
 
 	public Formularioa() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 376);
+		setBounds(100, 100, 616, 410);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
 		lblLangKod = new JLabel("Langilearen kodea");
-		lblLangKod.setBounds(10, 11, 89, 20);
+		lblLangKod.setBounds(10, 11, 129, 20);
 		contentPane.add(lblLangKod);
 
 		lblIzena = new JLabel("Izena");
-		lblIzena.setBounds(10, 48, 27, 14);
+		lblIzena.setBounds(10, 48, 102, 14);
 		contentPane.add(lblIzena);
 
 		textField_izena = new JTextField();
@@ -90,12 +91,12 @@ public class Formularioa extends JFrame {
 
 			}
 		});
-		textField_izena.setBounds(51, 45, 239, 20);
+		textField_izena.setBounds(163, 45, 239, 20);
 		contentPane.add(textField_izena);
 		textField_izena.setColumns(10);
 
 		lblAbizena = new JLabel("Abizena");
-		lblAbizena.setBounds(10, 84, 39, 14);
+		lblAbizena.setBounds(10, 84, 102, 14);
 		contentPane.add(lblAbizena);
 
 		textField_abizena = new JTextField();
@@ -110,12 +111,12 @@ public class Formularioa extends JFrame {
 
 			}
 		});
-		textField_abizena.setBounds(61, 81, 229, 20);
+		textField_abizena.setBounds(163, 76, 229, 20);
 		contentPane.add(textField_abizena);
 		textField_abizena.setColumns(10);
 
 		lblDeptKod = new JLabel("Departamentu kodea");
-		lblDeptKod.setBounds(10, 122, 102, 14);
+		lblDeptKod.setBounds(10, 122, 129, 14);
 		contentPane.add(lblDeptKod);
 
 		textField_deptKod = new JTextField();
@@ -128,12 +129,12 @@ public class Formularioa extends JFrame {
 				}
 			}
 		});
-		textField_deptKod.setBounds(122, 119, 168, 20);
+		textField_deptKod.setBounds(163, 119, 168, 20);
 		contentPane.add(textField_deptKod);
 		textField_deptKod.setColumns(10);
 
 		lblSoldata = new JLabel("Soldata");
-		lblSoldata.setBounds(10, 157, 39, 14);
+		lblSoldata.setBounds(10, 157, 102, 14);
 		contentPane.add(lblSoldata);
 
 		textField_soldata = new JTextField();
@@ -146,12 +147,12 @@ public class Formularioa extends JFrame {
 				}
 			}
 		});
-		textField_soldata.setBounds(61, 154, 229, 20);
+		textField_soldata.setBounds(163, 154, 229, 20);
 		contentPane.add(textField_soldata);
 		textField_soldata.setColumns(10);
 
 		lblNagusia = new JLabel("Nagusia");
-		lblNagusia.setBounds(10, 191, 39, 14);
+		lblNagusia.setBounds(10, 191, 102, 14);
 		contentPane.add(lblNagusia);
 
 		textField_nagusia = new JTextField();
@@ -164,17 +165,17 @@ public class Formularioa extends JFrame {
 				}
 			}
 		});
-		textField_nagusia.setBounds(61, 188, 229, 20);
+		textField_nagusia.setBounds(163, 188, 229, 20);
 		contentPane.add(textField_nagusia);
 		textField_nagusia.setColumns(10);
 
 		lblArdura = new JLabel("Ardura");
-		lblArdura.setBounds(10, 221, 33, 14);
+		lblArdura.setBounds(10, 221, 102, 14);
 		contentPane.add(lblArdura);
 		
 		comboBox_ardura = new JComboBox();
 		comboBox_ardura.setModel(new DefaultComboBoxModel(new String[] {"Zuzendari", "Ikasketa burua", "Irakaslea", "Bedela"}));
-		comboBox_ardura.setBounds(51, 218, 239, 23);
+		comboBox_ardura.setBounds(163, 219, 239, 23);
 		contentPane.add(comboBox_ardura);
 
 		comboBox_kodea = new JComboBox();
@@ -188,7 +189,7 @@ public class Formularioa extends JFrame {
 			
 		}
 		
-		comboBox_kodea.setBounds(109, 11, 181, 20);
+		comboBox_kodea.setBounds(163, 11, 181, 20);
 		contentPane.add(comboBox_kodea);
 
 		comboBox_aukera = new JComboBox();
@@ -267,8 +268,10 @@ public class Formularioa extends JFrame {
 				DateFormat hourdateFormat = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
 				if (menukontroladorea.getArduraZuz(l1).equals("Zuzendari")) {
 					logger.info("Ardura hori badago artuta.");
+					lblNewLabel.setText("Ardura hori badago artuta.");
 				} else if (menukontroladorea.getArduraIB(l1).equals("Ikasketa Burua")) {
 					logger.info("Ardura hori badago artuta.");
+					lblNewLabel.setText("Ardura hori badago artuta.");
 				} else {
 					if (comboBox_aukera.getSelectedItem().equals("Txertatu")) {
 						int langKod = menukontroladorea.maxEmpleKod();
@@ -276,7 +279,7 @@ public class Formularioa extends JFrame {
 						int dept_noZenbkia = Integer.parseInt(textField_deptKod.getText());
 						int nagusia = Integer.parseInt(textField_nagusia.getText());
 						l1 = new langilea(langKod, dept_noZenbkia, soldata, textField_izena.getText(),
-								textField_abizena.getText(), nagusia, (String) comboBox_aukera.getSelectedItem(),
+								textField_abizena.getText(), nagusia, (String) comboBox_ardura.getSelectedItem(),
 								ordua + ", " + data);
 
 						menukontroladorea.getData(l1);
@@ -326,14 +329,19 @@ public class Formularioa extends JFrame {
 		btnAtzera.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {		
 				menukontroladorea.langilePantailara();
+				
 			}
 		});
+		
 		btnAtzera.setBounds(137, 303, 89, 23);
 		contentPane.add(btnAtzera);
 		
-		
-
+		 lblNewLabel = new JLabel("");
+		lblNewLabel.setBounds(149, 268, 388, 14);
+		contentPane.add(lblNewLabel);
+		lblNewLabel.setText("");
 	}
+		
 	public void kargatuAL(ArrayList <Integer> kodeak){
 		for (int n = 0; n < kodeak.size(); n++) {
 			String kodeStr;
@@ -352,5 +360,25 @@ public class Formularioa extends JFrame {
 
 	public void nireMenukontroladorea(Menukontroladorea menukontroladorea) {
 		this.menukontroladorea = menukontroladorea;
+	}
+	public static void operazioa() {
+		lblNewLabel.setVisible(true);
+		lblNewLabel.setText("Langile operazioa ondo atera da.");
+		
+	}
+	public static void txertatuErrorea() {
+		lblNewLabel.setVisible(true);
+		lblNewLabel.setText("Langile ezin izan da txertatu edo aldatu, kontsultatu log.");
+		
+	}
+	public static void ezabatuLangile() {
+		lblNewLabel.setVisible(true);
+		lblNewLabel.setText("Langile ezin izan da ezabatu edo aldatu, kontsultatu log.");
+		
+	}
+	public void departamentuaEzdaexistitzen() {
+		lblNewLabel.setVisible(true);
+		lblNewLabel.setText("Departmentua ez da existitzen");
+		
 	}
 }
