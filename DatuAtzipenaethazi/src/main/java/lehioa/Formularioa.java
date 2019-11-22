@@ -350,6 +350,7 @@ public class Formularioa extends JFrame {
 			comboBox_kodea.addItem(kodeStr);
 		}
 		
+		
 	}
 	
 	public void blokeatuKodea() {
