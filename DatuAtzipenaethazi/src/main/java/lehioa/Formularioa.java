@@ -349,7 +349,6 @@ public class Formularioa extends JFrame {
 			langKod.add(kodeStr);
 			comboBox_kodea.addItem(kodeStr);
 		}
-//		langKodInteger= kodeak;
 		
 	}
 	
