@@ -8,6 +8,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Hashtable;
 
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
@@ -38,7 +39,6 @@ public class Formularioa extends JFrame {
 	private JLabel lblDataOrdua;
 	private JTextField textField_izena;
 	private JTextField textField_abizena;
-	private JTextField textField_deptKod;
 	private JTextField textField_soldata;
 	private JTextField textField_nagusia;
 	private JTextField textField_ardura;
@@ -53,6 +53,8 @@ public class Formularioa extends JFrame {
 	private JComboBox comboBox_ardura;
 	private JComboBox comboBox_kodea;
 	public static JLabel lblNewLabel;
+	private JComboBox comboBox;
+	private Hashtable<String, Integer> hashi =  new Hashtable<String, Integer>();
 	
 	ArrayList<langilea> langileArr = new ArrayList<langilea>();
 	langilea l1;
@@ -118,20 +120,6 @@ public class Formularioa extends JFrame {
 		lblDeptKod = new JLabel("Departamentu kodea");
 		lblDeptKod.setBounds(10, 122, 129, 14);
 		contentPane.add(lblDeptKod);
-
-		textField_deptKod = new JTextField();
-		textField_deptKod.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyTyped(KeyEvent e) {
-				char a = e.getKeyChar();
-				if (!Character.isDigit(a)) {
-					e.consume();
-				}
-			}
-		});
-		textField_deptKod.setBounds(163, 119, 168, 20);
-		contentPane.add(textField_deptKod);
-		textField_deptKod.setColumns(10);
 
 		lblSoldata = new JLabel("Soldata");
 		lblSoldata.setBounds(10, 157, 102, 14);
@@ -202,7 +190,7 @@ public class Formularioa extends JFrame {
 					
 					textField_izena.setEnabled(true);
 					textField_abizena.setEnabled(true);
-					textField_deptKod.setEnabled(true);
+					comboBox.setEnabled(true);
 					textField_nagusia.setEnabled(true);
 					textField_soldata.setEnabled(true);
 					comboBox_ardura.setEnabled(true);
@@ -210,7 +198,7 @@ public class Formularioa extends JFrame {
 					textField_izena.setEditable(true);
 					textField_abizena.setEditable(true);
 					comboBox_ardura.setEditable(true);
-					textField_deptKod.setEditable(true);
+					comboBox.setEditable(true);
 					textField_nagusia.setEditable(true);
 					textField_soldata.setEditable(true);
 
@@ -220,7 +208,7 @@ public class Formularioa extends JFrame {
 
 					textField_izena.setEnabled(false);
 					textField_abizena.setEnabled(false);
-					textField_deptKod.setEnabled(false);
+					comboBox.setEnabled(false);
 					textField_nagusia.setEnabled(false);
 					textField_soldata.setEnabled(false);
 					comboBox_ardura.setEnabled(false);
@@ -228,14 +216,14 @@ public class Formularioa extends JFrame {
 					textField_izena.setEditable(false);
 					textField_abizena.setEditable(false);
 					comboBox_ardura.setEditable(false);
-					textField_deptKod.setEditable(false);
+					comboBox.setEditable(false);
 					textField_nagusia.setEditable(false);
 					textField_soldata.setEditable(false);
 				} else if (comboBox_aukera.getSelectedItem().equals("Txertatu")) {
 					
 					textField_izena.setEnabled(true);
 					textField_abizena.setEnabled(true);
-					textField_deptKod.setEnabled(true);
+					comboBox.setEnabled(true);
 					textField_nagusia.setEnabled(true);
 					textField_soldata.setEnabled(true);
 					comboBox_ardura.setEnabled(true);
@@ -243,7 +231,7 @@ public class Formularioa extends JFrame {
 					textField_izena.setEditable(true);
 					textField_abizena.setEditable(true);
 					comboBox_ardura.setEditable(true);
-					textField_deptKod.setEditable(true);
+					comboBox.setEditable(true);
 					textField_nagusia.setEditable(true);
 					textField_soldata.setEditable(true);
 					
@@ -276,7 +264,8 @@ public class Formularioa extends JFrame {
 					if (comboBox_aukera.getSelectedItem().equals("Txertatu")) {
 						int langKod = menukontroladorea.maxEmpleKod();
 						int soldata = Integer.parseInt(textField_soldata.getText());
-						int dept_noZenbkia = Integer.parseInt(textField_deptKod.getText());
+						String departamentua = (String) comboBox.getSelectedItem();
+						 int dept_noZenbkia = hashi.get(departamentua);
 						int nagusia = Integer.parseInt(textField_nagusia.getText());
 						l1 = new langilea(langKod, dept_noZenbkia, soldata, textField_izena.getText(),
 								textField_abizena.getText(), nagusia, (String) comboBox_ardura.getSelectedItem(),
@@ -287,7 +276,8 @@ public class Formularioa extends JFrame {
 					} else if (comboBox_aukera.getSelectedItem().equals("Aldatu")) {
 						int langKod = Integer.parseInt((String) comboBox_kodea.getSelectedItem());
 						int soldata = Integer.parseInt(textField_soldata.getText());
-						int dept_noZenbkia = Integer.parseInt(textField_deptKod.getText());
+						String departamentua = (String) comboBox.getSelectedItem();
+						 int dept_noZenbkia = hashi.get(departamentua);
 						int nagusia = Integer.parseInt(textField_nagusia.getText());
 
 						l1 = new langilea(langKod, dept_noZenbkia, soldata, textField_izena.getText(),
@@ -315,7 +305,7 @@ public class Formularioa extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				textField_izena.setText(null);
 				textField_abizena.setText(null);
-				textField_deptKod.setText(null);
+				comboBox.setSelectedIndex(1);
 				textField_soldata.setText(null);
 				textField_nagusia.setText(null);
 				textField_ardura.setText(null);
@@ -341,6 +331,10 @@ public class Formularioa extends JFrame {
 		contentPane.add(lblNewLabel);
 		lblNewLabel.setText("");
 		
+		 comboBox = new JComboBox();
+		comboBox.setBounds(169, 119, 175, 20);
+		contentPane.add(comboBox);
+		
 		
 
 	}
@@ -354,6 +348,19 @@ public class Formularioa extends JFrame {
 //		langKodInteger= kodeak;
 		
 	}
+	
+	//Hash
+	public void kargatuDepartamentuak(ArrayList <String> departamentuak){
+		for (int n = 0; n < departamentuak.size(); n++) {
+			comboBox.addItem(departamentuak.get(n));
+		}
+		
+	}
+	public  void kargatuDiccionario( Hashtable<String, Integer> liburua){
+		hashi =  liburua;
+		
+	}
+	////
 	
 	public void blokeatuKodea() {
 		this.comboBox_kodea.setEditable(false);

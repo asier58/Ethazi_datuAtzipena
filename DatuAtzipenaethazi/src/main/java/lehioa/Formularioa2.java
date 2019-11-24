@@ -210,7 +210,7 @@ public class Formularioa2 extends JFrame {
 		comboBox.addItem("Aldatu");
 		
 		lblNewLabel = new JLabel("Departamentua ez da existitzen");
-		lblNewLabel.setBounds(139, 235, 256, 14);
+		lblNewLabel.setBounds(139, 235, 331, 14);
 		contentPane.add(lblNewLabel);
 		lblNewLabel.setVisible(false);
 		

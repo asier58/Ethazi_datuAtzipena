@@ -33,7 +33,7 @@ public class Jasper  {
 				JasperViewer jasperViewer = new JasperViewer(jasperPrintWindow);
 				jasperViewer.setVisible(true);
 				
-				JasperPrint jasperPrint2 = JasperFillManager.fillReport("C:\\Users\\Asier\\git\\repository\\DatuAtzipenaethazi\\enplegatua.jasper", null,DriverManager.getConnection("jdbc:mysql://localhost/mydb", "root", ""));
+				JasperPrint jasperPrint2 = JasperFillManager.fillReport("C:\\Users\\Asier\\git\\repository\\DatuAtzipenaethazi\\enplegatuBueno.jasper", null,DriverManager.getConnection("jdbc:mysql://localhost/mydb", "root", ""));
 				JRPdfExporter exp2 = new JRPdfExporter();
 				exp2.setExporterInput(new SimpleExporterInput(jasperPrint));
 				exp2.setExporterOutput(new SimpleOutputStreamExporterOutput("enplegatua.pdf"));
@@ -43,7 +43,7 @@ public class Jasper  {
 		 
 				// se muestra en una ventana aparte para su descarga
 				JasperPrint jasperPrintWindow2 = JasperFillManager.fillReport(
-						"..\\\\DatuAtzipenaethazi\\\\enplegatua.jasper", null,
+						"..\\\\DatuAtzipenaethazi\\\\enplegatuBueno.jasper", null,
 						DriverManager.getConnection("jdbc:mysql://localhost/mydb", "root", ""));
 				JasperViewer jasperViewer2 = new JasperViewer(jasperPrintWindow2);
 				jasperViewer2.setVisible(true);

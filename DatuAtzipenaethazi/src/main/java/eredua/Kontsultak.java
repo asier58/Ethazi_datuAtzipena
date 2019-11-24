@@ -11,6 +11,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Hashtable;
 
 import javax.swing.JOptionPane;
 
@@ -58,8 +59,7 @@ public class Kontsultak {
 
 				int sartuTaulara = preparedStatement.executeUpdate();
 			} catch (Exception e) {
-				System.out.println(e.getMessage());
-				System.out.println("jajanotira");
+				logger.info(e.getMessage());
 
 			}
 
@@ -75,7 +75,7 @@ public class Kontsultak {
 	public static void datuakSartu1(ArrayList<departamentua> zerrenda) {
 		Connection conexion = null;
 		Statement s = null;
-		for (departamentua k : zerrenda) {
+		for (int i = 0;i<zerrenda.size();i++) {
 			try {
 
 				// Cargar el driver
@@ -89,10 +89,10 @@ public class Kontsultak {
 
 				PreparedStatement preparedStatement = conexion.prepareStatement(sql);
 
-				preparedStatement.setInt(1, zerrenda.get(0).getDept_no());
-				preparedStatement.setString(2, zerrenda.get(0).getIzena());
-				preparedStatement.setString(3, zerrenda.get(0).getEraikina());
-				preparedStatement.setString(4, zerrenda.get(0).getZentroa());
+				preparedStatement.setInt(1, zerrenda.get(i).getDept_no());
+				preparedStatement.setString(2, zerrenda.get(i).getIzena());
+				preparedStatement.setString(3, zerrenda.get(i).getEraikina());
+				preparedStatement.setString(4, zerrenda.get(i).getZentroa());
 
 				int sartuTaulara = preparedStatement.executeUpdate();
 			} catch (Exception e) {
@@ -545,6 +545,67 @@ public class Kontsultak {
 
 		return zenbakia;
 
+	}
+	//**********HashTable********
+	public static Hashtable<String, Integer>hashi(){
+		
+		Connection conexion = null;
+		Statement s = null;
+		Hashtable<String, Integer> pantaila =  new Hashtable<String, Integer>();
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conexion = DriverManager.getConnection("jdbc:mysql://localhost/mydb", "root", "");
+			s = (Statement) conexion.createStatement();
+
+			String sql = "SELECT dept_no,Izena FROM departamentua";
+
+			PreparedStatement preparedStatement = conexion.prepareStatement(sql);
+
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				pantaila.put(resultSet.getString(2), resultSet.getInt(1));
+
+			}
+
+		}
+
+		catch (SQLException I) {
+			logger.error(I.getMessage());
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return pantaila;
+		
+	}
+public static ArrayList<String> pantailaratuDepartamentuak(){
+		
+		Connection conexion = null;
+		Statement s = null;
+		ArrayList<String> departamentuak =  new ArrayList<String>();
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conexion = DriverManager.getConnection("jdbc:mysql://localhost/mydb", "root", "");
+			s = (Statement) conexion.createStatement();
+
+			String sql = "SELECT Izena FROM departamentua";
+
+			PreparedStatement preparedStatement = conexion.prepareStatement(sql);
+
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				departamentuak.add(resultSet.getString(1));
+
+			}
+
+		}
+
+		catch (SQLException I) {
+			logger.error(I.getMessage());
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return departamentuak;
+		
 	}
 	
 	private static ArrayList<String> departamentuZerrenda() {

@@ -2,6 +2,7 @@ package kontroladorea;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Hashtable;
 
 import org.apache.log4j.Logger;
 import org.json.JSONException;
@@ -172,6 +173,12 @@ public class Menukontroladorea {
 		enplegatua.setVisible(false);
 		
 		ArrayList<Integer> abiyua = Kontsultak.ateraEnplegatuKod(); 
+		
+		ArrayList<String>  departamentuuak = Kontsultak.pantailaratuDepartamentuak();
+		formularioa.kargatuDepartamentuak(departamentuuak);
+		Hashtable<String, Integer> pasitoa = Kontsultak.hashi();
+		formularioa.kargatuDiccionario(pasitoa);
+		
 		formularioa.kargatuAL(abiyua);
 		formularioa.blokeatuKodea();
 		formularioa.setVisible(true);
